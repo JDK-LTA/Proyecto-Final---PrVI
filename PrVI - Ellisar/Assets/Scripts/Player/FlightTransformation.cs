@@ -26,6 +26,7 @@ public class FlightTransformation : Transformation
         if (roll != 0)
         {
             transform.Rotate(transform.forward, roll * Time.deltaTime * 10, Space.World);
+            transform.Rotate(Vector3.up, -roll * Time.deltaTime * 15, Space.World);
         }
 
         rb.AddForce(transform.forward * Time.deltaTime * 10);
