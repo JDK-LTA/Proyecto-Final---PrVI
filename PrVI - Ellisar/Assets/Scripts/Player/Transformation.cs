@@ -22,5 +22,8 @@ public class Transformation : PlayerParent
     public virtual void JumpAction(InputAction.CallbackContext cxt)
     {
     }
+    public virtual void RTriggerAction(InputAction.CallbackContext cxt)
+    {
 
+    }
 }
