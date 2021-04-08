@@ -789,6 +789,7 @@ GameObject:
   - component: {fileID: 1763037126}
   - component: {fileID: 1763037125}
   - component: {fileID: 1763037124}
+  - component: {fileID: 1763037128}
   - component: {fileID: 1763037123}
   - component: {fileID: 1763037131}
   - component: {fileID: 1763037130}
@@ -1009,6 +1010,54 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1dfaddf3-8dde-4fea-929b-712b7b79914a
     m_ActionName: PlayerBall/Jump[/DualShock4GamepadHID/buttonSouth,/DualShock4GamepadHID/buttonSouth,/XInputControllerWindows/buttonSouth,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1763037128}
+        m_TargetAssemblyTypeName: MovHandler, Assembly-CSharp
+        m_MethodName: ChangeToFlight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0c6f082c-92b6-4d7e-a739-47fd32147274
+    m_ActionName: PlayerBiped/TransformIntoFlight[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/leftShoulder,/XInputControllerWindows/leftShoulder,/DualShock4GamepadHID/buttonNorth,/DualShock4GamepadHID/buttonNorth,/XInputControllerWindows/buttonNorth,/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0330c024-3a58-44c5-8ca9-48cb049d0f33
+    m_ActionName: PlayerBiped/TransformIntoBall[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/leftShoulder,/XInputControllerWindows/leftShoulder,/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID/buttonEast,/XInputControllerWindows/buttonEast,/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1763037128}
+        m_TargetAssemblyTypeName: MovHandler, Assembly-CSharp
+        m_MethodName: ChangeToBiped
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0a6afd8f-17c5-4e62-b49a-7203f7fe98ad
+    m_ActionName: PlayerFlight/TransformIntoBiped[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7b6bfffa-2782-4e18-aae2-7e1ee1e3b11e
+    m_ActionName: PlayerFlight/TransformIntoBall[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/leftShoulder,/XInputControllerWindows/leftShoulder,/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID/buttonEast,/XInputControllerWindows/buttonEast,/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d491ae66-56df-4735-b52a-a31b46a25808
+    m_ActionName: PlayerBall/TransformIntoFlight[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/leftShoulder,/XInputControllerWindows/leftShoulder,/DualShock4GamepadHID/buttonNorth,/DualShock4GamepadHID/buttonNorth,/XInputControllerWindows/buttonNorth,/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f314b353-9a66-478e-ac57-20d92ebe67bd
+    m_ActionName: PlayerBall/TransformIntoBall[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/leftShoulder,/XInputControllerWindows/leftShoulder,/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID/buttonEast,/XInputControllerWindows/buttonEast,/Keyboard/3]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: PlayerBiped
@@ -1093,6 +1142,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1763037128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763037122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb97184b494e0e459888ae769db80f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1763037130
 MonoBehaviour:
   m_ObjectHideFlags: 0
