@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [System.Serializable]
     public enum WorldState
     {
         Grounded, //on ground
@@ -205,18 +206,18 @@ public class PlayerMovement : MonoBehaviour
         //check for jumping
         if (States == WorldState.Grounded)
         {
+            if (FloorTimer > 0)
+                return;
+
+            //check for ground
+            bool Ground = Colli.CheckGround();
+
+            if (!Ground)
+            {
+                SetInAir();
+                return;
+            }
             #region DEP
-            //if (FloorTimer > 0)
-            //    return;
-
-            ////check for ground
-            //bool Ground = Colli.CheckGround();
-
-            //if (!Ground)
-            //{
-            //    SetInAir();
-            //    return;
-            //}
 
             //if (InputHand.Jump)
             //{
@@ -279,6 +280,11 @@ public class PlayerMovement : MonoBehaviour
                 {
                     //stun character
                     Stunned(-transform.forward);
+                    return;
+                }
+                else
+                {
+                    SetGrounded();
                     return;
                 }
             }

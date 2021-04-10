@@ -10899,9 +10899,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f6b7bd8d8b1ae47a1982ae914eef04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottomOffset: 0.5
+  bottomOffset: 0.8
   frontOffset: 0.5
-  collisionRadius: 0.3
+  collisionRadius: 0.4
   GroundLayer:
     serializedVersion: 2
     m_Bits: 1281
