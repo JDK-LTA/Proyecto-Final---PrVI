@@ -10995,7 +10995,7 @@ MonoBehaviour:
   StunPushBack: 50
   StunnedTime: 0.25
   maxNOfFlaps: 3
-  cooldownToRegenFlap: 30
+  cooldownToRegenFlap: 15
   flapForce: 30
   flappingTimer: 1
   flappingCooldown: 1.5
