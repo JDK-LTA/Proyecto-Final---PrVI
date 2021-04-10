@@ -7,7 +7,7 @@ public class HookOption : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        BipedTransformation biped = other.GetComponent<BipedTransformation>();
+        PlayerMovement biped = other.GetComponent<PlayerMovement>();
         if (biped)
         {
             biped.HookOptions.Add(this);
@@ -15,7 +15,7 @@ public class HookOption : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        BipedTransformation biped = other.GetComponent<BipedTransformation>();
+        PlayerMovement biped = other.GetComponent<PlayerMovement>();
         if (biped)
         {
             biped.HookOptions.Remove(this);

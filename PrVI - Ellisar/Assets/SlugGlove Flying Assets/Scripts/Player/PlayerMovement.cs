@@ -104,9 +104,20 @@ public class PlayerMovement : MonoBehaviour
 
 
     [Header("Flap")]
+    [SerializeField] private int maxNOfFlaps = 4;
+    private int actualFlaps = 0;
+    [SerializeField] private float cooldownToRegenFlap = 6;
+    private float tCdInterFlap = 0;
+
+    [SerializeField] private float flapForce = 30;
     private bool hasFlapped = false, flapCd = false;
     [SerializeField] private float flappingTimer = 1f, flappingCooldown = 2f;
     private float tFlap = 0, tFlapCd = 0;
+
+    private bool isFlying = false;
+    private bool startedFlying = false;
+    [SerializeField] private float startFlightWindow = 0.4f;
+    private float tStartFlight = 0;
 
     [Header("Hook")]
     [SerializeField] private float hookForce;
@@ -123,10 +134,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (cxt.started)
         {
-            if (States == WorldState.Flying && flapCd == false)
+            if (States == WorldState.Flying && flapCd == false && actualFlaps > 0)
             {
                 flapCd = true;
                 hasFlapped = true;
+                actualFlaps--;
+
+                SpeedBoost(flapForce);
             }
             else if (States == WorldState.Grounded || States == WorldState.InAir)
             {
@@ -136,6 +150,13 @@ public class PlayerMovement : MonoBehaviour
                     hasHooked = true;
                 }
             }
+        }
+    }
+    public void ChangeToBiped(InputAction.CallbackContext cxt)
+    {
+        if (cxt.started)
+        {
+            SetGrounded();
         }
     }
 
@@ -159,7 +180,9 @@ public class PlayerMovement : MonoBehaviour
 
         //setup this characters stats
         SetupCharacter();
+
         targetHookPos = Rigid.position;
+        actualFlaps = maxNOfFlaps;
     }
 
     private void Update()   //inputs and animation
@@ -168,35 +191,10 @@ public class PlayerMovement : MonoBehaviour
         if (States == WorldState.Static)
             return;
 
-        if (hasFlapped)
-        {
-            tFlap += Time.deltaTime;
-            if (tFlap >= flappingTimer)
-            {
-                tFlap = 0;
-                hasFlapped = false;
-            }
-        }
-        if (flapCd)
-        {
-            tFlapCd += Time.deltaTime;
-            if (tFlapCd >= flappingCooldown)
-            {
-                tFlapCd = 0;
-                flapCd = false;
-            }
-        }
-
-        UpdateHookTarget();
-        if (hasHooked)
-        {
-            tHook += Time.deltaTime;
-            if (tHook >= hookCooldown)
-            {
-                hasHooked = false;
-                tHook = 0;
-            }
-        }
+        FlapTimers();
+        HookFunctionality();
+        StartFlightTimer();
+        FlapRegenTimer();
 
         //control the animator
         AnimCtrl();
@@ -216,6 +214,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 SetInAir();
                 return;
+            }
+            else
+            {
+                actualFlaps = maxNOfFlaps;
             }
             #region DEP
 
@@ -252,7 +254,9 @@ public class PlayerMovement : MonoBehaviour
                 return;
 
             if (InputHand.Fly)  //switch to flying
+            {
                 SetFlying();
+            }
 
 
             //check for ground
@@ -261,6 +265,7 @@ public class PlayerMovement : MonoBehaviour
             if (Ground)
             {
                 SetGrounded();
+                actualFlaps = maxNOfFlaps;
                 return;
             }
         }
@@ -290,7 +295,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //check for ground if we are not holding the flying button
-            if (!InputHand.Fly)
+            if (!startedFlying)
             {
                 bool Ground = Colli.CheckGround();
 
@@ -299,6 +304,68 @@ public class PlayerMovement : MonoBehaviour
                     SetGrounded();
                     return;
                 }
+            }
+        }
+    }
+
+    private void FlapRegenTimer()
+    {
+        if (actualFlaps < maxNOfFlaps)
+        {
+            tCdInterFlap += Time.deltaTime;
+            if (tCdInterFlap >= cooldownToRegenFlap)
+            {
+                tCdInterFlap = 0;
+                actualFlaps++;
+            }
+        }
+    }
+
+    private void StartFlightTimer()
+    {
+        if (startedFlying)
+        {
+            tStartFlight += Time.deltaTime;
+            if (tStartFlight >= startFlightWindow)
+            {
+                startedFlying = false;
+                tStartFlight = 0;
+            }
+        }
+    }
+
+    private void HookFunctionality()
+    {
+        UpdateHookTarget();
+        if (hasHooked)
+        {
+            tHook += Time.deltaTime;
+            if (tHook >= hookCooldown)
+            {
+                hasHooked = false;
+                tHook = 0;
+            }
+        }
+    }
+
+    private void FlapTimers()
+    {
+        if (hasFlapped)
+        {
+            tFlap += Time.deltaTime;
+            if (tFlap >= flappingTimer)
+            {
+                tFlap = 0;
+                hasFlapped = false;
+            }
+        }
+        if (flapCd)
+        {
+            tFlapCd += Time.deltaTime;
+            if (tFlapCd >= flappingCooldown)
+            {
+                tFlapCd = 0;
+                flapCd = false;
             }
         }
     }
@@ -389,7 +456,7 @@ public class PlayerMovement : MonoBehaviour
         else if (States == WorldState.Flying)
         {
             //setup gliding
-            if (!InputHand.Fly)
+            if (!hasFlapped)
             {
                 if (FlyingTimer > 0) //reduce flying timer 
                     FlyingTimer -= delta;
@@ -566,6 +633,10 @@ public class PlayerMovement : MonoBehaviour
 
         //turn on gravity
         Rigid.useGravity = true;
+
+        isFlying = false;
+        startedFlying = false;
+        tStartFlight = 0;
     }
     //for when we are set in the air (for falling
     void SetInAir()
@@ -585,7 +656,10 @@ public class PlayerMovement : MonoBehaviour
     //for when we start to fly
     void SetFlying()
     {
+        isFlying = true;
+        startedFlying = true;
         InputHand.Fly = false;
+
         States = WorldState.Flying;
 
         //set animation 
@@ -618,6 +692,10 @@ public class PlayerMovement : MonoBehaviour
 
         //turn on gravity
         Rigid.useGravity = true;
+
+        isFlying = false;
+        startedFlying = false;
+        tStartFlight = 0;
     }
 
     void AnimCtrl()
@@ -642,11 +720,11 @@ public class PlayerMovement : MonoBehaviour
 
         //set our grounded and flying animations
         Anim.SetBool("OnGround", OnGround);
-        bool Fly = true;
-        if (!InputHand.Fly)
-            Fly = false;
+        //bool Fly = true;
+        //if (!InputHand.Fly)
+        //    Fly = false;
 
-        Anim.SetBool("Flying", Fly);
+        Anim.SetBool("Flying", isFlying);
     }
 
     void FixedAnimCtrl(float D) //animations involving a timer
@@ -847,10 +925,10 @@ public class PlayerMovement : MonoBehaviour
         // APLICA LA VELOCIDAD EN EL EJE Z CALCULADA EN HANDLEVELOCITY Y CALCULA Y APLICA LA GRAVEDAD
         Vector3 targetVelocity = transform.forward * Speed;
         //push down more when not pressing fly
-        if (InputHand.Fly)
-            ActGravAmt = Mathf.Lerp(ActGravAmt, FlyingGravityAmt, FlyingGravBuildSpeed * 4f * d);
-        else
-            ActGravAmt = Mathf.Lerp(ActGravAmt, GlideGravityAmt, FlyingGravBuildSpeed * 0.5f * d);
+        //if (InputHand.Fly)
+        ActGravAmt = Mathf.Lerp(ActGravAmt, FlyingGravityAmt, FlyingGravBuildSpeed * 4f * d);
+        //else
+        //    ActGravAmt = Mathf.Lerp(ActGravAmt, GlideGravityAmt, FlyingGravBuildSpeed * 0.5f * d);
 
         targetVelocity -= Vector3.up * ActGravAmt;
         //lerp velocity

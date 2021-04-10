@@ -65,6 +65,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""TransformIntoBiped"",
+                    ""type"": ""Button"",
+                    ""id"": ""09bd6b69-6708-400e-914b-acb02bb41b5b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -395,6 +403,50 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""TransformIntoBall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""597ddf36-b1bd-45b9-be50-d71a3ae6274c"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TransformIntoBiped"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""8a0ace4b-faef-4d37-9458-2367076fffbd"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""TransformIntoBiped"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""81e37953-83b2-4e60-ba9c-ad387eb4f545"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""TransformIntoBiped"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b3b2c372-2e34-468c-be17-90400e2751ac"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""TransformIntoBiped"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1816,6 +1868,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_PlayerBiped_Jump = m_PlayerBiped.FindAction("Jump", throwIfNotFound: true);
         m_PlayerBiped_TransformIntoFlight = m_PlayerBiped.FindAction("TransformIntoFlight", throwIfNotFound: true);
         m_PlayerBiped_TransformIntoBall = m_PlayerBiped.FindAction("TransformIntoBall", throwIfNotFound: true);
+        m_PlayerBiped_TransformIntoBiped = m_PlayerBiped.FindAction("TransformIntoBiped", throwIfNotFound: true);
         // PlayerFlight
         m_PlayerFlight = asset.FindActionMap("PlayerFlight", throwIfNotFound: true);
         m_PlayerFlight_Move = m_PlayerFlight.FindAction("Move", throwIfNotFound: true);
@@ -1899,6 +1952,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerBiped_Jump;
     private readonly InputAction m_PlayerBiped_TransformIntoFlight;
     private readonly InputAction m_PlayerBiped_TransformIntoBall;
+    private readonly InputAction m_PlayerBiped_TransformIntoBiped;
     public struct PlayerBipedActions
     {
         private @InputActions m_Wrapper;
@@ -1909,6 +1963,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerBiped_Jump;
         public InputAction @TransformIntoFlight => m_Wrapper.m_PlayerBiped_TransformIntoFlight;
         public InputAction @TransformIntoBall => m_Wrapper.m_PlayerBiped_TransformIntoBall;
+        public InputAction @TransformIntoBiped => m_Wrapper.m_PlayerBiped_TransformIntoBiped;
         public InputActionMap Get() { return m_Wrapper.m_PlayerBiped; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1936,6 +1991,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @TransformIntoBall.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnTransformIntoBall;
                 @TransformIntoBall.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnTransformIntoBall;
                 @TransformIntoBall.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnTransformIntoBall;
+                @TransformIntoBiped.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnTransformIntoBiped;
+                @TransformIntoBiped.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnTransformIntoBiped;
+                @TransformIntoBiped.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnTransformIntoBiped;
             }
             m_Wrapper.m_PlayerBipedActionsCallbackInterface = instance;
             if (instance != null)
@@ -1958,6 +2016,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @TransformIntoBall.started += instance.OnTransformIntoBall;
                 @TransformIntoBall.performed += instance.OnTransformIntoBall;
                 @TransformIntoBall.canceled += instance.OnTransformIntoBall;
+                @TransformIntoBiped.started += instance.OnTransformIntoBiped;
+                @TransformIntoBiped.performed += instance.OnTransformIntoBiped;
+                @TransformIntoBiped.canceled += instance.OnTransformIntoBiped;
             }
         }
     }
@@ -2266,6 +2327,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnTransformIntoFlight(InputAction.CallbackContext context);
         void OnTransformIntoBall(InputAction.CallbackContext context);
+        void OnTransformIntoBiped(InputAction.CallbackContext context);
     }
     public interface IPlayerFlightActions
     {
