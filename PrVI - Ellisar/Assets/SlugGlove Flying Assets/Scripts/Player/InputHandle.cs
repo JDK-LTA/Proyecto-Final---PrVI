@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputHandle : MonoBehaviour
 {
@@ -27,15 +28,25 @@ public class InputHandle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Horizontal = Input.GetAxis("Horizontal");
-        Vertical = Input.GetAxis("Vertical");
+        //Horizontal = Input.GetAxis("Horizontal");
+        //Vertical = Input.GetAxis("Vertical");
 
-        Jump = Input.GetButtonDown("Jump");
-        JumpHold = Input.GetButton("Jump");
-        Fly = JumpHold; 
+        //Jump = Input.GetButtonDown("Jump");
+        //JumpHold = Input.GetButton("Jump");
+        //Fly = JumpHold; 
 
-        RB = Input.GetButton("RightTilt");
-        LB = Input.GetButton("LeftTilt");
+        //RB = Input.GetButton("RightTilt");
+        //LB = Input.GetButton("LeftTilt");
 
+    }
+    public void MoveInput(InputAction.CallbackContext cxt)
+    {
+        Horizontal = cxt.ReadValue<Vector2>().x;
+        Vertical = cxt.ReadValue<Vector2>().y;
+    }
+    public void ChangeIntoFlight(InputAction.CallbackContext cxt)
+    {
+        if (cxt.started)
+            Fly = true;
     }
 }

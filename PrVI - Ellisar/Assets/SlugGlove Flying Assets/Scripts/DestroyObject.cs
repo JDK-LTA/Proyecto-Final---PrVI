@@ -50,5 +50,16 @@ public class DestroyObject : MonoBehaviour
             }
             
         }
+        else
+        {
+            if (delay > 0)
+            {
+                delay -= Time.deltaTime;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

@@ -15,21 +15,21 @@ public class UIControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(UISets[indexAmt].Input))
-        {
-            UISets[indexAmt].UIHandle.SetActive(false);
-            indexAmt += 1;
+        //if (Input.GetKeyDown(UISets[indexAmt].Input))
+        //{
+        //    UISets[indexAmt].UIHandle.SetActive(false);
+        //    indexAmt += 1;
 
-            if(UISets.Length > indexAmt)
-            {
-                UISets[indexAmt].UIHandle.SetActive(true);
-            }
-            else
-            {
-                Destroy(GetComponent<UIControls>());
-            }
+        //    if(UISets.Length > indexAmt)
+        //    {
+        //        UISets[indexAmt].UIHandle.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        Destroy(GetComponent<UIControls>());
+        //    }
 
-        }
+        //}
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -27,7 +28,8 @@ public class CameraFollow : MonoBehaviour
 
     private Vector3 LookAtPos;
     [Header("Mouse Speeds")]
-    public float MouseSpeed = 2; //how quickly the camera rotates 
+    [SerializeField] private bool yInverted = true;
+    public float xSensitivity = 4, ySensitivity = 3; //how quickly the camera rotates 
     public float turnSmoothing = 0.1f; //smoothing applied to this
     public float minAngle = -35; //the min amount the camera can tilt downwards
     public float maxAngle = 35; //the max amount the camera can tilt upwards
@@ -59,6 +61,8 @@ public class CameraFollow : MonoBehaviour
     public float MaxVelocity;
     private float FovLerp;
 
+    private float horizLook, vertLook;
+
     //setup objects
     void Awake()
     {
@@ -74,6 +78,9 @@ public class CameraFollow : MonoBehaviour
         LookDirection = transform.forward;
 
         CamUnit = GetComponentInChildren<Camera>();
+
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void FixedUpdate()
@@ -87,19 +94,23 @@ public class CameraFollow : MonoBehaviour
         Tick(delta);
     }
 
+    public void LookInput(InputAction.CallbackContext cxt)
+    {
+        horizLook = cxt.ReadValue<Vector2>().x;
+        horizLook = Mathf.Clamp(horizLook, -1, 1);
+        vertLook = cxt.ReadValue<Vector2>().y;
+        vertLook = Mathf.Clamp(vertLook, -1, 1);
+    }
     public void Tick(float d)
     {
-        float h = Input.GetAxis("Mouse X");
-        float v = Input.GetAxis("Mouse Y");
-
         //reset auto input timer
-        if (h != 0 || v != 0)
+        if (horizLook != 0 || vertLook != 0)
         {
             if(AutoXInput < TimeBeforeAutoXInput)
                 AutoXInput = TimeBeforeAutoXInput;
         }
 
-        HandleRotation(d, v, h, MouseSpeed);
+        HandleRotation(d, vertLook, horizLook, xSensitivity, ySensitivity);
         handlePivotPosition();
 
         //look at player
@@ -158,7 +169,7 @@ public class CameraFollow : MonoBehaviour
         camTransform.localPosition = tp;
     }
 
-    void HandleRotation(float d, float v, float h, float speed)
+    void HandleRotation(float d, float v, float h, float speedX, float speedY)
     {
         if (turnSmoothing > 0)
         {
@@ -171,13 +182,14 @@ public class CameraFollow : MonoBehaviour
             smoothY = v;
         }
 
-        tiltAngle -= smoothY * speed;
+        int inv = yInverted ? -1 : 1;
+        tiltAngle -= smoothY * speedY * inv;
         tiltAngle = Mathf.Clamp(tiltAngle, minAngle, maxAngle);
         pivot.localRotation = Quaternion.Euler(tiltAngle, 0, 0);
 
         if (smoothX != 0)
         {
-            transform.RotateAround(transform.position, transform.up, ((smoothX * speed) * 30f) * d);
+            transform.RotateAround(transform.position, transform.up, ((smoothX * speedX) * 30f) * d);
         }
     }
 

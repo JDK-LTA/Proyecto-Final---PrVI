@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -30,67 +31,67 @@ public class PlayerMovement : MonoBehaviour
     float delta;
 
     [Header("Physics")]
-    public float HandleReturnSpeed; //how quickly our handle on our character is returned to normal after a force is added (such as jumping
+    [SerializeField] private float HandleReturnSpeed; //how quickly our handle on our character is returned to normal after a force is added (such as jumping
     private float ActGravAmt; //the actual gravity that is applied to our character
-    public LayerMask GroundLayers; //what layers the ground can be
+    [SerializeField] private LayerMask GroundLayers; //what layers the ground can be
     private float FloorTimer; //how long we are on the floor
     private bool OnGround;  //the bool for if we are on ground (this is used for the animator
     private float ActionAirTimer; //the air timer counting our current actions performed in air
 
-    [Header("Stats")]
-    public float MaxSpeed = 15f; //max speed for basic movement
-    public float SpeedClamp = 50f; //max possible speed
+    [Header("Biped Stats")]
+    [SerializeField] private float MaxSpeed = 15f; //max speed for basic movement
+    [SerializeField] private float SpeedClamp = 50f; //max possible speed
     private float ActAccel; //our actual acceleration
-    public float Acceleration = 4f; //how quickly we build speed
-    public float MovementAcceleration = 20f;    //how quickly we adjust to new speeds
-    public float SlowDownAcceleration = 2f; //how quickly we slow down
-    public float turnSpeed = 2f; //how quickly we turn on the ground
+    [SerializeField] private float Acceleration = 4f; //how quickly we build speed
+    [SerializeField] private float MovementAcceleration = 20f;    //how quickly we adjust to new speeds
+    [SerializeField] private float SlowDownAcceleration = 2f; //how quickly we slow down
+    [SerializeField] private float turnSpeed = 2f; //how quickly we turn on the ground
     private float FlownAdjustmentLerp = 1; //if we have flown this will be reset at 0, and effect turn speed on the ground
     [HideInInspector]
     public float ActSpeed; //our actual speed
     private Vector3 movepos, targetDir, DownwardDirection; //where to move to
 
     [Header("Falling")]
-    public float AirAcceleration = 5f;  //how quickly we adjust to new speeds when in air
-    public float turnSpeedInAir = 2f;
-    public float FallingDirectionSpeed = 0.5f; //how quickly we will return to a normal direction
+    [SerializeField] private float AirAcceleration = 5f;  //how quickly we adjust to new speeds when in air
+    [SerializeField] private float turnSpeedInAir = 2f;
+    [SerializeField] private float FallingDirectionSpeed = 0.5f; //how quickly we will return to a normal direction
 
     [Header("Flying")]
-    public float FlyingDirectionSpeed = 2f; //how much influence our direction relative to the camera will influence our flying
-    public float FlyingRotationSpeed = 6f; //how fast we turn in air overall
-    public float FlyingUpDownSpeed = 0.1f; //how fast we rotate up and down
-    public float FlyingLeftRightSpeed = 0.1f;  //how fast we rotate left and right
-    public float FlyingRollSpeed = 0.1f; //how fast we roll
+    [SerializeField] private float FlyingDirectionSpeed = 2f; //how much influence our direction relative to the camera will influence our flying
+    [SerializeField] private float FlyingRotationSpeed = 6f; //how fast we turn in air overall
+    [SerializeField] private float FlyingUpDownSpeed = 0.1f; //how fast we rotate up and down
+    [SerializeField] private float FlyingLeftRightSpeed = 0.1f;  //how fast we rotate left and right
+    [SerializeField] private float FlyingRollSpeed = 0.1f; //how fast we roll
 
-    public float FlyingAcceleration = 4f; //how much we accelerate to max speed
-    public float FlyingDecelleration = 1f; //how quickly we slow down when flying
-    public float FlyingSpeed; //our max flying speed
-    public float FlyingMinSpeed; //our flying slow down speed
+    [SerializeField] private float FlyingAcceleration = 4f; //how much we accelerate to max speed
+    [SerializeField] private float FlyingDecelleration = 1f; //how quickly we slow down when flying
+    [SerializeField] private float FlyingSpeed; //our max flying speed
+    [SerializeField] private float FlyingMinSpeed; //our flying slow down speed
 
-    public float FlyingAdjustmentSpeed; //how quickly our velocity adjusts to the flying speed
+    [SerializeField] private float FlyingAdjustmentSpeed; //how quickly our velocity adjusts to the flying speed
     private float FlyingAdjustmentLerp = 0; //the lerp for our adjustment amount
 
     [Header("Flying Physics")]
-    public float FlyingGravityAmt = 2f; //how much gravity will pull us down when flying
-    public float GlideGravityAmt = 4f; //how much gravity affects us when just gliding
-    public float FlyingGravBuildSpeed = 3f; //how much our gravity is lerped when stopping flying
+    [SerializeField] private float FlyingGravityAmt = 2f; //how much gravity will pull us down when flying
+    [SerializeField] private float GlideGravityAmt = 4f; //how much gravity affects us when just gliding
+    [SerializeField] private float FlyingGravBuildSpeed = 3f; //how much our gravity is lerped when stopping flying
 
-    public float FlyingVelocityGain = 2f; //how much velocity we gain for flying downwards
-    public float FlyingVelocityLoss = 1f; //how much velocity we lose for flying upwards
-    public float FlyingLowerLimit = -6f; //how much we fly down before a boost
-    public float FlyingUpperLimit = 4f; //how much we fly up before a boost;
-    public float GlideTime = 10f; //how long we glide for when not flying before we start to fall
+    [SerializeField] private float FlyingVelocityGain = 2f; //how much velocity we gain for flying downwards
+    [SerializeField] private float FlyingVelocityLoss = 1f; //how much velocity we lose for flying upwards
+    [SerializeField] private float FlyingLowerLimit = -6f; //how much we fly down before a boost
+    [SerializeField] private float FlyingUpperLimit = 4f; //how much we fly up before a boost;
+    [SerializeField] private float GlideTime = 10f; //how long we glide for when not flying before we start to fall
 
     [Header("Jumps")]
-    public float JumpAmt; //how much we jump upwards 
+    [SerializeField] private float JumpAmt; //how much we jump upwards 
     private bool HasJumped; //if we have pressed jump
-    public float GroundedTimerBeforeJump = 0.2f; //how long we have to be on the floor before an action can be made
-    public float JumpForwardAmount = 5f; //how much our regular jumps move us forward
+    [SerializeField] private float GroundedTimerBeforeJump = 0.2f; //how long we have to be on the floor before an action can be made
+    [SerializeField] private float JumpForwardAmount = 5f; //how much our regular jumps move us forward
 
     [Header("Wall Impact")]
-    public float SpeedLimitBeforeCrash; //how fast we have to be going to crash
-    public float StunPushBack;  //how much we are pushed back
-    public float StunnedTime; //how long we are stunned for
+    [SerializeField] private float SpeedLimitBeforeCrash; //how fast we have to be going to crash
+    [SerializeField] private float StunPushBack;  //how much we are pushed back
+    [SerializeField] private float StunnedTime; //how long we are stunned for
     private float StunTimer; //the in use stun timer
 
     [Header("Visuals")]
@@ -100,11 +101,49 @@ public class PlayerMovement : MonoBehaviour
     private float RunTimer; //animation ctrl for running
     private float FlyingTimer; //the time before the animation stops flying
 
+
+    [Header("Flap")]
+    private bool hasFlapped = false, flapCd = false;
+    [SerializeField] private float flappingTimer = 1f, flappingCooldown = 2f;
+    private float tFlap = 0, tFlapCd = 0;
+
+    [Header("Hook")]
+    [SerializeField] private float hookForce;
+    [SerializeField] private ForceMode hookForceMode = ForceMode.VelocityChange;
+    [SerializeField] private bool canHook = true, hasHooked = false;
+    private List<HookOption> hookOptions = new List<HookOption>();
+    private Vector3 targetHookPos;
+    [SerializeField] private float hookCooldown = 1f;
+    private float tHook = 0;
+
+    public List<HookOption> HookOptions { get => hookOptions; set => hookOptions = value; }
+
+    public void RTriggerAction(InputAction.CallbackContext cxt)
+    {
+        if (cxt.started)
+        {
+            if (States == WorldState.Flying && flapCd == false)
+            {
+                flapCd = true;
+                hasFlapped = true;
+            }
+            else if (States == WorldState.Grounded || States == WorldState.InAir)
+            {
+                if (canHook && !hasHooked)
+                {
+                    Rigid.AddForce((targetHookPos - transform.position) * hookForce, hookForceMode);
+                    hasHooked = true;
+                }
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Awake()
-    { 
+    {
         //static until finished setup
         States = WorldState.Static;
+
 
         InputHand = GetComponent<InputHandle>();
         Colli = GetComponent<DetectCollision>();
@@ -119,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
 
         //setup this characters stats
         SetupCharacter();
+        targetHookPos = Rigid.position;
     }
 
     private void Update()   //inputs and animation
@@ -126,6 +166,36 @@ public class PlayerMovement : MonoBehaviour
         //cannot function when dead
         if (States == WorldState.Static)
             return;
+
+        if (hasFlapped)
+        {
+            tFlap += Time.deltaTime;
+            if (tFlap >= flappingTimer)
+            {
+                tFlap = 0;
+                hasFlapped = false;
+            }
+        }
+        if (flapCd)
+        {
+            tFlapCd += Time.deltaTime;
+            if (tFlapCd >= flappingCooldown)
+            {
+                tFlapCd = 0;
+                flapCd = false;
+            }
+        }
+
+        UpdateHookTarget();
+        if (hasHooked)
+        {
+            tHook += Time.deltaTime;
+            if (tHook >= hookCooldown)
+            {
+                hasHooked = false;
+                tHook = 0;
+            }
+        }
 
         //control the animator
         AnimCtrl();
@@ -135,40 +205,42 @@ public class PlayerMovement : MonoBehaviour
         //check for jumping
         if (States == WorldState.Grounded)
         {
-            if (FloorTimer > 0)
-                return;
+            #region DEP
+            //if (FloorTimer > 0)
+            //    return;
 
-            //check for ground
-            bool Ground = Colli.CheckGround();
+            ////check for ground
+            //bool Ground = Colli.CheckGround();
 
-            if (!Ground)
-            {
-                SetInAir();
-                return;
-            }
+            //if (!Ground)
+            //{
+            //    SetInAir();
+            //    return;
+            //}
 
-            if (InputHand.Jump)
-            {
-                //if the player can jump, isnt attacking and isnt using an item
-                if (!HasJumped)
-                {                   
-                    if(Anim)
-                    {
-                        MirrorAnim = !MirrorAnim;
-                        Anim.SetBool("Mirror", MirrorAnim);
-                    }
+            //if (InputHand.Jump)
+            //{
+            //    //if the player can jump, isnt attacking and isnt using an item
+            //    if (!HasJumped)
+            //    {
+            //        if (Anim)
+            //        {
+            //            MirrorAnim = !MirrorAnim;
+            //            Anim.SetBool("Mirror", MirrorAnim);
+            //        }
 
-                    Visuals.Jump();
+            //        Visuals.Jump();
 
-                    float AddAmt = Mathf.Clamp((ActSpeed * 0.5f), -10, 16);
-                    float ForwardAmt = Mathf.Clamp(ActSpeed * 4f, JumpForwardAmount, 100);
+            //        float AddAmt = Mathf.Clamp((ActSpeed * 0.5f), -10, 16);
+            //        float ForwardAmt = Mathf.Clamp(ActSpeed * 4f, JumpForwardAmount, 100);
 
-                    StopCoroutine(JumpUp(ForwardAmt, JumpAmt + AddAmt));
-                    StartCoroutine(JumpUp(ForwardAmt, JumpAmt + AddAmt));
+            //        StopCoroutine(JumpUp(ForwardAmt, JumpAmt + AddAmt));
+            //        StartCoroutine(JumpUp(ForwardAmt, JumpAmt + AddAmt));
 
-                    return;
-                }
-            }
+            //        return;
+            //    }
+            //}
+            #endregion
         }
         else if (States == WorldState.InAir)
         {
@@ -191,7 +263,7 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
         }
-        else if(States == WorldState.Flying)
+        else if (States == WorldState.Flying)
         {
             if (ActionAirTimer > 0) //reduce air timer 
                 return;
@@ -203,7 +275,7 @@ public class PlayerMovement : MonoBehaviour
             if (WallHit)
             {
                 //if we are going fast enough to crash into a wall
-                if(ActSpeed > SpeedLimitBeforeCrash)
+                if (ActSpeed > SpeedLimitBeforeCrash)
                 {
                     //stun character
                     Stunned(-transform.forward);
@@ -277,13 +349,13 @@ public class PlayerMovement : MonoBehaviour
             if (FloorTimer > 0)
                 FloorTimer -= delta;
 
-           if (InputHand.Horizontal == 0 && InputHand.Vertical == 0)
+            if (InputHand.Horizontal == 0 && InputHand.Vertical == 0)
             {
                 //we are not moving, lerp to a walk speed
                 LSpeed = 0f;
                 Accel = SlowDownAcceleration;
             }
-           //lerp our current speed
+            //lerp our current speed
             if (ActSpeed > LSpeed - 0.5f || ActSpeed < LSpeed + 0.5f)
                 LerpSpeed(delta, LSpeed, Accel);
             //move our character
@@ -319,7 +391,7 @@ public class PlayerMovement : MonoBehaviour
             else if (FlyingTimer < GlideTime)
             {
                 //flapping animation
-                if(FlyingTimer < GlideTime * 0.8f)
+                if (FlyingTimer < GlideTime * 0.8f)
                     Anim.SetTrigger("Flap");
 
                 FlyingTimer = GlideTime;
@@ -341,16 +413,20 @@ public class PlayerMovement : MonoBehaviour
 
             //lerp speed
             float YAmt = Rigid.velocity.y;
-            float FlyAccel = FlyingAcceleration * FlyingAdjustmentLerp;
-            float Spd = FlyingSpeed;
-            if (!InputHand.Fly)  //we are not holding fly, slow down
+            float FlyAccel;
+            float Spd;
+            if (!hasFlapped)  //we are not holding fly, slow down
             {
-                Spd = FlyingMinSpeed; 
-                if(ActSpeed > FlyingMinSpeed)
+                Spd = FlyingMinSpeed;
+                if (ActSpeed > FlyingMinSpeed)
                     FlyAccel = FlyingDecelleration * FlyingAdjustmentLerp;
+                else
+                    FlyAccel = FlyingAcceleration * FlyingAdjustmentLerp;
             }
             else
             {
+                Spd = FlyingSpeed;
+                FlyAccel = FlyingAcceleration * FlyingAdjustmentLerp;
                 //flying effects 
                 Visuals.FlyingFxTimer(delta);
             }
@@ -389,7 +465,7 @@ public class PlayerMovement : MonoBehaviour
                     return;
                 }
             }
-            
+
             //lerp mesh slower when not on ground
             RotateSelf(DownwardDirection, delta, 8f);
             RotateMesh(delta, transform.forward, turnSpeed);
@@ -403,7 +479,65 @@ public class PlayerMovement : MonoBehaviour
             Visuals.WindAudioSetting(delta, Rigid.velocity.magnitude);
         }
     }
+    public void JumpAction(InputAction.CallbackContext cxt)
+    {
+        if (cxt.started && States == WorldState.Grounded)
+        {
+            if (FloorTimer > 0)
+                return;
+
+            //check for ground
+            bool Ground = Colli.CheckGround();
+
+            if (!Ground)
+            {
+                SetInAir();
+                return;
+            }
+
+            if (!HasJumped)
+            {
+                if (Anim)
+                {
+                    MirrorAnim = !MirrorAnim;
+                    Anim.SetBool("Mirror", MirrorAnim);
+                }
+
+                Visuals.Jump();
+
+                float AddAmt = Mathf.Clamp((ActSpeed * 0.5f), -10, 16);
+                float ForwardAmt = Mathf.Clamp(ActSpeed * 4f, JumpForwardAmount, 100);
+
+                StopCoroutine(JumpUp(ForwardAmt, JumpAmt + AddAmt));
+                StartCoroutine(JumpUp(ForwardAmt, JumpAmt + AddAmt));
+
+                return;
+            }
+        }
+    }
     //for when we return to the ground
+    private void UpdateHookTarget()
+    {
+        if (hookOptions.Count > 1)
+        {
+            foreach (HookOption hook in hookOptions)
+            {
+                if (Vector3.Distance(hook.transform.position, transform.position) < Vector3.Distance(targetHookPos, transform.position))
+                {
+                    targetHookPos = hook.transform.position;
+                }
+            }
+        }
+        else if (hookOptions.Count == 1)
+        {
+            targetHookPos = hookOptions[0].transform.position;
+        }
+        else
+        {
+            targetHookPos = Rigid.position;
+        }
+        canHook = hookOptions.Count > 0;
+    }
     public void SetGrounded()
     {
         Visuals.Landing();
@@ -445,6 +579,7 @@ public class PlayerMovement : MonoBehaviour
     //for when we start to fly
     void SetFlying()
     {
+        InputHand.Fly = false;
         States = WorldState.Flying;
 
         //set animation 
@@ -514,7 +649,7 @@ public class PlayerMovement : MonoBehaviour
         float LAMT = InputHand.Horizontal;
         XAnimFloat = Mathf.Lerp(XAnimFloat, LAMT, D * 4f);
         Anim.SetFloat("XInput", XAnimFloat);
-    } 
+    }
 
     IEnumerator JumpUp(float ForwardAmt, float UpwardsAmt)
     {
@@ -564,7 +699,9 @@ public class PlayerMovement : MonoBehaviour
     void HandleVelocity(float d, float TargetSpeed, float Accel, float YAmt)
     {
         if (ActSpeed > FlyingSpeed) //we are over out max speed, slow down slower
+        {
             Accel = Accel * 0.8f;
+        }
 
         if (YAmt < FlyingLowerLimit) //we are flying down! boost speed
         {
@@ -628,7 +765,7 @@ public class PlayerMovement : MonoBehaviour
         //accelerate our character
         ActAccel = Mathf.Lerp(ActAccel, Accel, HandleReturnSpeed * d);
         //lerp our movement direction
-        Vector3 dir = Vector3.Lerp(curVelocity, targetVelocity, d * ActAccel);   
+        Vector3 dir = Vector3.Lerp(curVelocity, targetVelocity, d * ActAccel);
         dir.y = Rigid.velocity.y;
         //set our rigibody direction
         Rigid.velocity = dir;
@@ -649,11 +786,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 LerpDirection = DownwardDirection;
         float FallDirSpd = FallingDirectionSpeed;
 
-        if(Rigid.velocity.y < -6) //we are going downwards
+        if (Rigid.velocity.y < -6) //we are going downwards
         {
             LerpDirection = Vector3.up;
             FallDirSpd = FallDirSpd * -(Rigid.velocity.y * 0.2f);
-        }         
+        }
 
         DownwardDirection = Vector3.Lerp(DownwardDirection, LerpDirection, FallDirSpd * d);
 
@@ -677,6 +814,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FlyingCtrl(float d, float Speed, float XMove, float ZMove)
     {
+        // APLICA LAS ROTACIONES NECESARIAS
         //input direction 
         float InvertX = -1;
         float InvertY = -1;
@@ -698,13 +836,16 @@ public class PlayerMovement : MonoBehaviour
         if (FlyingTimer < GlideTime * 0.7f) //lerp to velocity if not flying
             RotateToVelocity(d, rotSpd * 0.05f);
 
+
+
+        // APLICA LA VELOCIDAD EN EL EJE Z CALCULADA EN HANDLEVELOCITY Y CALCULA Y APLICA LA GRAVEDAD
         Vector3 targetVelocity = transform.forward * Speed;
         //push down more when not pressing fly
-        if(InputHand.Fly)
+        if (InputHand.Fly)
             ActGravAmt = Mathf.Lerp(ActGravAmt, FlyingGravityAmt, FlyingGravBuildSpeed * 4f * d);
         else
             ActGravAmt = Mathf.Lerp(ActGravAmt, GlideGravityAmt, FlyingGravBuildSpeed * 0.5f * d);
- 
+
         targetVelocity -= Vector3.up * ActGravAmt;
         //lerp velocity
         Vector3 dir = Vector3.Lerp(Rigid.velocity, targetVelocity, d * FlyLerpSpd);

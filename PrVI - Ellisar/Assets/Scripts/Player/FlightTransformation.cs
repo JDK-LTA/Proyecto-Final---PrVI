@@ -9,12 +9,17 @@ public class FlightTransformation : Transformation
     [SerializeField] protected float wingBeatHeight = 3f;
     [SerializeField] private float energy = 0, fall = 0, airSpeed = 0;
 
-    private float actionAirTimer = 0;
-
-
     private DetectCollision colliderDetector;
 
     private float delta;
+
+    [Header("Physics")]
+    [SerializeField] private float handleReturnSpeed; //how quickly our handle on our character is returned to normal after a force is added (such as jumping
+    private float actGravAmt; //the actual gravity that is applied to our character
+    [SerializeField] private LayerMask groundLayers; //what layers the ground can be
+    private float floorTimer; //how long we are on the floor
+    private bool onGround;  //the bool for if we are on ground (this is used for the animator
+    private float actionAirTimer; //the air timer counting our current actions performed in air
 
     [Header("Stats")]
     [SerializeField] private float maxSpeed = 15f; //max speed for basic movement
@@ -26,7 +31,7 @@ public class FlightTransformation : Transformation
     [SerializeField] private float turnSpeed = 2f; //how quickly we turn on the ground
     private float flownAdjustmentLerp = 1; //if we have flown this will be reset at 0, and effect turn speed on the ground
     [HideInInspector]
-    public float ActSpeed; //our actual speed
+    public float actSpeed; //our actual speed
     private Vector3 movepos, targetDir, DownwardDirection; //where to move to
 
     [Header("Falling")]
@@ -65,18 +70,63 @@ public class FlightTransformation : Transformation
     [SerializeField] private float stunnedTime; //how long we are stunned for
     private float stunTimer; //the in use stun timer
 
-    private void Start()
+    [Header("Collision detection")]
+    [SerializeField] private float bottomOffset;
+    [SerializeField] private float frontOffset;
+    [SerializeField] private float collisionRadius;
+    [SerializeField] private LayerMask GroundLayer;
+    [SerializeField] private float WallDistance;
+
+    //check if there is a floor to stand on, or land on
+    public bool CheckGround()
     {
-        colliderDetector = GetComponent<DetectCollision>();
+        Vector3 Pos = transform.position + (-transform.up * bottomOffset);
+        Collider[] hitColliders = Physics.OverlapSphere(Pos, collisionRadius, GroundLayer);
+        if (hitColliders.Length > 0)
+        {
+            //we are on the ground
+            return true;
+        }
+
+        return false;
     }
+    //check if there is a wall to crash into
+    public bool CheckWall()
+    {
+        Vector3 Pos2 = transform.position + (transform.forward * frontOffset);
+        Collider[] hitColliders = Physics.OverlapSphere(Pos2, collisionRadius, GroundLayer);
+
+        if (hitColliders.Length > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
 
     private void Update()
     {
-        energy = transform.position.y + rb.velocity.magnitude;
+        //energy = transform.position.y + rb.velocity.magnitude;
+        //transform.position = rb.position;
 
-        transform.position = rb.position;
-
-
+        if (CheckWall())
+        {
+            if (actSpeed > speedLimitBeforeCrash)
+            {
+                //STUN
+                return;
+            }
+        }
+        if (CheckGround())
+        {
+            //SET GROUNDED
+            return;
+        }
+    }
+    private void FixedUpdate()
+    {
+        //Vector3 yaw = moveInputVector.y * Vector3.up * 
     }
 
     private void OnEnable()
@@ -89,12 +139,7 @@ public class FlightTransformation : Transformation
     {
         rb.useGravity = true;
     }
-    private void FixedUpdate()
-    {
-        //OriginalGlider();
 
-
-    }
 
     private void OriginalGlider()
     {
@@ -132,7 +177,6 @@ public class FlightTransformation : Transformation
 
         airSpeed = rb.velocity.magnitude;
     }
-
     public override void JumpAction(InputAction.CallbackContext cxt)
     {
         rb.AddForce(transform.up * Mathf.Sqrt(wingBeatHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
