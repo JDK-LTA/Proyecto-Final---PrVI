@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private CameraFollow CamFol; //reference to our camera script
     private PlayerVisuals Visuals; //script for handling visual effects
     private Vector3 CheckPointPos; //where we respawn
+    private Collider parentOwnCollider, rigidCollider;
 
     private DetectCollision Colli; //collision detection
     [HideInInspector]
@@ -32,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
     float delta;
 
     [Header("Physics")]
+    [SerializeField] private PhysicMaterial bipedPhysMat;
+    [SerializeField] private PhysicMaterial flightPhysMat;
+    [SerializeField] private PhysicMaterial ballPhysMat;
     [SerializeField] private float HandleReturnSpeed; //how quickly our handle on our character is returned to normal after a force is added (such as jumping
     private float ActGravAmt; //the actual gravity that is applied to our character
     [SerializeField] private LayerMask GroundLayers; //what layers the ground can be
@@ -121,13 +125,26 @@ public class PlayerMovement : MonoBehaviour
     private float tStartFlight = 0;
 
     [Header("Hook")]
-    private float hookForce;
     [SerializeField] private ForceMode hookForceMode = ForceMode.VelocityChange;
     [SerializeField] private bool canHook = true, hasHooked = false;
+    private float hookForce;
     private List<HookOption> hookOptions = new List<HookOption>();
     private Vector3 targetHookPos;
     [SerializeField] private float hookCooldown = 1f;
     private float tHook = 0;
+
+    [Header("Ball Stats")]
+    [SerializeField] private float bombForce = 15f;
+    [SerializeField] private float massWhenBall = 3;
+    [SerializeField] private float ballGravAmt = 14;
+    [SerializeField] private float downwardsVelLimitOnBomb = -10;
+    [SerializeField] private float ballSpeedToDestroyWalls = 30f;
+    [SerializeField] private GameObject ballMesh;
+    [SerializeField] private GameObject bodyMesh, faceMesh, ponchoMesh;
+    private bool isBombing = false;
+    private bool ballActivated = false;
+    private float originalMass;
+
 
     public List<HookOption> HookOptions { get => hookOptions; set => hookOptions = value; }
 
@@ -157,9 +174,27 @@ public class PlayerMovement : MonoBehaviour
     }
     public void ChangeToBiped(InputAction.CallbackContext cxt)
     {
-        if (cxt.started)
+        if (cxt.performed)
         {
             SetGrounded();
+            ballActivated = false;
+            Rigid.mass = originalMass;
+            isBombing = false;
+
+            ballMesh.SetActive(false);
+            bodyMesh.SetActive(true);
+            faceMesh.SetActive(true);
+            ponchoMesh.SetActive(true);
+
+            parentOwnCollider.material = bipedPhysMat;
+            rigidCollider.material = bipedPhysMat;
+        }
+    }
+        public void ChangeToBall(InputAction.CallbackContext cxt)
+    {
+        if (cxt.performed && (States == WorldState.InAir || States == WorldState.Flying))
+        {
+            SetBall();
         }
     }
 
@@ -183,6 +218,11 @@ public class PlayerMovement : MonoBehaviour
 
         //setup this characters stats
         SetupCharacter();
+
+        TryGetComponent(out parentOwnCollider);
+        Rigid.TryGetComponent(out rigidCollider);
+
+        originalMass = Rigid.mass;
 
         targetHookPos = Rigid.position;
         actualFlaps = maxNOfFlaps;
@@ -307,6 +347,15 @@ public class PlayerMovement : MonoBehaviour
                     SetGrounded();
                     return;
                 }
+            }
+        }
+
+        if ((States == WorldState.Grounded || States == WorldState.InAir) && ballActivated == true)
+        {
+            Collider hitColl = Colli.CheckBallWall();
+            if (hitColl && ActSpeed > ballSpeedToDestroyWalls)
+            {
+                Destroy(hitColl.gameObject);
             }
         }
     }
@@ -454,6 +503,11 @@ public class PlayerMovement : MonoBehaviour
             if (FlyingAdjustmentLerp > -.1)
                 FlyingAdjustmentLerp -= delta * (FlyingAdjustmentSpeed * 0.5f);
 
+            if (isBombing && Rigid.velocity.y > downwardsVelLimitOnBomb)
+            {
+                Rigid.AddForce(Vector3.down * bombForce, ForceMode.Force);
+            }
+
             //control our character when falling
             FallingCtrl(delta, ActSpeed, AirAcceleration, moveDirection);
         }
@@ -558,7 +612,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void JumpAction(InputAction.CallbackContext cxt)
     {
-        if (cxt.started && States == WorldState.Grounded)
+        if (cxt.started && States == WorldState.Grounded && !ballActivated)
         {
             if (FloorTimer > 0)
                 return;
@@ -590,6 +644,20 @@ public class PlayerMovement : MonoBehaviour
 
                 return;
             }
+        }
+    }
+    public void BombPress(InputAction.CallbackContext cxt)
+    {
+        if (cxt.performed && States == WorldState.InAir && ballActivated)
+        {
+            isBombing = true;
+        }
+    }
+    public void BombRelease(InputAction.CallbackContext cxt)
+    {
+        if (cxt.performed && ballActivated)
+        {
+            isBombing = false;
         }
     }
     //for when we return to the ground
@@ -645,6 +713,13 @@ public class PlayerMovement : MonoBehaviour
         startedFlying = false;
         tStartFlight = 0;
         InputHand.Fly = false;
+
+        //ballActivated = false;
+        //Rigid.mass = originalMass;
+        //isBombing = false;
+
+        //parentOwnCollider.material = bipedPhysMat;
+        //rigidCollider.material = bipedPhysMat;
     }
     //for when we are set in the air (for falling
     void SetInAir()
@@ -682,6 +757,18 @@ public class PlayerMovement : MonoBehaviour
 
         //turn on gravity
         Rigid.useGravity = false;
+
+        ballActivated = false;
+        Rigid.mass = originalMass;
+        isBombing = false;
+
+        ballMesh.SetActive(false);
+        bodyMesh.SetActive(true);
+        faceMesh.SetActive(true);
+        ponchoMesh.SetActive(true);
+
+        parentOwnCollider.material = flightPhysMat;
+        rigidCollider.material = flightPhysMat;
     }
     //stun our character
     public void Stunned(Vector3 PushDirection)
@@ -704,7 +791,33 @@ public class PlayerMovement : MonoBehaviour
         isFlying = false;
         startedFlying = false;
         tStartFlight = 0;
+
+        parentOwnCollider.material = bipedPhysMat;
+        rigidCollider.material = bipedPhysMat;
     }
+    public void SetBall()
+    {
+        Rigid.useGravity = true;
+
+        isFlying = false;
+        startedFlying = false;
+        tStartFlight = 0;
+        InputHand.Fly = false;
+
+        Rigid.mass = massWhenBall;
+        ballActivated = true;
+
+        ballMesh.SetActive(true);
+        bodyMesh.SetActive(false);
+        faceMesh.SetActive(false);
+        ponchoMesh.SetActive(false);
+
+        States = WorldState.InAir;
+
+        parentOwnCollider.material = ballPhysMat;
+        rigidCollider.material = ballPhysMat;
+    }
+
 
     void AnimCtrl()
     {
