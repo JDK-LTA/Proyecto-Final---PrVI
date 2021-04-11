@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float FallingDirectionSpeed = 0.5f; //how quickly we will return to a normal direction
 
     [Header("Flying")]
+    [SerializeField] private bool yInvertedOnFlight = true;
     [SerializeField] private float FlyingDirectionSpeed = 2f; //how much influence our direction relative to the camera will influence our flying
     [SerializeField] private float FlyingRotationSpeed = 6f; //how fast we turn in air overall
     [SerializeField] private float FlyingUpDownSpeed = 0.1f; //how fast we rotate up and down
@@ -120,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     private float tStartFlight = 0;
 
     [Header("Hook")]
-    [SerializeField] private float hookForce;
+    private float hookForce;
     [SerializeField] private ForceMode hookForceMode = ForceMode.VelocityChange;
     [SerializeField] private bool canHook = true, hasHooked = false;
     private List<HookOption> hookOptions = new List<HookOption>();
@@ -146,7 +147,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (canHook && !hasHooked)
                 {
+                    Rigid.velocity = Vector3.zero;
                     Rigid.AddForce((targetHookPos - transform.position) * hookForce, hookForceMode);
+                    ActAccel = 0;
                     hasHooked = true;
                 }
             }
@@ -598,16 +601,19 @@ public class PlayerMovement : MonoBehaviour
                 if (Vector3.Distance(hook.transform.position, transform.position) < Vector3.Distance(targetHookPos, transform.position))
                 {
                     targetHookPos = hook.transform.position;
+                    hookForce = hook.forceOfHook;
                 }
             }
         }
         else if (hookOptions.Count == 1)
         {
             targetHookPos = hookOptions[0].transform.position;
+            hookForce = hookOptions[0].forceOfHook;
         }
         else
         {
             targetHookPos = Rigid.position;
+            hookForce = 0;
         }
         canHook = hookOptions.Count > 0;
     }
@@ -901,7 +907,7 @@ public class PlayerMovement : MonoBehaviour
         // APLICA LAS ROTACIONES NECESARIAS
         //input direction 
         float InvertX = -1;
-        float InvertY = -1;
+        float InvertY = yInvertedOnFlight ? -1 : 1;
 
         XMove = XMove * InvertX; //horizontal inputs
         ZMove = ZMove * InvertY; //vertical inputs

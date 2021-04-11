@@ -5002,6 +5002,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HookOption
       objectReference: {fileID: 0}
+    - target: {fileID: 7488066763085186484, guid: 7f48209cafce64548a65469e05166209, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7488066763085186507, guid: 7f48209cafce64548a65469e05166209, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -9327,6 +9331,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HookOption_1
       objectReference: {fileID: 0}
+    - target: {fileID: 7488066763085186484, guid: 7f48209cafce64548a65469e05166209, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7488066763085186507, guid: 7f48209cafce64548a65469e05166209, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -10970,6 +10978,7 @@ MonoBehaviour:
   AirAcceleration: 2
   turnSpeedInAir: 0.5
   FallingDirectionSpeed: 0.05
+  yInvertedOnFlight: 1
   FlyingDirectionSpeed: 1
   FlyingRotationSpeed: 5
   FlyingUpDownSpeed: 10
@@ -11000,7 +11009,6 @@ MonoBehaviour:
   flappingTimer: 1
   flappingCooldown: 1.5
   startFlightWindow: 0.4
-  hookForce: 5
   hookForceMode: 1
   canHook: 1
   hasHooked: 0

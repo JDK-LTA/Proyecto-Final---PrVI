@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class HookOption : MonoBehaviour
 {
+    [SerializeField] public float forceOfHook = 100;
     private void OnTriggerEnter(Collider other)
     {
         PlayerMovement biped = other.GetComponent<PlayerMovement>();
