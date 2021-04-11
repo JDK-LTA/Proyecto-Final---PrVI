@@ -812,6 +812,8 @@ public class PlayerMovement : MonoBehaviour
         faceMesh.SetActive(false);
         ponchoMesh.SetActive(false);
 
+        States = WorldState.InAir;
+
         parentOwnCollider.material = ballPhysMat;
         rigidCollider.material = ballPhysMat;
     }

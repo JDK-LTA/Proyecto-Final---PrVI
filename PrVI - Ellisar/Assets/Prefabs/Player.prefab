@@ -282,7 +282,7 @@ MonoBehaviour:
   TimeBeforeAutoXInput: 5
   AutoInputCorrectionSpeed: 0.1
   AutoInputCorrectionSpeedFlying: 2
-  DistanceFromPlayer: 6
+  DistanceFromPlayer: 9
   NormalFov: 40
   MaxFov: 95
   MinVelocity: 8
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 6665035767991154542}
-  Offset: 2
+  Offset: 3.5
   OffsetDirection: {fileID: 6665035767991154543}
 --- !u!81 &6665035767358471180
 AudioListener:
