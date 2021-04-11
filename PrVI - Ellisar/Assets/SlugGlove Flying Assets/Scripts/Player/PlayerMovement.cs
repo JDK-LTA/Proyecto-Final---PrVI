@@ -220,7 +220,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                actualFlaps = maxNOfFlaps;
+                //actualFlaps = maxNOfFlaps;
             }
             #region DEP
 
@@ -268,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
             if (Ground)
             {
                 SetGrounded();
-                actualFlaps = maxNOfFlaps;
+                //actualFlaps = maxNOfFlaps;
                 return;
             }
         }
@@ -315,7 +315,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (actualFlaps < maxNOfFlaps)
         {
-            tCdInterFlap += Time.deltaTime;
+            float mult = States == WorldState.Grounded ? 8 : 1;
+            tCdInterFlap += Time.deltaTime * mult;
             if (tCdInterFlap >= cooldownToRegenFlap)
             {
                 tCdInterFlap = 0;
@@ -643,6 +644,7 @@ public class PlayerMovement : MonoBehaviour
         isFlying = false;
         startedFlying = false;
         tStartFlight = 0;
+        InputHand.Fly = false;
     }
     //for when we are set in the air (for falling
     void SetInAir()

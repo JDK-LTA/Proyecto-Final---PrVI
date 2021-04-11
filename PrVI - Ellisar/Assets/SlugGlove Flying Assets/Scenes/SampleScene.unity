@@ -2319,7 +2319,7 @@ MonoBehaviour:
   target: {fileID: 1370491613}
   YPivot: {fileID: 1226996447}
   camTransform: {fileID: 1655566035}
-  yInverted: 1
+  yInverted: 0
   xSensitivity: 2.89
   ySensitivity: 1.73
   turnSmoothing: 0.1
@@ -10978,7 +10978,7 @@ MonoBehaviour:
   AirAcceleration: 2
   turnSpeedInAir: 0.5
   FallingDirectionSpeed: 0.05
-  yInvertedOnFlight: 1
+  yInvertedOnFlight: 0
   FlyingDirectionSpeed: 1
   FlyingRotationSpeed: 5
   FlyingUpDownSpeed: 10
