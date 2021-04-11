@@ -8,8 +8,8 @@ public class DetectCollision : MonoBehaviour
 
     public float bottomOffset;
     public float frontOffset;
-    public float collisionGroundRadius = 0.8f, collisionWallRadius = 0.3f;
-    public LayerMask GroundLayer;
+    public float collisionGroundRadius = 0.8f, collisionWallRadius = 0.3f, collisionBallWallRadius = 1.3f;
+    public LayerMask GroundLayer, ballDestroyableLayer;
     public float WallDistance;
 
     //check if there is a floor to stand on, or land on
@@ -38,6 +38,18 @@ public class DetectCollision : MonoBehaviour
         }
 
         return false;
+    }
+
+    public Collider CheckBallWall()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, collisionBallWallRadius, ballDestroyableLayer);
+
+        if (hitColliders.Length > 0)
+        {
+            return hitColliders[0];
+        }
+
+        return null;
     }
 
     void OnDrawGizmosSelected()

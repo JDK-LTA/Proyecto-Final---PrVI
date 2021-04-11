@@ -43,6 +43,22 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""BombPress"",
+                    ""type"": ""Button"",
+                    ""id"": ""fbe3c8d4-df8b-4980-b035-052cc1a8ff63"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""BombRelease"",
+                    ""type"": ""Button"",
+                    ""id"": ""14254feb-3ecf-4f45-b775-d9c63e3d6af5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)""
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""5e4664c2-5bd5-462c-b50f-e787d624adf6"",
@@ -447,6 +463,116 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""TransformIntoBiped"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f3cfd2a-a0c4-465e-94da-4431b5962e47"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""BombPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c59dfdb1-542e-4fa9-9628-299429db0f5f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""BombPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e993cd87-5747-45d4-baee-a886389d9162"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""BombPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f0f3403-63dd-41d0-98c6-1acd1287ac98"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""BombPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd0e779a-561c-4dd0-8f3d-803b176d8091"",
+                    ""path"": ""<XRController>/{PrimaryAction}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""BombPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f176dc2e-93fb-40bb-acf9-23bb569c511e"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""BombRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9a206da-8d47-40b1-8142-5e59267f87c5"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""BombRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74416512-9be7-496b-a7c3-4760a08633d7"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""BombRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3259bba2-7edc-41a1-a322-a174ab06494f"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""BombRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c4f8d90-5988-432f-82fe-0f59167f0a83"",
+                    ""path"": ""<XRController>/{PrimaryAction}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""BombRelease"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1865,6 +1991,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_PlayerBiped_Move = m_PlayerBiped.FindAction("Move", throwIfNotFound: true);
         m_PlayerBiped_Look = m_PlayerBiped.FindAction("Look", throwIfNotFound: true);
         m_PlayerBiped_Fire = m_PlayerBiped.FindAction("Fire", throwIfNotFound: true);
+        m_PlayerBiped_BombPress = m_PlayerBiped.FindAction("BombPress", throwIfNotFound: true);
+        m_PlayerBiped_BombRelease = m_PlayerBiped.FindAction("BombRelease", throwIfNotFound: true);
         m_PlayerBiped_Jump = m_PlayerBiped.FindAction("Jump", throwIfNotFound: true);
         m_PlayerBiped_TransformIntoFlight = m_PlayerBiped.FindAction("TransformIntoFlight", throwIfNotFound: true);
         m_PlayerBiped_TransformIntoBall = m_PlayerBiped.FindAction("TransformIntoBall", throwIfNotFound: true);
@@ -1949,6 +2077,8 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerBiped_Move;
     private readonly InputAction m_PlayerBiped_Look;
     private readonly InputAction m_PlayerBiped_Fire;
+    private readonly InputAction m_PlayerBiped_BombPress;
+    private readonly InputAction m_PlayerBiped_BombRelease;
     private readonly InputAction m_PlayerBiped_Jump;
     private readonly InputAction m_PlayerBiped_TransformIntoFlight;
     private readonly InputAction m_PlayerBiped_TransformIntoBall;
@@ -1960,6 +2090,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerBiped_Move;
         public InputAction @Look => m_Wrapper.m_PlayerBiped_Look;
         public InputAction @Fire => m_Wrapper.m_PlayerBiped_Fire;
+        public InputAction @BombPress => m_Wrapper.m_PlayerBiped_BombPress;
+        public InputAction @BombRelease => m_Wrapper.m_PlayerBiped_BombRelease;
         public InputAction @Jump => m_Wrapper.m_PlayerBiped_Jump;
         public InputAction @TransformIntoFlight => m_Wrapper.m_PlayerBiped_TransformIntoFlight;
         public InputAction @TransformIntoBall => m_Wrapper.m_PlayerBiped_TransformIntoBall;
@@ -1982,6 +2114,12 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Fire.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnFire;
+                @BombPress.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnBombPress;
+                @BombPress.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnBombPress;
+                @BombPress.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnBombPress;
+                @BombRelease.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnBombRelease;
+                @BombRelease.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnBombRelease;
+                @BombRelease.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnBombRelease;
                 @Jump.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnJump;
@@ -2007,6 +2145,12 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @BombPress.started += instance.OnBombPress;
+                @BombPress.performed += instance.OnBombPress;
+                @BombPress.canceled += instance.OnBombPress;
+                @BombRelease.started += instance.OnBombRelease;
+                @BombRelease.performed += instance.OnBombRelease;
+                @BombRelease.canceled += instance.OnBombRelease;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -2324,6 +2468,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnBombPress(InputAction.CallbackContext context);
+        void OnBombRelease(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnTransformIntoFlight(InputAction.CallbackContext context);
         void OnTransformIntoBall(InputAction.CallbackContext context);
