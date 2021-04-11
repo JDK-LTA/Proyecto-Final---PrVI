@@ -76,6 +76,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "ResetLevel",
+                    "type": "Button",
+                    "id": "693205be-7482-4eda-944a-a63532362031",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -560,6 +568,28 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "BombRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60df6879-073c-4375-9af5-b62b4e07b5ad",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "Hold(duration=0.82)",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ResetLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b281a5f1-96d8-4b1d-82d8-e853b1569ba2",
+                    "path": "<Keyboard>/r",
+                    "interactions": "Hold(duration=0.8)",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ResetLevel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

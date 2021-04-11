@@ -276,7 +276,7 @@ MonoBehaviour:
   xSensitivity: 2.89
   ySensitivity: 1.73
   turnSmoothing: 0.1
-  minAngle: -50
+  minAngle: -20
   maxAngle: 50
   LookDirectionSpeed: 2
   TimeBeforeAutoXInput: 5
@@ -841,6 +841,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 14254feb-3ecf-4f45-b775-d9c63e3d6af5
     m_ActionName: PlayerBiped/BombRelease[/DualShock4GamepadHID/leftTrigger,/DualShock4GamepadHID/leftTrigger,/XInputControllerWindows/leftTrigger,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6665035767991154542}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: ResetLevel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 693205be-7482-4eda-944a-a63532362031
+    m_ActionName: PlayerBiped/ResetLevel[/DualShock4GamepadHID/rightStickPress,/DualShock4GamepadHID/rightStickPress,/XInputControllerWindows/rightStickPress,/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerBiped
