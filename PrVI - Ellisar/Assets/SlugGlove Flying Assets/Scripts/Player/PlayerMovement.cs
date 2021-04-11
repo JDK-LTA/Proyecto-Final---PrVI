@@ -148,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
                 if (canHook && !hasHooked)
                 {
                     Rigid.velocity = Vector3.zero;
-                    Rigid.AddForce((targetHookPos - transform.position) * hookForce, hookForceMode);
+                    Rigid.AddForce((targetHookPos - transform.position).normalized * hookForce, hookForceMode);
                     ActAccel = 0;
                     hasHooked = true;
                 }
