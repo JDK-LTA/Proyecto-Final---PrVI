@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23917796520313330}
   - component: {fileID: 95019937165247424}
   - component: {fileID: 64692864088021764}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Prop_Gem_Purple_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
