@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[System.Serializable]
+public enum WorldState
+{
+    Grounded, //on ground
+    InAir, //in the air
+    Flying, //trying to fly
+    Stunned, //on a wall
+    Static,
+}
 public class Transformation : PlayerParent
 {
     protected static bool isGrounded;
     [SerializeField] protected Vector2 moveInputVector;
     [SerializeField] protected Vector2 lookInputVector;
+    protected static WorldState state = WorldState.Grounded;
     public Vector2 MoveInputVector { get => moveInputVector; }
     public Vector2 LookInputVector { get => lookInputVector; }
 
