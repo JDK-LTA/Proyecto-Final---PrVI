@@ -4119,6 +4119,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753836680}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &796445826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6665035767991154542, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+  m_PrefabInstance: {fileID: 6665035767261695045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d88905959d3fc4b964bc164a00bd2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &815930855
 GameObject:
   m_ObjectHideFlags: 0
@@ -11063,10 +11074,102 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[29].m_ActionId
+      value: fbe3c8d4-df8b-4980-b035-052cc1a8ff63
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[30].m_ActionId
+      value: 14254feb-3ecf-4f45-b775-d9c63e3d6af5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[29].m_ActionName
+      value: PlayerBiped/Fire1[/DualShock4GamepadHID/rightTrigger,/DualShock4GamepadHID/rightTrigger,/XInputControllerWindows/rightTrigger,/Keyboard/q]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[30].m_ActionName
+      value: PlayerBiped/BombRelease[/DualShock4GamepadHID/leftTrigger,/DualShock4GamepadHID/leftTrigger,/XInputControllerWindows/leftTrigger,/Keyboard/q]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[29].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[30].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[29].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[30].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[29].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 796445826}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[30].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 796445826}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[29].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[30].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[29].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BombPress
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[30].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BombRelease
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[29].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerMovement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[30].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerMovement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[29].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154539, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[30].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6665035767991154541, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154542, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: bombForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665035767991154542, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: ballPhysMat
+      value: 
+      objectReference: {fileID: 13400000, guid: b274ee7b7489fca4aa246f44469b4558, type: 2}
+    - target: {fileID: 6665035767991154542, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: bipedPhysMat
+      value: 
+      objectReference: {fileID: 13400000, guid: b274ee7b7489fca4aa246f44469b4558, type: 2}
+    - target: {fileID: 6665035767991154542, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: flightPhysMat
+      value: 
+      objectReference: {fileID: 13400000, guid: 602fa52aa4f4e0b4bb03daed16d429d1, type: 2}
     - target: {fileID: 6665035767991154543, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -11110,6 +11213,10 @@ PrefabInstance:
     - target: {fileID: 6665035767991154543, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832570581771034876, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}
+      propertyPath: m_Mass
+      value: 3.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dbd67e6444555b49a2e4a32afb65ce2, type: 3}

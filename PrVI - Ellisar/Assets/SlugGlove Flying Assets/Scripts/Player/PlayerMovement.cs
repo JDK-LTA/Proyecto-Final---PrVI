@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private CameraFollow CamFol; //reference to our camera script
     private PlayerVisuals Visuals; //script for handling visual effects
     private Vector3 CheckPointPos; //where we respawn
+    private Collider parentOwnCollider, rigidCollider;
 
     private DetectCollision Colli; //collision detection
     [HideInInspector]
@@ -32,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
     float delta;
 
     [Header("Physics")]
+    [SerializeField] private PhysicMaterial bipedPhysMat;
+    [SerializeField] private PhysicMaterial flightPhysMat;
+    [SerializeField] private PhysicMaterial ballPhysMat;
     [SerializeField] private float HandleReturnSpeed; //how quickly our handle on our character is returned to normal after a force is added (such as jumping
     private float ActGravAmt; //the actual gravity that is applied to our character
     [SerializeField] private LayerMask GroundLayers; //what layers the ground can be
@@ -121,13 +125,17 @@ public class PlayerMovement : MonoBehaviour
     private float tStartFlight = 0;
 
     [Header("Hook")]
-    private float hookForce;
     [SerializeField] private ForceMode hookForceMode = ForceMode.VelocityChange;
     [SerializeField] private bool canHook = true, hasHooked = false;
+    private float hookForce;
     private List<HookOption> hookOptions = new List<HookOption>();
     private Vector3 targetHookPos;
     [SerializeField] private float hookCooldown = 1f;
     private float tHook = 0;
+
+    [Header("Ball Stats")]
+    [SerializeField] private float bombForce = 15f;
+    private bool isBombing = false;
 
     public List<HookOption> HookOptions { get => hookOptions; set => hookOptions = value; }
 
@@ -157,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void ChangeToBiped(InputAction.CallbackContext cxt)
     {
-        if (cxt.started)
+        if (cxt.performed)
         {
             SetGrounded();
         }
@@ -183,6 +191,9 @@ public class PlayerMovement : MonoBehaviour
 
         //setup this characters stats
         SetupCharacter();
+
+        TryGetComponent(out parentOwnCollider);
+        Rigid.TryGetComponent(out rigidCollider);
 
         targetHookPos = Rigid.position;
         actualFlaps = maxNOfFlaps;
@@ -454,6 +465,11 @@ public class PlayerMovement : MonoBehaviour
             if (FlyingAdjustmentLerp > -.1)
                 FlyingAdjustmentLerp -= delta * (FlyingAdjustmentSpeed * 0.5f);
 
+            if (isBombing)
+            {
+                Rigid.AddForce(Vector3.down * bombForce, ForceMode.Force);
+            }
+
             //control our character when falling
             FallingCtrl(delta, ActSpeed, AirAcceleration, moveDirection);
         }
@@ -592,6 +608,20 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    public void BombPress(InputAction.CallbackContext cxt)
+    {
+        if (cxt.performed && States == WorldState.InAir)
+        {
+            isBombing = true;
+        }
+    }
+    public void BombRelease(InputAction.CallbackContext cxt)
+    {
+        if (cxt.performed)
+        {
+            isBombing = false;
+        }
+    }
     //for when we return to the ground
     private void UpdateHookTarget()
     {
@@ -645,6 +675,9 @@ public class PlayerMovement : MonoBehaviour
         startedFlying = false;
         tStartFlight = 0;
         InputHand.Fly = false;
+
+        parentOwnCollider.material = bipedPhysMat;
+        rigidCollider.material = bipedPhysMat;
     }
     //for when we are set in the air (for falling
     void SetInAir()
@@ -682,6 +715,9 @@ public class PlayerMovement : MonoBehaviour
 
         //turn on gravity
         Rigid.useGravity = false;
+
+        parentOwnCollider.material = flightPhysMat;
+        rigidCollider.material = flightPhysMat;
     }
     //stun our character
     public void Stunned(Vector3 PushDirection)
@@ -704,6 +740,9 @@ public class PlayerMovement : MonoBehaviour
         isFlying = false;
         startedFlying = false;
         tStartFlight = 0;
+
+        parentOwnCollider.material = bipedPhysMat;
+        rigidCollider.material = bipedPhysMat;
     }
 
     void AnimCtrl()

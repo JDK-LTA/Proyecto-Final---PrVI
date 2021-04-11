@@ -46,7 +46,7 @@ public class InputHandle : MonoBehaviour
     }
     public void ChangeIntoFlight(InputAction.CallbackContext cxt)
     {
-        if (cxt.started)
+        if (cxt.performed)
             Fly = true;
     }
 }
