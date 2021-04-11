@@ -17,20 +17,17 @@ public class Dialogos : MonoBehaviour
 
     Coroutine auxCoroutine;
 
+    
+
 
     public void AbrirCajaDialogo(int valor)
     {
-        if(isDialogActive)
+        if (!isDialogActive)
         {
-            CerrarDialogo();
-            StartCoroutine(esperaSolapacionDialogo(valor));
 
-        }
-        else
-        {
-            isDialogActive = false;
             auxCoroutine = StartCoroutine(mostrarDialogo(valor));
         }
+       
     }
 
 
@@ -67,6 +64,7 @@ public class Dialogos : MonoBehaviour
         }
         yield return new WaitForSeconds(3f);
         Debug.Log("Cerramos MSORAR");
+
         CerrarDialogo();
 
     }
@@ -79,6 +77,7 @@ public class Dialogos : MonoBehaviour
 
     public void CerrarDialogo()
     {
+        
         isDialogActive = false;
         if(auxCoroutine !=null)
         {
