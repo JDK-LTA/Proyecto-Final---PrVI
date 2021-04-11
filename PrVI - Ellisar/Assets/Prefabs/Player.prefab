@@ -529,7 +529,7 @@ MonoBehaviour:
   massWhenBall: 3
   ballGravAmt: 14
   downwardsVelLimitOnBomb: -20
-  ballSpeedToDestroyWalls: 30
+  ballSpeedToDestroyWalls: 9.99
   ballMesh: {fileID: 915912079989546773}
   bodyMesh: {fileID: 4444150858073614031}
   faceMesh: {fileID: 8148035826506670884}
