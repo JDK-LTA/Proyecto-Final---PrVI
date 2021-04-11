@@ -9,7 +9,7 @@ public class NPC : MonoBehaviour
     public int valor;
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag== "Player")
+        if(other.GetComponent<PlayerMovement>())
         {
             Debug.Log("hola");
 
