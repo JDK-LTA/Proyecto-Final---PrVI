@@ -83,7 +83,23 @@
                     "id": "693205be-7482-4eda-944a-a63532362031",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": "Hold(duration=0.8)"
+                },
+                {
+                    "name": "ShowControls",
+                    "type": "Button",
+                    "id": "d1a49420-403a-488e-8bac-d8c3e91e3168",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)"
+                },
+                {
+                    "name": "StopShowingControls",
+                    "type": "Button",
+                    "id": "3eac0a95-bbb5-4064-b092-b09002e9f23f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)"
                 }
             ],
             "bindings": [
@@ -575,7 +591,7 @@
                     "name": "",
                     "id": "60df6879-073c-4375-9af5-b62b4e07b5ad",
                     "path": "<Gamepad>/rightStickPress",
-                    "interactions": "Hold(duration=0.82)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "ResetLevel",
@@ -586,10 +602,54 @@
                     "name": "",
                     "id": "b281a5f1-96d8-4b1d-82d8-e853b1569ba2",
                     "path": "<Keyboard>/r",
-                    "interactions": "Hold(duration=0.8)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "ResetLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc58cab9-e933-4308-9a21-929f0fcff821",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ShowControls",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af149ffd-fb21-468d-ba49-1cfa36a993d5",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ShowControls",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6723f751-82c5-451f-b45c-fbdc79fadd0e",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "StopShowingControls",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59520662-b743-453c-ae34-ef7dd5b6669a",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "StopShowingControls",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -96,7 +96,23 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""id"": ""693205be-7482-4eda-944a-a63532362031"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Hold(duration=0.8)""
+                },
+                {
+                    ""name"": ""ShowControls"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1a49420-403a-488e-8bac-d8c3e91e3168"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""StopShowingControls"",
+                    ""type"": ""Button"",
+                    ""id"": ""3eac0a95-bbb5-4064-b092-b09002e9f23f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -588,7 +604,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""60df6879-073c-4375-9af5-b62b4e07b5ad"",
                     ""path"": ""<Gamepad>/rightStickPress"",
-                    ""interactions"": ""Hold(duration=0.82)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""ResetLevel"",
@@ -599,10 +615,54 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""b281a5f1-96d8-4b1d-82d8-e853b1569ba2"",
                     ""path"": ""<Keyboard>/r"",
-                    ""interactions"": ""Hold(duration=0.8)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""ResetLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc58cab9-e933-4308-9a21-929f0fcff821"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ShowControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af149ffd-fb21-468d-ba49-1cfa36a993d5"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShowControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6723f751-82c5-451f-b45c-fbdc79fadd0e"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""StopShowingControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59520662-b743-453c-ae34-ef7dd5b6669a"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""StopShowingControls"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2028,6 +2088,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_PlayerBiped_TransformIntoBall = m_PlayerBiped.FindAction("TransformIntoBall", throwIfNotFound: true);
         m_PlayerBiped_TransformIntoBiped = m_PlayerBiped.FindAction("TransformIntoBiped", throwIfNotFound: true);
         m_PlayerBiped_ResetLevel = m_PlayerBiped.FindAction("ResetLevel", throwIfNotFound: true);
+        m_PlayerBiped_ShowControls = m_PlayerBiped.FindAction("ShowControls", throwIfNotFound: true);
+        m_PlayerBiped_StopShowingControls = m_PlayerBiped.FindAction("StopShowingControls", throwIfNotFound: true);
         // PlayerFlight
         m_PlayerFlight = asset.FindActionMap("PlayerFlight", throwIfNotFound: true);
         m_PlayerFlight_Move = m_PlayerFlight.FindAction("Move", throwIfNotFound: true);
@@ -2115,6 +2177,8 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerBiped_TransformIntoBall;
     private readonly InputAction m_PlayerBiped_TransformIntoBiped;
     private readonly InputAction m_PlayerBiped_ResetLevel;
+    private readonly InputAction m_PlayerBiped_ShowControls;
+    private readonly InputAction m_PlayerBiped_StopShowingControls;
     public struct PlayerBipedActions
     {
         private @InputActions m_Wrapper;
@@ -2129,6 +2193,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @TransformIntoBall => m_Wrapper.m_PlayerBiped_TransformIntoBall;
         public InputAction @TransformIntoBiped => m_Wrapper.m_PlayerBiped_TransformIntoBiped;
         public InputAction @ResetLevel => m_Wrapper.m_PlayerBiped_ResetLevel;
+        public InputAction @ShowControls => m_Wrapper.m_PlayerBiped_ShowControls;
+        public InputAction @StopShowingControls => m_Wrapper.m_PlayerBiped_StopShowingControls;
         public InputActionMap Get() { return m_Wrapper.m_PlayerBiped; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2168,6 +2234,12 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @ResetLevel.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnResetLevel;
                 @ResetLevel.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnResetLevel;
                 @ResetLevel.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnResetLevel;
+                @ShowControls.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnShowControls;
+                @ShowControls.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnShowControls;
+                @ShowControls.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnShowControls;
+                @StopShowingControls.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnStopShowingControls;
+                @StopShowingControls.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnStopShowingControls;
+                @StopShowingControls.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnStopShowingControls;
             }
             m_Wrapper.m_PlayerBipedActionsCallbackInterface = instance;
             if (instance != null)
@@ -2202,6 +2274,12 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @ResetLevel.started += instance.OnResetLevel;
                 @ResetLevel.performed += instance.OnResetLevel;
                 @ResetLevel.canceled += instance.OnResetLevel;
+                @ShowControls.started += instance.OnShowControls;
+                @ShowControls.performed += instance.OnShowControls;
+                @ShowControls.canceled += instance.OnShowControls;
+                @StopShowingControls.started += instance.OnStopShowingControls;
+                @StopShowingControls.performed += instance.OnStopShowingControls;
+                @StopShowingControls.canceled += instance.OnStopShowingControls;
             }
         }
     }
@@ -2514,6 +2592,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnTransformIntoBall(InputAction.CallbackContext context);
         void OnTransformIntoBiped(InputAction.CallbackContext context);
         void OnResetLevel(InputAction.CallbackContext context);
+        void OnShowControls(InputAction.CallbackContext context);
+        void OnStopShowingControls(InputAction.CallbackContext context);
     }
     public interface IPlayerFlightActions
     {

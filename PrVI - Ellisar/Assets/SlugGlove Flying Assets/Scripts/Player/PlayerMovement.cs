@@ -239,7 +239,7 @@ public class PlayerMovement : MonoBehaviour
 
         targetHookPos = Rigid.position;
         actualFlaps = maxNOfFlaps;
-        UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
+        //UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
     }
 
     private void Update()   //inputs and animation
