@@ -107,12 +107,12 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""interactions"": ""Press(behavior=2)""
                 },
                 {
-                    ""name"": ""StopShowingControls"",
+                    ""name"": ""ExitGame"",
                     ""type"": ""Button"",
-                    ""id"": ""3eac0a95-bbb5-4064-b092-b09002e9f23f"",
+                    ""id"": ""d8484227-ed51-451b-a8c1-66cffab69a29"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=2)""
+                    ""interactions"": ""Hold(duration=2)""
                 }
             ],
             ""bindings"": [
@@ -646,23 +646,23 @@ public class @InputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6723f751-82c5-451f-b45c-fbdc79fadd0e"",
-                    ""path"": ""<Gamepad>/select"",
+                    ""id"": ""112f3411-0522-401e-9971-f721bb24eef3"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""StopShowingControls"",
+                    ""action"": ""ExitGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""59520662-b743-453c-ae34-ef7dd5b6669a"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""id"": ""9d1fc3aa-7aab-4d67-a104-038d3a8db517"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""StopShowingControls"",
+                    ""action"": ""ExitGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2089,7 +2089,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_PlayerBiped_TransformIntoBiped = m_PlayerBiped.FindAction("TransformIntoBiped", throwIfNotFound: true);
         m_PlayerBiped_ResetLevel = m_PlayerBiped.FindAction("ResetLevel", throwIfNotFound: true);
         m_PlayerBiped_ShowControls = m_PlayerBiped.FindAction("ShowControls", throwIfNotFound: true);
-        m_PlayerBiped_StopShowingControls = m_PlayerBiped.FindAction("StopShowingControls", throwIfNotFound: true);
+        m_PlayerBiped_ExitGame = m_PlayerBiped.FindAction("ExitGame", throwIfNotFound: true);
         // PlayerFlight
         m_PlayerFlight = asset.FindActionMap("PlayerFlight", throwIfNotFound: true);
         m_PlayerFlight_Move = m_PlayerFlight.FindAction("Move", throwIfNotFound: true);
@@ -2178,7 +2178,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerBiped_TransformIntoBiped;
     private readonly InputAction m_PlayerBiped_ResetLevel;
     private readonly InputAction m_PlayerBiped_ShowControls;
-    private readonly InputAction m_PlayerBiped_StopShowingControls;
+    private readonly InputAction m_PlayerBiped_ExitGame;
     public struct PlayerBipedActions
     {
         private @InputActions m_Wrapper;
@@ -2194,7 +2194,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @TransformIntoBiped => m_Wrapper.m_PlayerBiped_TransformIntoBiped;
         public InputAction @ResetLevel => m_Wrapper.m_PlayerBiped_ResetLevel;
         public InputAction @ShowControls => m_Wrapper.m_PlayerBiped_ShowControls;
-        public InputAction @StopShowingControls => m_Wrapper.m_PlayerBiped_StopShowingControls;
+        public InputAction @ExitGame => m_Wrapper.m_PlayerBiped_ExitGame;
         public InputActionMap Get() { return m_Wrapper.m_PlayerBiped; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2237,9 +2237,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @ShowControls.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnShowControls;
                 @ShowControls.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnShowControls;
                 @ShowControls.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnShowControls;
-                @StopShowingControls.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnStopShowingControls;
-                @StopShowingControls.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnStopShowingControls;
-                @StopShowingControls.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnStopShowingControls;
+                @ExitGame.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnExitGame;
+                @ExitGame.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnExitGame;
+                @ExitGame.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnExitGame;
             }
             m_Wrapper.m_PlayerBipedActionsCallbackInterface = instance;
             if (instance != null)
@@ -2277,9 +2277,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @ShowControls.started += instance.OnShowControls;
                 @ShowControls.performed += instance.OnShowControls;
                 @ShowControls.canceled += instance.OnShowControls;
-                @StopShowingControls.started += instance.OnStopShowingControls;
-                @StopShowingControls.performed += instance.OnStopShowingControls;
-                @StopShowingControls.canceled += instance.OnStopShowingControls;
+                @ExitGame.started += instance.OnExitGame;
+                @ExitGame.performed += instance.OnExitGame;
+                @ExitGame.canceled += instance.OnExitGame;
             }
         }
     }
@@ -2593,7 +2593,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnTransformIntoBiped(InputAction.CallbackContext context);
         void OnResetLevel(InputAction.CallbackContext context);
         void OnShowControls(InputAction.CallbackContext context);
-        void OnStopShowingControls(InputAction.CallbackContext context);
+        void OnExitGame(InputAction.CallbackContext context);
     }
     public interface IPlayerFlightActions
     {
