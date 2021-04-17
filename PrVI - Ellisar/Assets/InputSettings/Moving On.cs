@@ -89,6 +89,30 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""ResetLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""693205be-7482-4eda-944a-a63532362031"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.8)""
+                },
+                {
+                    ""name"": ""ShowControls"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1a49420-403a-488e-8bac-d8c3e91e3168"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""ExitGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8484227-ed51-451b-a8c1-66cffab69a29"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=2)""
                 }
             ],
             ""bindings"": [
@@ -573,6 +597,72 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""BombRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60df6879-073c-4375-9af5-b62b4e07b5ad"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ResetLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b281a5f1-96d8-4b1d-82d8-e853b1569ba2"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ResetLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc58cab9-e933-4308-9a21-929f0fcff821"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ShowControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af149ffd-fb21-468d-ba49-1cfa36a993d5"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShowControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""112f3411-0522-401e-9971-f721bb24eef3"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ExitGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d1fc3aa-7aab-4d67-a104-038d3a8db517"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ExitGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1997,6 +2087,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_PlayerBiped_TransformIntoFlight = m_PlayerBiped.FindAction("TransformIntoFlight", throwIfNotFound: true);
         m_PlayerBiped_TransformIntoBall = m_PlayerBiped.FindAction("TransformIntoBall", throwIfNotFound: true);
         m_PlayerBiped_TransformIntoBiped = m_PlayerBiped.FindAction("TransformIntoBiped", throwIfNotFound: true);
+        m_PlayerBiped_ResetLevel = m_PlayerBiped.FindAction("ResetLevel", throwIfNotFound: true);
+        m_PlayerBiped_ShowControls = m_PlayerBiped.FindAction("ShowControls", throwIfNotFound: true);
+        m_PlayerBiped_ExitGame = m_PlayerBiped.FindAction("ExitGame", throwIfNotFound: true);
         // PlayerFlight
         m_PlayerFlight = asset.FindActionMap("PlayerFlight", throwIfNotFound: true);
         m_PlayerFlight_Move = m_PlayerFlight.FindAction("Move", throwIfNotFound: true);
@@ -2083,6 +2176,9 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerBiped_TransformIntoFlight;
     private readonly InputAction m_PlayerBiped_TransformIntoBall;
     private readonly InputAction m_PlayerBiped_TransformIntoBiped;
+    private readonly InputAction m_PlayerBiped_ResetLevel;
+    private readonly InputAction m_PlayerBiped_ShowControls;
+    private readonly InputAction m_PlayerBiped_ExitGame;
     public struct PlayerBipedActions
     {
         private @InputActions m_Wrapper;
@@ -2096,6 +2192,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @TransformIntoFlight => m_Wrapper.m_PlayerBiped_TransformIntoFlight;
         public InputAction @TransformIntoBall => m_Wrapper.m_PlayerBiped_TransformIntoBall;
         public InputAction @TransformIntoBiped => m_Wrapper.m_PlayerBiped_TransformIntoBiped;
+        public InputAction @ResetLevel => m_Wrapper.m_PlayerBiped_ResetLevel;
+        public InputAction @ShowControls => m_Wrapper.m_PlayerBiped_ShowControls;
+        public InputAction @ExitGame => m_Wrapper.m_PlayerBiped_ExitGame;
         public InputActionMap Get() { return m_Wrapper.m_PlayerBiped; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2132,6 +2231,15 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @TransformIntoBiped.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnTransformIntoBiped;
                 @TransformIntoBiped.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnTransformIntoBiped;
                 @TransformIntoBiped.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnTransformIntoBiped;
+                @ResetLevel.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnResetLevel;
+                @ResetLevel.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnResetLevel;
+                @ResetLevel.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnResetLevel;
+                @ShowControls.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnShowControls;
+                @ShowControls.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnShowControls;
+                @ShowControls.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnShowControls;
+                @ExitGame.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnExitGame;
+                @ExitGame.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnExitGame;
+                @ExitGame.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnExitGame;
             }
             m_Wrapper.m_PlayerBipedActionsCallbackInterface = instance;
             if (instance != null)
@@ -2163,6 +2271,15 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @TransformIntoBiped.started += instance.OnTransformIntoBiped;
                 @TransformIntoBiped.performed += instance.OnTransformIntoBiped;
                 @TransformIntoBiped.canceled += instance.OnTransformIntoBiped;
+                @ResetLevel.started += instance.OnResetLevel;
+                @ResetLevel.performed += instance.OnResetLevel;
+                @ResetLevel.canceled += instance.OnResetLevel;
+                @ShowControls.started += instance.OnShowControls;
+                @ShowControls.performed += instance.OnShowControls;
+                @ShowControls.canceled += instance.OnShowControls;
+                @ExitGame.started += instance.OnExitGame;
+                @ExitGame.performed += instance.OnExitGame;
+                @ExitGame.canceled += instance.OnExitGame;
             }
         }
     }
@@ -2474,6 +2591,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnTransformIntoFlight(InputAction.CallbackContext context);
         void OnTransformIntoBall(InputAction.CallbackContext context);
         void OnTransformIntoBiped(InputAction.CallbackContext context);
+        void OnResetLevel(InputAction.CallbackContext context);
+        void OnShowControls(InputAction.CallbackContext context);
+        void OnExitGame(InputAction.CallbackContext context);
     }
     public interface IPlayerFlightActions
     {

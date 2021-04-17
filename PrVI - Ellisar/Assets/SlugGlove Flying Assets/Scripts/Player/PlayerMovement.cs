@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -145,6 +146,8 @@ public class PlayerMovement : MonoBehaviour
     private bool ballActivated = false;
     private float originalMass;
 
+    private Vector3 originalPosition;
+
 
     public List<HookOption> HookOptions { get => hookOptions; set => hookOptions = value; }
 
@@ -157,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
                 flapCd = true;
                 hasFlapped = true;
                 actualFlaps--;
+                UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
 
                 SpeedBoost(flapForce);
             }
@@ -190,11 +194,19 @@ public class PlayerMovement : MonoBehaviour
             rigidCollider.material = bipedPhysMat;
         }
     }
-        public void ChangeToBall(InputAction.CallbackContext cxt)
+    public void ChangeToBall(InputAction.CallbackContext cxt)
     {
         if (cxt.performed && (States == WorldState.InAir || States == WorldState.Flying))
         {
             SetBall();
+        }
+    }
+    public void ResetLevel(InputAction.CallbackContext cxt)
+    {
+        if (cxt.performed)
+        {
+            Rigid.position = originalPosition;
+            Physics.SyncTransforms();
         }
     }
 
@@ -223,9 +235,11 @@ public class PlayerMovement : MonoBehaviour
         Rigid.TryGetComponent(out rigidCollider);
 
         originalMass = Rigid.mass;
+        originalPosition = Rigid.position;
 
         targetHookPos = Rigid.position;
         actualFlaps = maxNOfFlaps;
+        //UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
     }
 
     private void Update()   //inputs and animation
@@ -364,12 +378,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (actualFlaps < maxNOfFlaps)
         {
-            float mult = States == WorldState.Grounded ? 8 : 1;
+            float mult = States == WorldState.Grounded ? 9 : 1;
             tCdInterFlap += Time.deltaTime * mult;
+
+            UI_FlapsEnergy.Instance.UpdateFeatherImage(tCdInterFlap / cooldownToRegenFlap);
+
             if (tCdInterFlap >= cooldownToRegenFlap)
             {
                 tCdInterFlap = 0;
                 actualFlaps++;
+                UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
             }
         }
     }
@@ -626,7 +644,10 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
 
-            if (!HasJumped)
+            RaycastHit hit;
+            Physics.Raycast(transform.position + Vector3.up*1.1f, transform.forward, out hit, 0.7f);
+
+            if (!HasJumped && Vector3.Angle(Vector3.up, hit.normal) < 50)
             {
                 if (Anim)
                 {

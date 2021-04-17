@@ -276,7 +276,7 @@ MonoBehaviour:
   xSensitivity: 2.89
   ySensitivity: 1.73
   turnSmoothing: 0.1
-  minAngle: -50
+  minAngle: -20
   maxAngle: 50
   LookDirectionSpeed: 2
   TimeBeforeAutoXInput: 5
@@ -473,9 +473,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   States: 0
   Rigid: {fileID: 0}
-  bipedPhysMat: {fileID: 0}
-  flightPhysMat: {fileID: 0}
-  ballPhysMat: {fileID: 0}
+  bipedPhysMat: {fileID: 13400000, guid: 602fa52aa4f4e0b4bb03daed16d429d1, type: 2}
+  flightPhysMat: {fileID: 13400000, guid: 602fa52aa4f4e0b4bb03daed16d429d1, type: 2}
+  ballPhysMat: {fileID: 13400000, guid: b274ee7b7489fca4aa246f44469b4558, type: 2}
   HandleReturnSpeed: 2
   GroundLayers:
     serializedVersion: 2
@@ -607,7 +607,19 @@ MonoBehaviour:
       m_Calls: []
   m_ControlsChangedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UI_FlapsEnergy, Assembly-CSharp
+        m_MethodName: ChangeControlsText
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
@@ -690,7 +702,19 @@ MonoBehaviour:
     m_ActionId: 0c6f082c-92b6-4d7e-a739-47fd32147274
     m_ActionName: PlayerBiped/TransformIntoFlight[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/leftShoulder,/XInputControllerWindows/leftShoulder,/DualShock4GamepadHID/buttonNorth,/DualShock4GamepadHID/buttonNorth,/XInputControllerWindows/buttonNorth,/Keyboard/2]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6665035767991154542}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: ChangeToBall
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 0330c024-3a58-44c5-8ca9-48cb049d0f33
     m_ActionName: PlayerBiped/TransformIntoBall[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/leftShoulder,/XInputControllerWindows/leftShoulder,/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID/buttonEast,/XInputControllerWindows/buttonEast,/Keyboard/3]
   - m_PersistentCalls:
@@ -797,6 +821,86 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 09bd6b69-6708-400e-914b-acb02bb41b5b
     m_ActionName: PlayerBiped/TransformIntoBiped[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/leftShoulder,/XInputControllerWindows/leftShoulder,/DualShock4GamepadHID/buttonSouth,/DualShock4GamepadHID/buttonSouth,/XInputControllerWindows/buttonSouth,/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6665035767991154542}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: BombPress
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fbe3c8d4-df8b-4980-b035-052cc1a8ff63
+    m_ActionName: PlayerBiped/Fire1[/DualShock4GamepadHID/rightTrigger,/DualShock4GamepadHID/rightTrigger,/XInputControllerWindows/rightTrigger,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6665035767991154542}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: BombRelease
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 14254feb-3ecf-4f45-b775-d9c63e3d6af5
+    m_ActionName: PlayerBiped/BombRelease[/DualShock4GamepadHID/leftTrigger,/DualShock4GamepadHID/leftTrigger,/XInputControllerWindows/leftTrigger,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6665035767991154542}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: ResetLevel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 693205be-7482-4eda-944a-a63532362031
+    m_ActionName: PlayerBiped/ResetLevel[/DualShock4GamepadHID/rightStickPress,/DualShock4GamepadHID/rightStickPress,/XInputControllerWindows/rightStickPress,/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UI_FlapsEnergy, Assembly-CSharp
+        m_MethodName: ToggleShowControls
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d1a49420-403a-488e-8bac-d8c3e91e3168
+    m_ActionName: PlayerBiped/ShowControls[/DualShock4GamepadHID/select,/DualShock4GamepadHID/select,/XInputControllerWindows/select,/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6665035767991154536}
+        m_TargetAssemblyTypeName: InputHandle, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d8484227-ed51-451b-a8c1-66cffab69a29
+    m_ActionName: PlayerBiped/ExitGame[/DualShock4GamepadHID/start,/DualShock4GamepadHID/start,/XInputControllerWindows/start,/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerBiped

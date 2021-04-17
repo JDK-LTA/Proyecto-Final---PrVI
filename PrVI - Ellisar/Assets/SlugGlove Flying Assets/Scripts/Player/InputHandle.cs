@@ -23,6 +23,8 @@ public class InputHandle : MonoBehaviour
     private void Start()
     {
         Player = GetComponent<PlayerMovement>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -49,4 +51,22 @@ public class InputHandle : MonoBehaviour
         if (cxt.performed)
             Fly = true;
     }
+    public void ExitGame(InputAction.CallbackContext cxt)
+    {
+#if UNITY_EDITOR
+        if (cxt.started)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+#endif
+        if (cxt.performed)
+        {
+#if UNITY_EDITOR
+            Debug.Break();
+            return;
+#endif
+            Application.Quit();
+        }
+    } 
 }

@@ -31,7 +31,7 @@ public class Dialogos : MonoBehaviour
     }
 
 
-    IEnumerator mostrarDialogo(int valor, float time =0.1f)
+    IEnumerator mostrarDialogo(int valor, float time =0.06f)
     {
         panel.SetActive(true);
         string[] dialogo;
@@ -58,7 +58,7 @@ public class Dialogos : MonoBehaviour
                     }
                     else yield break;
                 }
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(2f);
             }
             else yield break;
         }
