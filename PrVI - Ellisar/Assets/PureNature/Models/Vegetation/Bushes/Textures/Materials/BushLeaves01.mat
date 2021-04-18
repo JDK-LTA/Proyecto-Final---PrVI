@@ -124,7 +124,7 @@ Material:
     - _GlossyReflections: 1
     - _GradientFalloff: 2
     - _GradientFaloff: 1
-    - _GradientPosition: 1
+    - _GradientPosition: 0.883
     - _HideHardAngles: 1
     - _HidePower: 2.5
     - _HideSides: 1
@@ -185,10 +185,10 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color0: {r: 1, g: 1, b: 1, a: 0}
-    - _ColorVariation: {r: 0, g: 0.28108943, b: 0.4245283, a: 0}
+    - _ColorVariation: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GradientColor: {r: 0.24200165, g: 0.5566038, b: 0, a: 0}
-    - _MainColor: {r: 0.5962733, g: 1, b: 0, a: 1}
+    - _GradientColor: {r: 0, g: 0.38570705, b: 0.990566, a: 0}
+    - _MainColor: {r: 1, g: 0.42830187, b: 0.79149824, a: 1}
     - _ScatteringColor: {r: 0.56218994, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     - _Tiling: {r: 4, g: 4, b: 0, a: 0}
@@ -198,3 +198,4 @@ Material:
     - _TreeOffset1: {r: 0, g: 5, b: 0, a: 0}
     - _Vector0: {r: 1, g: 1, b: 0, a: 0}
     - _windOrientation: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

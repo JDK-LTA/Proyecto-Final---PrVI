@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
-        m_Texture: {fileID: 2800000, guid: 1bbb6f363f884124aaa1cad8329f78cf, type: 3}
+        m_Texture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailMask:
@@ -91,7 +91,7 @@ Material:
     - _GlossyReflections: 1
     - _LayerContrast: 0
     - _LayerPosition: 0
-    - _LayerPower: 0.594
+    - _LayerPower: 0.101
     - _LayerThreshold: 50
     - _Metallic: 0
     - _MetallicPower: 0
@@ -114,6 +114,7 @@ Material:
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _2ndColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _2ndColor: {r: 0.35500178, g: 0.53873974, b: 0.6792453, a: 1}
+    - _Color: {r: 0.95294124, g: 0.49803925, b: 0.52156866, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []

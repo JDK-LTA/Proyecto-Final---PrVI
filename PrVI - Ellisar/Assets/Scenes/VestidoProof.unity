@@ -599,7 +599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2128948149894907116, guid: b483676b3404a4544b5c5897dceee4f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 375.51
+      value: 374.29
       objectReference: {fileID: 0}
     - target: {fileID: 2128948149894907116, guid: b483676b3404a4544b5c5897dceee4f4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -607,7 +607,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2128948149894907116, guid: b483676b3404a4544b5c5897dceee4f4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 273.40994
+      value: 271.88
       objectReference: {fileID: 0}
     - target: {fileID: 2128948149894907116, guid: b483676b3404a4544b5c5897dceee4f4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1103,7 +1103,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 363253597b905fe479696813c3effdc5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 58240d391120a614b8e28d18d1c50101, type: 2}
+      objectReference: {fileID: 2100000, guid: 609f7d033ada30e498303ffb38b16744, type: 2}
     - target: {fileID: 919132149155446097, guid: 363253597b905fe479696813c3effdc5, type: 3}
       propertyPath: m_Name
       value: Wrecked_Car
@@ -3180,7 +3180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1172181875094368916, guid: 900e756d070e0224ca717c851e8a0df7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 371.76
+      value: 372.79
       objectReference: {fileID: 0}
     - target: {fileID: 1172181875094368916, guid: 900e756d070e0224ca717c851e8a0df7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3188,7 +3188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1172181875094368916, guid: 900e756d070e0224ca717c851e8a0df7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 261.97
+      value: 261.76
       objectReference: {fileID: 0}
     - target: {fileID: 1172181875094368916, guid: 900e756d070e0224ca717c851e8a0df7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3231,6 +3231,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2991821628024139018, guid: 85b67c305e731644981723bb07cc1a46, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f33cd4d907167149a8e85d929348d8c, type: 2}
     - target: {fileID: 3046783442267225437, guid: 85b67c305e731644981723bb07cc1a46, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3295,6 +3299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OakTree02
       objectReference: {fileID: 0}
+    - target: {fileID: 8354948122903103733, guid: 85b67c305e731644981723bb07cc1a46, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f33cd4d907167149a8e85d929348d8c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85b67c305e731644981723bb07cc1a46, type: 3}
 --- !u!1001 &904425753
@@ -3688,15 +3696,15 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 5514b2918c00ac8438c7f1e8636d705c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d40402fcd3684aa458746cebc8690df5, type: 2}
+      objectReference: {fileID: 2100000, guid: 155a6fdbdabea4444b43a6d94ba075ff, type: 2}
     - target: {fileID: -7511558181221131132, guid: 5514b2918c00ac8438c7f1e8636d705c, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 515356c9c55ea7543b125ffd778bd808, type: 2}
+      objectReference: {fileID: 2100000, guid: f55f9744881bdc84390584b810fce4e7, type: 2}
     - target: {fileID: -7511558181221131132, guid: 5514b2918c00ac8438c7f1e8636d705c, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: f9f9bccb9b3b99d48bfd1ff0c85ab506, type: 2}
+      objectReference: {fileID: 2100000, guid: f55b08172b89c83448ae560186564565, type: 2}
     - target: {fileID: 919132149155446097, guid: 5514b2918c00ac8438c7f1e8636d705c, type: 3}
       propertyPath: m_Name
       value: wheel
