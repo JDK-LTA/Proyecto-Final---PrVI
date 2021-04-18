@@ -134,3 +134,4 @@ Material:
     - _MainColor: {r: 0.14878201, g: 0.36200002, b: 0.21511647, a: 1}
     - _MainColor1: {r: 1, g: 0, b: 0, a: 0}
     - _TrunkColor: {r: 0.5, g: 0.43962264, b: 0.4245283, a: 1}
+  m_BuildTextureStacks: []
