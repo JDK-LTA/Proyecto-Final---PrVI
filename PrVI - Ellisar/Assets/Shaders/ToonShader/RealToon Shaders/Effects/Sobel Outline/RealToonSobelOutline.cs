@@ -29,21 +29,23 @@ public class RealToonSobelOutline : MonoBehaviour
 
     private GameObject tmpCam = null;
 	private Camera _camera;
+    [SerializeField]
+    private Material materialEffect;
 
     [HideInInspector]
     public Material _material;
-
+    
 	private GameObject go;
 	private bool destroy = false;
 
 	void OnEnable() 
 	{
-		_material = new Material(Shader.Find("Hidden/RealToon/Effects/Sobel Outline"));
+        _material = materialEffect;
 	}
 
     void Reset()
     {
-        _material = new Material(Shader.Find("Hidden/RealToon/Effects/Sobel Outline"));
+        _material = materialEffect;
     }
 
     void OnRenderImage(RenderTexture source, RenderTexture destination)
