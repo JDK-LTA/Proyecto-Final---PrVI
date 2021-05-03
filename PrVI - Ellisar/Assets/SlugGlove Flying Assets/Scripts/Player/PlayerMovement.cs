@@ -172,6 +172,9 @@ public class PlayerMovement : MonoBehaviour
                     Rigid.AddForce((targetHookPos - transform.position).normalized * hookForce, hookForceMode);
                     ActAccel = 0;
                     hasHooked = true;
+
+                    //Animations
+                    Anim.SetTrigger("Hook");
                 }
             }
         }
