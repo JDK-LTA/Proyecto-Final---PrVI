@@ -140,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float ballGravAmt = 14;
     [SerializeField] private float downwardsVelLimitOnBomb = -10;
     [SerializeField] private float ballSpeedToDestroyWalls = 30f;
+    [SerializeField] private float ballBoost = 15;
     [SerializeField] private GameObject ballMesh;
     [SerializeField] private GameObject bodyMesh, faceMesh, ponchoMesh;
     private bool isBombing = false;
@@ -166,12 +167,18 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (States == WorldState.Grounded || States == WorldState.InAir)
             {
-                if (canHook && !hasHooked)
+                if (canHook && !hasHooked && !ballActivated)
                 {
                     Rigid.velocity = Vector3.zero;
                     Rigid.AddForce((targetHookPos - transform.position).normalized * hookForce, hookForceMode);
                     ActAccel = 0;
                     hasHooked = true;
+                }
+                else if (ballActivated && actualFlaps > 0)
+                {
+                    SpeedBoost(ballBoost);
+                    actualFlaps--;
+                    UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
                 }
             }
         }
@@ -378,7 +385,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (actualFlaps < maxNOfFlaps)
         {
-            float mult = States == WorldState.Grounded ? 9 : 1;
+            float mult = States == WorldState.Grounded ? (ballActivated ? 3 : 9) : 1;
             tCdInterFlap += Time.deltaTime * mult;
 
             UI_FlapsEnergy.Instance.UpdateFeatherImage(tCdInterFlap / cooldownToRegenFlap);
@@ -447,12 +454,14 @@ public class PlayerMovement : MonoBehaviour
         //tick deltatime
         delta = Time.deltaTime;
 
+        #region DEPRECATED
         //get velocity to feed to the camera
-        float CamVel = 0;
-        if (Rigid != null)
-            CamVel = Rigid.velocity.magnitude;
+        //float CamVel = 0;
+        //if (Rigid != null)
+        //    CamVel = Rigid.velocity.magnitude;
         //change the cameras fov based on speed
         //CamFol.HandleFov(delta, CamVel);
+        #endregion
 
         //cannot function when dead
         if (States == WorldState.Static)
@@ -645,9 +654,9 @@ public class PlayerMovement : MonoBehaviour
             }
 
             RaycastHit hit;
-            Physics.Raycast(transform.position + Vector3.up*1.1f, transform.forward, out hit, 0.7f);
+            Physics.Raycast(transform.position + Vector3.up * 1.1f, transform.forward, out hit, 0.7f);
 
-            if (!HasJumped && Vector3.Angle(Vector3.up, hit.normal) < 50)
+            if (!HasJumped /*&& Vector3.Angle(Vector3.up, hit.normal) < 50*/)
             {
                 if (Anim)
                 {
