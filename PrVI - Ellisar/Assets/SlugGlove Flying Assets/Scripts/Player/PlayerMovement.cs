@@ -148,6 +148,12 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 originalPosition;
 
+    [Header("VFX")]
+    [SerializeField] private ParticleSystem positionMarker;
+    [SerializeField] private Transform positionMarkerTransform;
+    [SerializeField] private float maxDistanceForMarker=100;
+	private bool isInAir_VFX;
+
 
     public List<HookOption> HookOptions { get => hookOptions; set => hookOptions = value; }
 
@@ -307,6 +313,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (States == WorldState.InAir)
         {
+	    isInAir_VFX=CheckGroundForMarker();
+
             if (ActionAirTimer > 0) //reduce air timer 
                 return;
 
@@ -375,6 +383,18 @@ public class PlayerMovement : MonoBehaviour
                 Destroy(hitColl.gameObject);
             }
         }
+    }
+
+    private bool CheckGroundForMarker()
+    {
+	RaycastHit hitInfo;
+        if(Physics.Raycast(transform.position, Vector3.down, out hitInfo, maxDistanceForMarker))
+        {
+            positionMarkerTransform.position = hitInfo.point;
+	    positionMarkerTransform.eulerAngles = hitInfo.normal + new Vector3(90,1,0);
+            return true;
+        }
+        else return false;
     }
 
     private void FlapRegenTimer()
@@ -484,6 +504,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (States == WorldState.Grounded)
         {
+            
             //turn off wind audio
             if (Visuals.WindLerpAmt > 0)
                 Visuals.WindAudioSetting(delta * 3f, 0f);
@@ -510,6 +531,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (States == WorldState.InAir)
         {
+            
             //reduce air timer 
             if (ActionAirTimer > 0)
                 ActionAirTimer -= delta;
@@ -714,6 +736,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Visuals.Landing();
 
+	//turn off positionMarker
+            positionMarker.Stop();
+
         //reset wind animation
         Visuals.SetFallingEffects(1.6f);
 
@@ -748,6 +773,12 @@ public class PlayerMovement : MonoBehaviour
     //for when we are set in the air (for falling
     void SetInAir()
     {
+	//turn positionMarker On
+            if (isInAir_VFX)
+            {
+                positionMarker.Play();
+            }
+
         OnGround = false;
         FloorTimer = GroundedTimerBeforeJump;
         ActionAirTimer = 0.2f;
