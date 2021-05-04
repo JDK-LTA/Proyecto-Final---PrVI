@@ -152,7 +152,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ParticleSystem positionMarker;
     [SerializeField] private Transform positionMarkerTransform;
     [SerializeField] private float maxDistanceForMarker=100;
-	private bool isInAir_VFX;
+    [SerializeField] private GameObject model_00;
+    [SerializeField] private GameObject model_01;
+    private bool isInAir_VFX;
 
 
     public List<HookOption> HookOptions { get => hookOptions; set => hookOptions = value; }
@@ -736,8 +738,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Visuals.Landing();
 
-	//turn off positionMarker
-            positionMarker.Stop();
+        //turn on ground form
+        model_01.SetActive(false);
+        model_00.SetActive(true);
+
+	    //turn off positionMarker
+        positionMarker.Stop();
 
         //reset wind animation
         Visuals.SetFallingEffects(1.6f);
@@ -773,11 +779,12 @@ public class PlayerMovement : MonoBehaviour
     //for when we are set in the air (for falling
     void SetInAir()
     {
-	//turn positionMarker On
-            if (isInAir_VFX)
-            {
-                positionMarker.Play();
-            }
+        
+	    //turn positionMarker On
+        if (isInAir_VFX)
+        {
+            positionMarker.Play();
+        }
 
         OnGround = false;
         FloorTimer = GroundedTimerBeforeJump;
@@ -794,6 +801,10 @@ public class PlayerMovement : MonoBehaviour
     //for when we start to fly
     void SetFlying()
     {
+        //turn on Air form
+        model_00.SetActive(false);
+        model_01.SetActive(true);
+
         isFlying = true;
         startedFlying = true;
         InputHand.Fly = false;
