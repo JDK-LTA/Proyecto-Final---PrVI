@@ -170,8 +170,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject model_01;
     private bool isInAir_VFX;
 
+    private NPCDialogTrigger interactableDialog;
+    private bool canInteract;
+
 
     public List<HookOption> HookOptions { get => hookOptions; set => hookOptions = value; }
+    public NPCDialogTrigger InteractableDialog { get => interactableDialog; set => interactableDialog = value; }
+    public bool CanInteract { get => canInteract; set => canInteract = value; }
 
     public void RTriggerAction(InputAction.CallbackContext cxt)
     {
@@ -302,6 +307,13 @@ public class PlayerMovement : MonoBehaviour
         if (cxt.performed && ballActivated)
         {
             isBombing = false;
+        }
+    }
+    public void Interact(InputAction.CallbackContext cxt)
+    {
+        if (canInteract && interactableDialog)
+        {
+            interactableDialog.EnableTexter();
         }
     }
 
