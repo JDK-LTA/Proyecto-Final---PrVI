@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ForceMode hookForceMode = ForceMode.VelocityChange;
     [SerializeField] private bool canHook = true, hasHooked = false;
     private float hookForce;
-    private List<HookOption> hookOptions = new List<HookOption>();
+    [SerializeField] private List<HookOption> hookOptions = new List<HookOption>();
     private Vector3 targetHookPos;
     [SerializeField] private float hookCooldown = 1f;
     private float tHook = 0;

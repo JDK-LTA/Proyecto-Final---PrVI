@@ -53,15 +53,15 @@ public class Texter : MonoBehaviour
         {
             BetterParagraph par = paragraphs[i];
 
-            if (par.timeBetweenLetters < 0.005)
+            if (par.timeBetweenLetters < 0.008)
             {
-                par.timeBetweenLetters = 0.005f;
-                throw new System.Exception("Time between letters on paragraph number " + i + " is too low. It's been defaulted to 0.005");
+                par.timeBetweenLetters = 0.008f;
+                print("Time between letters on paragraph number " + i + " is too low. It's been defaulted to 0.008");
             }
-            if (par.timeAfterParagraph < 0.005)
+            if (par.timeAfterParagraph < 0.008)
             {
-                par.timeAfterParagraph = 0.005f;
-                throw new System.Exception("Time after paragraph on paragraph number " + i + " is too low. It's been defaulted to 0.005");
+                par.timeAfterParagraph = 0.008f;
+                print("Time after paragraph on paragraph number " + i + " is too low. It's been defaulted to 0.008");
             }
 
             secsToWrite += (par.timeBetweenLetters * par.text.Length) + par.timeAfterParagraph;
