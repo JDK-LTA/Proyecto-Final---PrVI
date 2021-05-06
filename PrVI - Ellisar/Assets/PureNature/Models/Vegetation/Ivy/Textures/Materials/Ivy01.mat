@@ -24,6 +24,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ColorVariationNoise:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DepositMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -131,6 +135,12 @@ Material:
     - _SrcBlend: 1
     - _Tiling: 1
     - _Tiling2: 1
+    - _TransAmbient: 0.2
+    - _TransDirect: 1
+    - _TransNormalDistortion: 0.1
+    - _TransScattering: 2
+    - _TransShadow: 0.9
+    - _Translucency: 1
     - _UVSec: 0
     - _UseVertexColor: 0
     - _VertexColorChannel: 2
@@ -146,4 +156,5 @@ Material:
     - _ColorVariation: {r: 0.21505088, g: 0.3490566, b: 0.12348701, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GradientColor: {r: 0.32352027, g: 0.57547164, b: 0.124866344, a: 1}
-    - _MainColor: {r: 0.5042214, g: 0.8113207, b: 0, a: 1}
+    - _MainColor: {r: 0, g: 0.8841176, b: 1, a: 1}
+  m_BuildTextureStacks: []
