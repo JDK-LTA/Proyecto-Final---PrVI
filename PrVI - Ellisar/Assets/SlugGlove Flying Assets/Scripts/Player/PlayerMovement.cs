@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("VFX")]
     [SerializeField] private ParticleSystem positionMarker;
     [SerializeField] private Transform positionMarkerTransform;
-    [SerializeField] private float maxDistanceForMarker=100;
+    [SerializeField] private float maxDistanceForMarker = 100;
     [SerializeField] private GameObject model_00;
     [SerializeField] private GameObject model_01;
     private bool isInAir_VFX;
@@ -513,7 +513,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (States == WorldState.Grounded)
         {
-            
+
             //turn off wind audio
             if (Visuals.WindLerpAmt > 0)
                 Visuals.WindAudioSetting(delta * 3f, 0f);
@@ -540,7 +540,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (States == WorldState.InAir)
         {
-            
+
             //reduce air timer 
             if (ActionAirTimer > 0)
                 ActionAirTimer -= delta;
@@ -666,11 +666,14 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CheckGroundForMarker()
     {
-	RaycastHit hitInfo;
-        if(Physics.Raycast(transform.position, Vector3.down, out hitInfo, maxDistanceForMarker))
+        RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, maxDistanceForMarker))
         {
-            positionMarkerTransform.position = hitInfo.point;
-	    positionMarkerTransform.eulerAngles = hitInfo.normal + new Vector3(90,1,0);
+            if (positionMarkerTransform)
+            {
+                positionMarkerTransform.position = hitInfo.point;
+                positionMarkerTransform.eulerAngles = hitInfo.normal + new Vector3(90, 1, 0);
+            }
             return true;
         }
         else return false;
@@ -823,11 +826,14 @@ public class PlayerMovement : MonoBehaviour
         Visuals.Landing();
 
         //turn on ground form
-        model_01.SetActive(false);
-        model_00.SetActive(true);
+        if (model_01)
+            model_01.SetActive(false);
+        if (model_00)
+            model_00.SetActive(true);
 
-	    //turn off positionMarker
-        positionMarker.Stop();
+        //turn off positionMarker
+        if (positionMarker)
+            positionMarker.Stop();
 
         //reset wind animation
         Visuals.SetFallingEffects(1.6f);
@@ -863,11 +869,12 @@ public class PlayerMovement : MonoBehaviour
     //for when we are set in the air (for falling
     private void SetInAir()
     {
-        
-	    //turn positionMarker On
+
+        //turn positionMarker On
         if (isInAir_VFX)
         {
-            positionMarker.Play();
+            if (positionMarker)
+                positionMarker.Play();
         }
 
         OnGround = false;
@@ -886,8 +893,10 @@ public class PlayerMovement : MonoBehaviour
     private void SetFlying()
     {
         //turn on Air form
-        model_00.SetActive(false);
-        model_01.SetActive(true);
+        if (model_00)
+            model_00.SetActive(false);
+        if (model_01)
+            model_01.SetActive(true);
 
         isFlying = true;
         startedFlying = true;

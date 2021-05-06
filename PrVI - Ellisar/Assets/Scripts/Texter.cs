@@ -49,8 +49,21 @@ public class Texter : MonoBehaviour
         //rolling = true;
 
         float secsToWrite = 0;
-        foreach (BetterParagraph par in paragraphs)
+        for (int i = 0; i < paragraphs.Count; i++)
         {
+            BetterParagraph par = paragraphs[i];
+
+            if (par.timeBetweenLetters < 0.005)
+            {
+                par.timeBetweenLetters = 0.005f;
+                throw new System.Exception("Time between letters on paragraph number " + i + " is too low. It's been defaulted to 0.005");
+            }
+            if (par.timeAfterParagraph < 0.005)
+            {
+                par.timeAfterParagraph = 0.005f;
+                throw new System.Exception("Time after paragraph on paragraph number " + i + " is too low. It's been defaulted to 0.005");
+            }
+
             secsToWrite += (par.timeBetweenLetters * par.text.Length) + par.timeAfterParagraph;
         }
         print("secs to write: " + secsToWrite);

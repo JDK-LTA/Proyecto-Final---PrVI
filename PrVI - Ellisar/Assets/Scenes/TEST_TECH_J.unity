@@ -3162,7 +3162,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839716221}
-  m_LocalRotation: {x: 0.14657341, y: -0.000000029682617, z: 0.0000000043981836, w: 0.9891998}
+  m_LocalRotation: {x: 0.14657342, y: 0.0000000034584804, z: -5.124556e-10, w: 0.9891998}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3177,6 +3177,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6093529898951535657, guid: 3264ea1c77ce83246a7b408d95d18f28, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8250031266831793072, guid: 3264ea1c77ce83246a7b408d95d18f28, type: 3}
       propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3227,7 +3231,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8250031266831793078, guid: 3264ea1c77ce83246a7b408d95d18f28, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player_Copy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250031266831793078, guid: 3264ea1c77ce83246a7b408d95d18f28, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250031267563125312, guid: 3264ea1c77ce83246a7b408d95d18f28, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250031267805832931, guid: 3264ea1c77ce83246a7b408d95d18f28, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250031268412125403, guid: 3264ea1c77ce83246a7b408d95d18f28, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3264ea1c77ce83246a7b408d95d18f28, type: 3}

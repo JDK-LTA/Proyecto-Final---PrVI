@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4915261913418466231}
   - component: {fileID: 3230644543429307635}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: SideCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 6093529898951535654}
   - component: {fileID: 6093529898951535655}
   - component: {fileID: 6093529898951535653}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Rigid Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -440,8 +440,8 @@ GameObject:
   - component: {fileID: 8250031266831793074}
   - component: {fileID: 8250031266831793073}
   - component: {fileID: 8250031266831793072}
-  m_Layer: 3
-  m_Name: Player 1
+  m_Layer: 8
+  m_Name: J Player Copy
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -581,6 +581,11 @@ MonoBehaviour:
   bodyMesh: {fileID: 1418566421914642964}
   faceMesh: {fileID: 6850162396131717119}
   ponchoMesh: {fileID: 3355020847065532162}
+  positionMarker: {fileID: 0}
+  positionMarkerTransform: {fileID: 0}
+  maxDistanceForMarker: 100
+  model_00: {fileID: 0}
+  model_01: {fileID: 0}
 --- !u!114 &8250031266831793074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1103,7 +1108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8250031267563125313}
   - component: {fileID: 3315503704871677499}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: YPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1146,7 +1151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8250031267805832928}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1307,7 +1312,7 @@ GameObject:
   - component: {fileID: 8250031268412125400}
   - component: {fileID: 8250031268412125398}
   - component: {fileID: 8250031268412125399}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CameraFollow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
