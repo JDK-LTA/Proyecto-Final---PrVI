@@ -134,12 +134,26 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float hookCooldown = 1f;
     private float tHook = 0;
 
+    [Header("Flash")]
+    [SerializeField] private float startingRadius = 1f;
+    [SerializeField] private float finalRadius = 15f;
+    private float radius;
+    [SerializeField] private float timeToFinishFlash = 1f;
+    [SerializeField] private float flashCooldown = 8f;
+    private bool hasFlashed = false;
+    private float tCdFlash = 0;
+    private float tFlash = 0;
+    private bool flashing = false;
+    private Vector3 flashPosition;
+    private bool canFlash = true;
+
     [Header("Ball Stats")]
     [SerializeField] private float bombForce = 15f;
     [SerializeField] private float massWhenBall = 3;
     [SerializeField] private float ballGravAmt = 14;
     [SerializeField] private float downwardsVelLimitOnBomb = -10;
     [SerializeField] private float ballSpeedToDestroyWalls = 30f;
+    [SerializeField] private float ballBoost = 15;
     [SerializeField] private GameObject ballMesh;
     [SerializeField] private GameObject bodyMesh, faceMesh, ponchoMesh;
     private bool isBombing = false;
@@ -174,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (States == WorldState.Grounded || States == WorldState.InAir)
             {
-                if (canHook && !hasHooked)
+                if (canHook && !hasHooked && !ballActivated)
                 {
                     Rigid.velocity = Vector3.zero;
                     Rigid.AddForce((targetHookPos - transform.position).normalized * hookForce, hookForceMode);
@@ -183,6 +197,12 @@ public class PlayerMovement : MonoBehaviour
 
                     //Animations
                     Anim.SetTrigger("Hook");
+                }
+                else if (ballActivated && actualFlaps > 0)
+                {
+                    SpeedBoost(ballBoost);
+                    actualFlaps--;
+                    UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
                 }
             }
         }
@@ -195,6 +215,7 @@ public class PlayerMovement : MonoBehaviour
             ballActivated = false;
             Rigid.mass = originalMass;
             isBombing = false;
+            canFlash = true;
 
             ballMesh.SetActive(false);
             bodyMesh.SetActive(true);
@@ -220,9 +241,71 @@ public class PlayerMovement : MonoBehaviour
             Physics.SyncTransforms();
         }
     }
+    public void FlashAction(InputAction.CallbackContext cxt)
+    {
+        if (cxt.performed)
+        {
+            //ANIMACIÓN DE DESTELLO
+            flashPosition = Rigid.position;
+            flashing = true;
+            hasFlashed = true;
+        }
+    }
+    public void JumpAction(InputAction.CallbackContext cxt)
+    {
+        if (cxt.started && States == WorldState.Grounded && !ballActivated)
+        {
+            if (FloorTimer > 0)
+                return;
 
-    // Start is called before the first frame update
-    void Awake()
+            //check for ground
+            bool Ground = Colli.CheckGround();
+
+            if (!Ground)
+            {
+                SetInAir();
+                return;
+            }
+
+            RaycastHit hit;
+            Physics.Raycast(transform.position + Vector3.up * 1.1f, transform.forward, out hit, 0.7f);
+
+            if (!HasJumped /*&& Vector3.Angle(Vector3.up, hit.normal) < 50*/)
+            {
+                if (Anim)
+                {
+                    MirrorAnim = !MirrorAnim;
+                    Anim.SetBool("Mirror", MirrorAnim);
+                }
+
+                Visuals.Jump();
+
+                float AddAmt = Mathf.Clamp((ActSpeed * 0.5f), -10, 16);
+                float ForwardAmt = Mathf.Clamp(ActSpeed * 4f, JumpForwardAmount, 100);
+
+                StopCoroutine(JumpUp(ForwardAmt, JumpAmt + AddAmt));
+                StartCoroutine(JumpUp(ForwardAmt, JumpAmt + AddAmt));
+
+                return;
+            }
+        }
+    }
+    public void BombPress(InputAction.CallbackContext cxt)
+    {
+        if (cxt.performed && States == WorldState.InAir && ballActivated)
+        {
+            isBombing = true;
+        }
+    }
+    public void BombRelease(InputAction.CallbackContext cxt)
+    {
+        if (cxt.performed && ballActivated)
+        {
+            isBombing = false;
+        }
+    }
+
+    private void Awake()
     {
         //static until finished setup
         States = WorldState.Static;
@@ -252,7 +335,6 @@ public class PlayerMovement : MonoBehaviour
         actualFlaps = maxNOfFlaps;
         //UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
     }
-
     private void Update()   //inputs and animation
     {
         //cannot function when dead
@@ -263,6 +345,8 @@ public class PlayerMovement : MonoBehaviour
         HookFunctionality();
         StartFlightTimer();
         FlapRegenTimer();
+        FlashingTimer();
+        FlashCdTimer();
 
         //control the animator
         AnimCtrl();
@@ -315,7 +399,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (States == WorldState.InAir)
         {
-	    isInAir_VFX=CheckGroundForMarker();
+            isInAir_VFX = CheckGroundForMarker();
 
             if (ActionAirTimer > 0) //reduce air timer 
                 return;
@@ -387,97 +471,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool CheckGroundForMarker()
-    {
-	RaycastHit hitInfo;
-        if(Physics.Raycast(transform.position, Vector3.down, out hitInfo, maxDistanceForMarker))
-        {
-            positionMarkerTransform.position = hitInfo.point;
-	    positionMarkerTransform.eulerAngles = hitInfo.normal + new Vector3(90,1,0);
-            return true;
-        }
-        else return false;
-    }
 
-    private void FlapRegenTimer()
-    {
-        if (actualFlaps < maxNOfFlaps)
-        {
-            float mult = States == WorldState.Grounded ? 9 : 1;
-            tCdInterFlap += Time.deltaTime * mult;
-
-            UI_FlapsEnergy.Instance.UpdateFeatherImage(tCdInterFlap / cooldownToRegenFlap);
-
-            if (tCdInterFlap >= cooldownToRegenFlap)
-            {
-                tCdInterFlap = 0;
-                actualFlaps++;
-                UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
-            }
-        }
-    }
-
-    private void StartFlightTimer()
-    {
-        if (startedFlying)
-        {
-            tStartFlight += Time.deltaTime;
-            if (tStartFlight >= startFlightWindow)
-            {
-                startedFlying = false;
-                tStartFlight = 0;
-            }
-        }
-    }
-
-    private void HookFunctionality()
-    {
-        UpdateHookTarget();
-        if (hasHooked)
-        {
-            tHook += Time.deltaTime;
-            if (tHook >= hookCooldown)
-            {
-                hasHooked = false;
-                tHook = 0;
-            }
-        }
-    }
-
-    private void FlapTimers()
-    {
-        if (hasFlapped)
-        {
-            tFlap += Time.deltaTime;
-            if (tFlap >= flappingTimer)
-            {
-                tFlap = 0;
-                hasFlapped = false;
-            }
-        }
-        if (flapCd)
-        {
-            tFlapCd += Time.deltaTime;
-            if (tFlapCd >= flappingCooldown)
-            {
-                tFlapCd = 0;
-                flapCd = false;
-            }
-        }
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()  //world movement
+    private void FixedUpdate()
     {
         //tick deltatime
         delta = Time.deltaTime;
 
+        #region DEPRECATED
         //get velocity to feed to the camera
-        float CamVel = 0;
-        if (Rigid != null)
-            CamVel = Rigid.velocity.magnitude;
+        //float CamVel = 0;
+        //if (Rigid != null)
+        //    CamVel = Rigid.velocity.magnitude;
         //change the cameras fov based on speed
-        CamFol.HandleFov(delta, CamVel);
+        //CamFol.HandleFov(delta, CamVel);
+        #endregion
 
         //cannot function when dead
         if (States == WorldState.Static)
@@ -655,60 +662,116 @@ public class PlayerMovement : MonoBehaviour
             Visuals.WindAudioSetting(delta, Rigid.velocity.magnitude);
         }
     }
-    public void JumpAction(InputAction.CallbackContext cxt)
+
+
+    private bool CheckGroundForMarker()
     {
-        if (cxt.started && States == WorldState.Grounded && !ballActivated)
+	RaycastHit hitInfo;
+        if(Physics.Raycast(transform.position, Vector3.down, out hitInfo, maxDistanceForMarker))
         {
-            if (FloorTimer > 0)
-                return;
-
-            //check for ground
-            bool Ground = Colli.CheckGround();
-
-            if (!Ground)
+            positionMarkerTransform.position = hitInfo.point;
+	    positionMarkerTransform.eulerAngles = hitInfo.normal + new Vector3(90,1,0);
+            return true;
+        }
+        else return false;
+    }
+    private void FlashCdTimer()
+    {
+        if (hasFlashed)
+        {
+            tCdFlash += Time.deltaTime;
+            if (tCdFlash >= flashCooldown)
             {
-                SetInAir();
-                return;
-            }
-
-            RaycastHit hit;
-            Physics.Raycast(transform.position + Vector3.up*1.1f, transform.forward, out hit, 0.7f);
-
-            if (!HasJumped && Vector3.Angle(Vector3.up, hit.normal) < 50)
-            {
-                if (Anim)
-                {
-                    MirrorAnim = !MirrorAnim;
-                    Anim.SetBool("Mirror", MirrorAnim);
-                }
-
-                Visuals.Jump();
-
-                float AddAmt = Mathf.Clamp((ActSpeed * 0.5f), -10, 16);
-                float ForwardAmt = Mathf.Clamp(ActSpeed * 4f, JumpForwardAmount, 100);
-
-                StopCoroutine(JumpUp(ForwardAmt, JumpAmt + AddAmt));
-                StartCoroutine(JumpUp(ForwardAmt, JumpAmt + AddAmt));
-
-                return;
+                tCdFlash = 0;
+                hasFlashed = false;
             }
         }
     }
-    public void BombPress(InputAction.CallbackContext cxt)
+    private void FlashingTimer()
     {
-        if (cxt.performed && States == WorldState.InAir && ballActivated)
+        if (flashing)
         {
-            isBombing = true;
+            tFlash += Time.deltaTime;
+            radius = Mathf.Lerp(startingRadius, finalRadius, tFlash / timeToFinishFlash);
+            Collider[] flashColls = Physics.OverlapSphere(flashPosition, radius);
+
+            foreach (Collider coll in flashColls)
+            {
+                FlashableWall fl = coll.GetComponent<FlashableWall>();
+                fl?.GetFlashed();
+            }
+
+            if (tFlash >= timeToFinishFlash)
+            {
+                tFlash = 0;
+                radius = startingRadius;
+                flashing = false;
+            }
         }
     }
-    public void BombRelease(InputAction.CallbackContext cxt)
+    private void FlapRegenTimer()
     {
-        if (cxt.performed && ballActivated)
+        if (actualFlaps < maxNOfFlaps)
         {
-            isBombing = false;
+            float mult = States == WorldState.Grounded ? (ballActivated ? 3 : 9) : 1;
+            tCdInterFlap += Time.deltaTime * mult;
+
+            UI_FlapsEnergy.Instance.UpdateFeatherImage(tCdInterFlap / cooldownToRegenFlap);
+
+            if (tCdInterFlap >= cooldownToRegenFlap)
+            {
+                tCdInterFlap = 0;
+                actualFlaps++;
+                UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
+            }
         }
     }
-    //for when we return to the ground
+    private void FlapTimers()
+    {
+        if (hasFlapped)
+        {
+            tFlap += Time.deltaTime;
+            if (tFlap >= flappingTimer)
+            {
+                tFlap = 0;
+                hasFlapped = false;
+            }
+        }
+        if (flapCd)
+        {
+            tFlapCd += Time.deltaTime;
+            if (tFlapCd >= flappingCooldown)
+            {
+                tFlapCd = 0;
+                flapCd = false;
+            }
+        }
+    }
+    private void StartFlightTimer()
+    {
+        if (startedFlying)
+        {
+            tStartFlight += Time.deltaTime;
+            if (tStartFlight >= startFlightWindow)
+            {
+                startedFlying = false;
+                tStartFlight = 0;
+            }
+        }
+    }
+    private void HookFunctionality()
+    {
+        UpdateHookTarget();
+        if (hasHooked)
+        {
+            tHook += Time.deltaTime;
+            if (tHook >= hookCooldown)
+            {
+                hasHooked = false;
+                tHook = 0;
+            }
+        }
+    }
     private void UpdateHookTarget()
     {
         if (hookOptions.Count > 1)
@@ -734,6 +797,27 @@ public class PlayerMovement : MonoBehaviour
         }
         canHook = hookOptions.Count > 0;
     }
+    IEnumerator JumpUp(float ForwardAmt, float UpwardsAmt)
+    {
+        HasJumped = true;
+        //kill velocity
+        Rigid.velocity = Vector3.zero;
+        //set to in air as we will be 
+        SetInAir();
+        //add force upwards
+        if (UpwardsAmt != 0)
+            Rigid.AddForce((Vector3.up * UpwardsAmt), ForceMode.Impulse);
+        //add force forwards
+        if (ForwardAmt != 0)
+            Rigid.AddForce((transform.forward * ForwardAmt), ForceMode.Impulse);
+        //remove any built up acceleration
+        ActAccel = 0;
+        //stop jump state
+        yield return new WaitForSecondsRealtime(0.3f);
+        HasJumped = false;
+    }
+
+    //for when we return to the ground
     public void SetGrounded()
     {
         Visuals.Landing();
@@ -759,7 +843,7 @@ public class PlayerMovement : MonoBehaviour
         OnGround = true;
 
         //camera reset flying state
-        CamFol.SetFlyingState(0);
+        //CamFol.SetFlyingState(0);
 
         //turn on gravity
         Rigid.useGravity = true;
@@ -777,7 +861,7 @@ public class PlayerMovement : MonoBehaviour
         //rigidCollider.material = bipedPhysMat;
     }
     //for when we are set in the air (for falling
-    void SetInAir()
+    private void SetInAir()
     {
         
 	    //turn positionMarker On
@@ -793,13 +877,13 @@ public class PlayerMovement : MonoBehaviour
         States = WorldState.InAir;
 
         //camera reset flying state
-        CamFol.SetFlyingState(0);
+        //CamFol.SetFlyingState(0);
 
         //turn off gravity
         Rigid.useGravity = true;
     }
     //for when we start to fly
-    void SetFlying()
+    private void SetFlying()
     {
         //turn on Air form
         model_00.SetActive(false);
@@ -819,7 +903,7 @@ public class PlayerMovement : MonoBehaviour
         FlownAdjustmentLerp = -1;
 
         //camera set flying state
-        CamFol.SetFlyingState(1);
+        //CamFol.SetFlyingState(1);
 
         //turn on gravity
         Rigid.useGravity = false;
@@ -828,6 +912,8 @@ public class PlayerMovement : MonoBehaviour
         Rigid.mass = originalMass;
         isBombing = false;
 
+        canFlash = false;
+
         ballMesh.SetActive(false);
         bodyMesh.SetActive(true);
         faceMesh.SetActive(true);
@@ -835,6 +921,30 @@ public class PlayerMovement : MonoBehaviour
 
         parentOwnCollider.material = flightPhysMat;
         rigidCollider.material = flightPhysMat;
+    }
+    public void SetBall()
+    {
+        Rigid.useGravity = true;
+
+        canFlash = false;
+
+        isFlying = false;
+        startedFlying = false;
+        tStartFlight = 0;
+        InputHand.Fly = false;
+
+        Rigid.mass = massWhenBall;
+        ballActivated = true;
+
+        ballMesh.SetActive(true);
+        bodyMesh.SetActive(false);
+        faceMesh.SetActive(false);
+        ponchoMesh.SetActive(false);
+
+        States = WorldState.InAir;
+
+        parentOwnCollider.material = ballPhysMat;
+        rigidCollider.material = ballPhysMat;
     }
     //stun our character
     public void Stunned(Vector3 PushDirection)
@@ -861,29 +971,8 @@ public class PlayerMovement : MonoBehaviour
         parentOwnCollider.material = bipedPhysMat;
         rigidCollider.material = bipedPhysMat;
     }
-    public void SetBall()
-    {
-        Rigid.useGravity = true;
 
-        isFlying = false;
-        startedFlying = false;
-        tStartFlight = 0;
-        InputHand.Fly = false;
-
-        Rigid.mass = massWhenBall;
-        ballActivated = true;
-
-        ballMesh.SetActive(true);
-        bodyMesh.SetActive(false);
-        faceMesh.SetActive(false);
-        ponchoMesh.SetActive(false);
-
-        States = WorldState.InAir;
-
-        parentOwnCollider.material = ballPhysMat;
-        rigidCollider.material = ballPhysMat;
-    }
-
+    //-----------------------------------------------------------------------------------
 
     void AnimCtrl()
     {
@@ -913,7 +1002,6 @@ public class PlayerMovement : MonoBehaviour
 
         Anim.SetBool("Flying", isFlying);
     }
-
     void FixedAnimCtrl(float D) //animations involving a timer
     {
         //setup the xinput animation for tilting our wings left and right
@@ -922,25 +1010,6 @@ public class PlayerMovement : MonoBehaviour
         Anim.SetFloat("XInput", XAnimFloat);
     }
 
-    IEnumerator JumpUp(float ForwardAmt, float UpwardsAmt)
-    {
-        HasJumped = true;
-        //kill velocity
-        Rigid.velocity = Vector3.zero;
-        //set to in air as we will be 
-        SetInAir();
-        //add force upwards
-        if (UpwardsAmt != 0)
-            Rigid.AddForce((Vector3.up * UpwardsAmt), ForceMode.Impulse);
-        //add force forwards
-        if (ForwardAmt != 0)
-            Rigid.AddForce((transform.forward * ForwardAmt), ForceMode.Impulse);
-        //remove any built up acceleration
-        ActAccel = 0;
-        //stop jump state
-        yield return new WaitForSecondsRealtime(0.3f);
-        HasJumped = false;
-    }
     //lerp our speed over time
     void LerpSpeed(float d, float TargetSpeed, float Accel)
     {
