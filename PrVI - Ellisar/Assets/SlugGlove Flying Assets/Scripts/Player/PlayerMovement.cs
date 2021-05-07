@@ -843,6 +843,9 @@ public class PlayerMovement : MonoBehaviour
         if (model_00)
             model_00.SetActive(true);
 
+        //get actual animator
+        Anim = GetComponentInChildren<Animator>();
+
         //turn off positionMarker
         if (positionMarker)
             positionMarker.Stop();
@@ -909,6 +912,9 @@ public class PlayerMovement : MonoBehaviour
             model_00.SetActive(false);
         if (model_01)
             model_01.SetActive(true);
+
+        //get actual animator
+        Anim = GetComponentInChildren<Animator>();
 
         isFlying = true;
         startedFlying = true;

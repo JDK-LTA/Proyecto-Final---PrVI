@@ -8,4 +8,44 @@ AvatarMask:
   m_PrefabAsset: {fileID: 0}
   m_Name: Wings Mask
   m_Mask: 00000000010000000000000000000000000000000100000001000000010000000100000000000000000000000000000000000000
-  m_Elements: []
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Huesos
+    m_Weight: 1
+  - m_Path: Huesos/joint7
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint1
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint1/joint2
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint1/joint2/joint3
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint1/joint2/joint3/joint4
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint1/joint2/joint3/joint4/joint5
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint11
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint11/joint12
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint11/joint12/joint13
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint14
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint14/joint15
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint14/joint15/joint16
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint14/joint15/joint16/joint17
+    m_Weight: 1
+  - m_Path: Huesos/joint7/joint8/joint9/joint10/joint14/joint15/joint16/joint17/joint18
+    m_Weight: 1
+  - m_Path: Modelo
+    m_Weight: 1

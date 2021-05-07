@@ -15512,6 +15512,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7488066763085186484, guid: 7f48209cafce64548a65469e05166209, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488066763085186484, guid: 7f48209cafce64548a65469e05166209, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -42662,7 +42666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1376988989
 Light:
   m_ObjectHideFlags: 0
@@ -67997,6 +68001,10 @@ PrefabInstance:
     - target: {fileID: 5583306478825598626, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
       propertyPath: m_Name
       value: Player_1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583306478825598626, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5583306478825598628, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
       propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
