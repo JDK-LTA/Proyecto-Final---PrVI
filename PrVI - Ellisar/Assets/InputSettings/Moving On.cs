@@ -113,6 +113,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=2)""
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""95948a73-8bc9-401f-8552-5a981e424bb2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=2)""
                 }
             ],
             ""bindings"": [
@@ -504,7 +512,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c59dfdb1-542e-4fa9-9628-299429db0f5f"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -559,7 +567,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f9a206da-8d47-40b1-8142-5e59267f87c5"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -663,6 +671,28 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""ExitGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c0a3f3c-94bc-4875-951d-84b8c75665a8"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8127e777-1f39-49ce-8364-81a6ed78b73a"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2090,6 +2120,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_PlayerBiped_ResetLevel = m_PlayerBiped.FindAction("ResetLevel", throwIfNotFound: true);
         m_PlayerBiped_ShowControls = m_PlayerBiped.FindAction("ShowControls", throwIfNotFound: true);
         m_PlayerBiped_ExitGame = m_PlayerBiped.FindAction("ExitGame", throwIfNotFound: true);
+        m_PlayerBiped_Interact = m_PlayerBiped.FindAction("Interact", throwIfNotFound: true);
         // PlayerFlight
         m_PlayerFlight = asset.FindActionMap("PlayerFlight", throwIfNotFound: true);
         m_PlayerFlight_Move = m_PlayerFlight.FindAction("Move", throwIfNotFound: true);
@@ -2179,6 +2210,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerBiped_ResetLevel;
     private readonly InputAction m_PlayerBiped_ShowControls;
     private readonly InputAction m_PlayerBiped_ExitGame;
+    private readonly InputAction m_PlayerBiped_Interact;
     public struct PlayerBipedActions
     {
         private @InputActions m_Wrapper;
@@ -2195,6 +2227,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @ResetLevel => m_Wrapper.m_PlayerBiped_ResetLevel;
         public InputAction @ShowControls => m_Wrapper.m_PlayerBiped_ShowControls;
         public InputAction @ExitGame => m_Wrapper.m_PlayerBiped_ExitGame;
+        public InputAction @Interact => m_Wrapper.m_PlayerBiped_Interact;
         public InputActionMap Get() { return m_Wrapper.m_PlayerBiped; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2240,6 +2273,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @ExitGame.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnExitGame;
                 @ExitGame.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnExitGame;
                 @ExitGame.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnExitGame;
+                @Interact.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerBipedActionsCallbackInterface = instance;
             if (instance != null)
@@ -2280,6 +2316,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @ExitGame.started += instance.OnExitGame;
                 @ExitGame.performed += instance.OnExitGame;
                 @ExitGame.canceled += instance.OnExitGame;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -2594,6 +2633,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnResetLevel(InputAction.CallbackContext context);
         void OnShowControls(InputAction.CallbackContext context);
         void OnExitGame(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IPlayerFlightActions
     {

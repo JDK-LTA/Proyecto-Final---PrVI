@@ -100,6 +100,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold(duration=2)"
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "95948a73-8bc9-401f-8552-5a981e424bb2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=2)"
                 }
             ],
             "bindings": [
@@ -491,7 +499,7 @@
                 {
                     "name": "",
                     "id": "c59dfdb1-542e-4fa9-9628-299429db0f5f",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -546,7 +554,7 @@
                 {
                     "name": "",
                     "id": "f9a206da-8d47-40b1-8142-5e59267f87c5",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -650,6 +658,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "ExitGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7c0a3f3c-94bc-4875-951d-84b8c75665a8",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8127e777-1f39-49ce-8364-81a6ed78b73a",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
