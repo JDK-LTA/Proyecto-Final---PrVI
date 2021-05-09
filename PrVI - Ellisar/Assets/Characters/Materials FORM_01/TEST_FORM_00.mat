@@ -176,7 +176,7 @@ Material:
     - _OcclusionStrength: 1
     - _Oper: 0
     - _OutlineExtrudeMethod: 0
-    - _OutlineWidth: 0.1
+    - _OutlineWidth: 0.73
     - _OutlineWidthAffectedByViewDistance: 0
     - _OutlineZPostionInCamera: 3.37
     - _OverallShadowColorPower: 0.45

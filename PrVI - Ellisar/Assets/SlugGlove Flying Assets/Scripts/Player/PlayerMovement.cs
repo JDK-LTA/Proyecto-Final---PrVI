@@ -163,11 +163,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 originalPosition;
 
     [Header("VFX")]
+    [SerializeField] private VFX_Manager vfx_Manager;
     [SerializeField] private ParticleSystem positionMarker;
     [SerializeField] private Transform positionMarkerTransform;
     [SerializeField] private float maxDistanceForMarker = 100;
     [SerializeField] private GameObject model_00;
     [SerializeField] private GameObject model_01;
+    [SerializeField] private GameObject model_02;
     private bool isInAir_VFX;
 
     private NPCDialogTrigger interactableDialog;
@@ -222,10 +224,21 @@ public class PlayerMovement : MonoBehaviour
             isBombing = false;
             canFlash = true;
 
-            ballMesh.SetActive(false);
-            bodyMesh.SetActive(true);
-            faceMesh.SetActive(true);
-            ponchoMesh.SetActive(true);
+            //play vfx
+            vfx_Manager.PlayParticles(0);
+
+            //change mesh
+            model_02.SetActive(false);
+            model_01.SetActive(false);
+            model_00.SetActive(true);
+
+            //get actual animator
+            Anim = GetComponentInChildren<Animator>();
+
+            //ballMesh.SetActive(false);
+            //bodyMesh.SetActive(true);
+            //faceMesh.SetActive(true);
+            //ponchoMesh.SetActive(true);
 
             parentOwnCollider.material = bipedPhysMat;
             rigidCollider.material = bipedPhysMat;
@@ -837,14 +850,24 @@ public class PlayerMovement : MonoBehaviour
     {
         Visuals.Landing();
 
-        //turn on ground form
-        if (model_01)
-            model_01.SetActive(false);
-        if (model_00)
-            model_00.SetActive(true);
+        
+       
 
-        //get actual animator
-        Anim = GetComponentInChildren<Animator>();
+        //turn on ground form
+        if (model_01.activeInHierarchy)
+        {
+            //play vfx
+            vfx_Manager.PlayParticles(0);
+            //change mesh
+            model_01.SetActive(false);
+            model_02.SetActive(false);
+            model_00.SetActive(true);
+            //get actual animator
+            Anim = GetComponentInChildren<Animator>();
+        }
+            
+
+        
 
         //turn off positionMarker
         if (positionMarker)
@@ -907,13 +930,15 @@ public class PlayerMovement : MonoBehaviour
     //for when we start to fly
     private void SetFlying()
     {
-        //turn on Air form
-        if (model_00)
-            model_00.SetActive(false);
-        if (model_01)
-            model_01.SetActive(true);
+        //play vfx
+        vfx_Manager.PlayParticles(1);
 
-        //get actual animator
+        //turn on Air form
+        model_00.SetActive(false);
+        model_02.SetActive(false);
+        model_01.SetActive(true);
+
+        //get current animator
         Anim = GetComponentInChildren<Animator>();
 
         isFlying = true;
@@ -941,16 +966,26 @@ public class PlayerMovement : MonoBehaviour
 
         canFlash = false;
 
-        ballMesh.SetActive(false);
-        bodyMesh.SetActive(true);
-        faceMesh.SetActive(true);
-        ponchoMesh.SetActive(true);
+        //ballMesh.SetActive(false);
+        //bodyMesh.SetActive(true);
+        //faceMesh.SetActive(true);
+        //ponchoMesh.SetActive(true);
 
         parentOwnCollider.material = flightPhysMat;
         rigidCollider.material = flightPhysMat;
     }
     public void SetBall()
     {
+        //play vfx
+        vfx_Manager.PlayParticles(2);
+
+        //turn on Ball form
+        
+        model_01.SetActive(false);
+        model_00.SetActive(false);
+        model_02.SetActive(true);
+
+
         Rigid.useGravity = true;
 
         canFlash = false;
@@ -963,10 +998,10 @@ public class PlayerMovement : MonoBehaviour
         Rigid.mass = massWhenBall;
         ballActivated = true;
 
-        ballMesh.SetActive(true);
-        bodyMesh.SetActive(false);
-        faceMesh.SetActive(false);
-        ponchoMesh.SetActive(false);
+        //ballMesh.SetActive(true);
+        //bodyMesh.SetActive(false);
+        //faceMesh.SetActive(false);
+        //ponchoMesh.SetActive(false);
 
         States = WorldState.InAir;
 

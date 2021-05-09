@@ -5028,14 +5028,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2144976551176926922, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2746911000444510974, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5583306478825598624, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5080,29 +5072,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5583306478825598625, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
-      propertyPath: model_01
-      value: 
-      objectReference: {fileID: 1306387974}
     - target: {fileID: 5583306478825598626, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
       propertyPath: m_Name
       value: Player_1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5583306478825598628, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 5583306478825598628, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
-      propertyPath: m_ActionEvents.Array.data[34].m_ActionId
-      value: 95948a73-8bc9-401f-8552-5a981e424bb2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5583306478825598628, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
-      propertyPath: m_ActionEvents.Array.data[34].m_ActionName
-      value: PlayerBiped/Interact[/DualShock4GamepadHID/buttonNorth,/DualShock4GamepadHID/buttonNorth,/XInputControllerWindows/buttonNorth,/Keyboard/f]
-      objectReference: {fileID: 0}
-    - target: {fileID: 5583306478825598628, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
-      propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
@@ -25046,11 +25018,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3344613622470018863, guid: 73956e97d7c6bf848992a020d0d25c44, type: 3}
   m_PrefabInstance: {fileID: 1305130887}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1306387974 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2746911000444510974, guid: f53f932ae845f794e823eb8da7a4b238, type: 3}
-  m_PrefabInstance: {fileID: 226273870}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1308167541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30328,7 +30295,7 @@ MonoBehaviour:
   excludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  materialEffect: {fileID: 2100000, guid: 2dfc0f2c2f55bf545ba2bc8d6d94426d, type: 2}
+  materialEffect: {fileID: 0}
   _material: {fileID: 2100000, guid: 2dfc0f2c2f55bf545ba2bc8d6d94426d, type: 2}
 --- !u!1001 &1575482895
 PrefabInstance:
