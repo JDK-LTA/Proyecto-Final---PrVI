@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraHotfixYPivot : MonoBehaviour
 {
-    private Transform camTransform;
+    [SerializeField] private Transform camTransform;
     private void Awake()
     {
         camTransform = Camera.main.transform;
