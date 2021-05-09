@@ -319,6 +319,33 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!1102 &-8016750302713671041
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Flap
+  m_Speed: 4
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -1699937546092723822}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 4500831741193413893, guid: cda2a72c24a4e194ebf1a12d5c29a434, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-7536690285941596309
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -378,7 +405,7 @@ BlendTree:
   m_Name: BlendTree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 2671492002787824600, guid: c70b77f104ac5a5419999a8e28f9d4c4, type: 3}
+    m_Motion: {fileID: 2590152719595957767, guid: aa8cbc78c3785e244a319cbdac69b4c8, type: 3}
     m_Threshold: 0
     m_Position: {x: 10, y: 0}
     m_TimeScale: 5
@@ -410,7 +437,7 @@ BlendTree:
     m_DirectBlendParameter: Moving
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 2071501729768582655, guid: cda2a72c24a4e194ebf1a12d5c29a434, type: 3}
+    m_Motion: {fileID: 2590152719595957767, guid: aa8cbc78c3785e244a319cbdac69b4c8, type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -752,7 +779,7 @@ BlendTree:
     m_DirectBlendParameter: Moving
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -6630616321172567852, guid: 452a57fc12c919f4097280df1977506f, type: 3}
+    m_Motion: {fileID: 2590152719595957767, guid: aa8cbc78c3785e244a319cbdac69b4c8, type: 3}
     m_Threshold: -1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 5
@@ -776,7 +803,7 @@ BlendTree:
     m_DirectBlendParameter: Moving
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 2671492002787824600, guid: 7399783acb806ed4b81e6e85b5b721c6, type: 3}
+    m_Motion: {fileID: 2071501729768582655, guid: cda2a72c24a4e194ebf1a12d5c29a434, type: 3}
     m_Threshold: 10
     m_Position: {x: 0, y: 0}
     m_TimeScale: 5
@@ -1003,7 +1030,8 @@ AnimatorState:
   m_Name: Flying
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: 5875486499425030027}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -1282,7 +1310,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Flap
-  m_Speed: 5
+  m_Speed: 8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5348937119202551522}
@@ -1436,7 +1464,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -5878036263946364250, guid: d723e2975c90d9f4ea24f272cb45bc58, type: 3}
+    m_Motion: {fileID: -6630616321172567852, guid: 452a57fc12c919f4097280df1977506f, type: 3}
     m_Threshold: -10
     m_Position: {x: 0, y: 0}
     m_TimeScale: 5
@@ -1452,7 +1480,7 @@ BlendTree:
     m_DirectBlendParameter: Moving
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -5878036263946364250, guid: aa69cec9ffe6d044381115f7f9665e03, type: 3}
+    m_Motion: {fileID: 2671492002787824600, guid: c70b77f104ac5a5419999a8e28f9d4c4, type: 3}
     m_Threshold: 10
     m_Position: {x: 0, y: 0}
     m_TimeScale: 5
@@ -1510,6 +1538,28 @@ AnimatorStateTransition:
   m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-1699937546092723822
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -4991804374265193531}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.47499996
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -1628,6 +1678,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -4991804374265193531}
     m_Position: {x: 360, y: 110, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -8016750302713671041}
+    m_Position: {x: 718.01215, y: 109.35916, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 5941172508309577524}
@@ -1920,12 +1973,12 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: FlapOverride
     m_StateMachine: {fileID: -7372279839559815045}
-    m_Mask: {fileID: 31900000, guid: 8a9ae1c32c9f92840b943f917c013d93, type: 2}
+    m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
-    m_DefaultWeight: 1
+    m_DefaultWeight: 0
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
@@ -1937,7 +1990,7 @@ AnimatorController:
     m_Behaviours: []
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
-    m_DefaultWeight: 1
+    m_DefaultWeight: 0
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
@@ -2479,9 +2532,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.7
+  m_TransitionDuration: 3.6999993
   m_TransitionOffset: 0
-  m_ExitTime: 3
+  m_ExitTime: 0.0000000013713748
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -2548,6 +2601,31 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.2
   m_TransitionOffset: 0
   m_ExitTime: 0.95
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &5875486499425030027
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Flap
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -8016750302713671041}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.30284536
+  m_TransitionOffset: 0
+  m_ExitTime: 0.99718
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -2760,9 +2838,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 1.168166
+  m_TransitionDuration: 0.18651724
   m_TransitionOffset: 0
-  m_ExitTime: 0.19723399
+  m_ExitTime: 0.8823093
   m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
