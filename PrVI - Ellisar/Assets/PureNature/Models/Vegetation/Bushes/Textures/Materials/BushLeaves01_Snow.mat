@@ -188,7 +188,7 @@ Material:
     - _ColorVariation: {r: 0, g: 0.28108943, b: 0.4245283, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GradientColor: {r: 0.8940014, g: 0.9143613, b: 0.9245283, a: 0}
-    - _MainColor: {r: 0.34864962, g: 0.5849056, b: 0, a: 1}
+    - _MainColor: {r: 0.5098547, g: 0, b: 0.58431375, a: 1}
     - _ScatteringColor: {r: 0.56218994, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     - _Tiling: {r: 4, g: 4, b: 0, a: 0}
@@ -198,3 +198,4 @@ Material:
     - _TreeOffset1: {r: 0, g: 5, b: 0, a: 0}
     - _Vector0: {r: 1, g: 1, b: 0, a: 0}
     - _windOrientation: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
