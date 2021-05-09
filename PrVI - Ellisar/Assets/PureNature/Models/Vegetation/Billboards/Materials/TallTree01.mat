@@ -130,6 +130,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GradientColor: {r: 0.22352943, g: 0.4901961, b: 0.015686275, a: 1}
     - _GradientColor1: {r: 1, g: 1, b: 1, a: 0}
-    - _MainColor: {r: 0.41176474, g: 0.7254902, b: 0, a: 1}
+    - _MainColor: {r: 1, g: 0.90526783, b: 0.23018867, a: 1}
     - _MainColor1: {r: 1, g: 0, b: 0, a: 0}
     - _TrunkColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 0}
+  m_BuildTextureStacks: []
