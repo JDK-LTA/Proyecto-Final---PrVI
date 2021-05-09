@@ -118,6 +118,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float flapForce = 30;
     private bool hasFlapped = false, flapCd = false;
     [SerializeField] private float flappingTimer = 1f, flappingCooldown = 2f;
+    [SerializeField] private float flapRegenFactorWhenBipedGrounded = 12f;
+    [SerializeField] private float flapRegenFactorWhenBallGrounded = 5f;
     private float tFlap = 0, tFlapCd = 0;
 
     private bool isFlying = false;
@@ -163,11 +165,16 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 originalPosition;
 
     [Header("VFX")]
+    [SerializeField] private VFX_Manager vfx_Manager;
     [SerializeField] private ParticleSystem positionMarker;
     [SerializeField] private Transform positionMarkerTransform;
     [SerializeField] private float maxDistanceForMarker = 100;
+    [SerializeField] private ParticleSystem speedVFX;
+    [Range(0, 200)]
+    [SerializeField] private float maxRateOfSpeedVFX = 100;
     [SerializeField] private GameObject model_00;
     [SerializeField] private GameObject model_01;
+    [SerializeField] private GameObject model_02;
     private bool isInAir_VFX;
 
     private NPCDialogTrigger interactableDialog;
@@ -214,7 +221,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void ChangeToBiped(InputAction.CallbackContext cxt)
     {
-        if (cxt.performed)
+        if (cxt.performed && ((model_01 != null && model_02 != null) && (model_02.activeInHierarchy || model_01.activeInHierarchy)))
         {
             SetGrounded();
             ballActivated = false;
@@ -222,10 +229,21 @@ public class PlayerMovement : MonoBehaviour
             isBombing = false;
             canFlash = true;
 
-            ballMesh.SetActive(false);
-            bodyMesh.SetActive(true);
-            faceMesh.SetActive(true);
-            ponchoMesh.SetActive(true);
+            //play vfx
+            vfx_Manager.PlayParticles(0);
+
+            //change mesh
+            model_02.SetActive(false);
+            model_01.SetActive(false);
+            model_00.SetActive(true);
+
+            //get actual animator
+            Anim = GetComponentInChildren<Animator>();
+
+            //ballMesh.SetActive(false);
+            //bodyMesh.SetActive(true);
+            //faceMesh.SetActive(true);
+            //ponchoMesh.SetActive(true);
 
             parentOwnCollider.material = bipedPhysMat;
             rigidCollider.material = bipedPhysMat;
@@ -673,18 +691,27 @@ public class PlayerMovement : MonoBehaviour
             //falling audio
             Visuals.WindAudioSetting(delta, Rigid.velocity.magnitude);
         }
+
+
+        if (speedVFX)
+        {
+            ParticleSystem.EmissionModule emission = speedVFX.emission;
+            emission.rateOverTime = Mathf.Lerp(0, maxRateOfSpeedVFX, ActSpeed / SpeedClamp);
+        }
     }
 
 
     private bool CheckGroundForMarker()
     {
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, maxDistanceForMarker))
+        int layermasking = 1 << 0;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, maxDistanceForMarker, layermasking))
         {
             if (positionMarkerTransform)
             {
-                positionMarkerTransform.position = hitInfo.point;
-                positionMarkerTransform.eulerAngles = hitInfo.normal + new Vector3(90, 1, 0);
+                positionMarkerTransform.position = hitInfo.point + new Vector3(0, 0.05f, 0);
+                positionMarkerTransform.eulerAngles = hitInfo.normal + new Vector3(90, 0, 0);
             }
             return true;
         }
@@ -728,7 +755,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (actualFlaps < maxNOfFlaps)
         {
-            float mult = States == WorldState.Grounded ? (ballActivated ? 3 : 9) : 1;
+            float mult = States == WorldState.Grounded ? (ballActivated ? flapRegenFactorWhenBallGrounded : flapRegenFactorWhenBipedGrounded) : 1;
             tCdInterFlap += Time.deltaTime * mult;
 
             UI_FlapsEnergy.Instance.UpdateFeatherImage(tCdInterFlap / cooldownToRegenFlap);
@@ -837,14 +864,26 @@ public class PlayerMovement : MonoBehaviour
     {
         Visuals.Landing();
 
-        //turn on ground form
-        if (model_01)
-            model_01.SetActive(false);
-        if (model_00)
-            model_00.SetActive(true);
+        if (model_01 != null)
+        {
+            //turn on ground form
+            if (model_01.activeInHierarchy)
+            {
+                //play vfx
+                vfx_Manager.PlayParticles(0);
+                //change mesh
+                model_01.SetActive(false);
+                model_02.SetActive(false);
+                model_00.SetActive(true);
+                positionMarker.gameObject.SetActive(true);
 
-        //get actual animator
-        Anim = GetComponentInChildren<Animator>();
+                //get actual animator
+                Anim = GetComponentInChildren<Animator>();
+            }
+        }
+
+
+
 
         //turn off positionMarker
         if (positionMarker)
@@ -907,13 +946,16 @@ public class PlayerMovement : MonoBehaviour
     //for when we start to fly
     private void SetFlying()
     {
-        //turn on Air form
-        if (model_00)
-            model_00.SetActive(false);
-        if (model_01)
-            model_01.SetActive(true);
+        //play vfx
+        vfx_Manager.PlayParticles(1);
 
-        //get actual animator
+        //turn on Air form
+        model_00.SetActive(false);
+        model_02.SetActive(false);
+        model_01.SetActive(true);
+        positionMarker.gameObject.SetActive(false);
+
+        //get current animator
         Anim = GetComponentInChildren<Animator>();
 
         isFlying = true;
@@ -941,16 +983,26 @@ public class PlayerMovement : MonoBehaviour
 
         canFlash = false;
 
-        ballMesh.SetActive(false);
-        bodyMesh.SetActive(true);
-        faceMesh.SetActive(true);
-        ponchoMesh.SetActive(true);
+        //ballMesh.SetActive(false);
+        //bodyMesh.SetActive(true);
+        //faceMesh.SetActive(true);
+        //ponchoMesh.SetActive(true);
 
         parentOwnCollider.material = flightPhysMat;
         rigidCollider.material = flightPhysMat;
     }
     public void SetBall()
     {
+        //play vfx
+        vfx_Manager.PlayParticles(2);
+
+        //turn on Ball form
+
+        model_01.SetActive(false);
+        model_00.SetActive(false);
+        model_02.SetActive(true);
+        positionMarker.gameObject.SetActive(true);
+
         Rigid.useGravity = true;
 
         canFlash = false;
@@ -963,10 +1015,10 @@ public class PlayerMovement : MonoBehaviour
         Rigid.mass = massWhenBall;
         ballActivated = true;
 
-        ballMesh.SetActive(true);
-        bodyMesh.SetActive(false);
-        faceMesh.SetActive(false);
-        ponchoMesh.SetActive(false);
+        //ballMesh.SetActive(true);
+        //bodyMesh.SetActive(false);
+        //faceMesh.SetActive(false);
+        //ponchoMesh.SetActive(false);
 
         States = WorldState.InAir;
 
