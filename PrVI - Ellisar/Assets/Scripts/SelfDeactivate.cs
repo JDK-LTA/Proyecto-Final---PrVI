@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SelfDeactivate : MonoBehaviour
 {
+    [SerializeField] private bool deactivateParent = false;
     [SerializeField] private float timeToDeactivate = 2f;
     float t = 0;
     // Update is called once per frame
@@ -13,7 +14,10 @@ public class SelfDeactivate : MonoBehaviour
         if (t >= timeToDeactivate)
         {
             t = 0;
-            gameObject.SetActive(false);
+            if (!deactivateParent)
+                gameObject.SetActive(false);
+            else
+                transform.parent.gameObject.SetActive(false);
         }
     }
 }

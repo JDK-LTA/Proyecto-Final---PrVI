@@ -46,6 +46,17 @@ public class Texter : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
 
         writing = true;
+        auxT = 0;
+        auxParT = 0;
+        letterCount = 0;
+        lettersThisLoop = 0;
+        paragraphCount = 0;
+        loopsToWriteNextLetter = 0;
+        accumulatorOfDecimals = 0;
+        auxAccumulation = 0;
+        paragraphEnd = false;
+        debugT = 0;
+        auxText = "";
         //rolling = true;
 
         float secsToWrite = 0;
