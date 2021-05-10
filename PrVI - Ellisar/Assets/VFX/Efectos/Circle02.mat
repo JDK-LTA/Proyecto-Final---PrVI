@@ -235,7 +235,7 @@ Material:
     - _SrcBlend: 1
     - _TEXMCOLINT: 1
     - _TexturePatternStyle: 0
-    - _TransparentThreshold: 0
+    - _TransparentThreshold: 0.16
     - _UVSec: 0
     - _UseSecondaryCutout: 0
     - _VertexColorBlueAffectOutlineWitdh: 0
@@ -248,8 +248,8 @@ Material:
     - _CustomLightDirection: {r: 0, g: 0, b: 10, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.5377358, g: 0.96126455, b: 2, a: 1}
+    - _HighlightColor: {r: 1, g: 1, b: 1, a: 0.5882353}
+    - _MainColor: {r: 1.8634343, g: 0.79861474, b: 8.47419, a: 0.43137255}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
     - _OverallShadowColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}

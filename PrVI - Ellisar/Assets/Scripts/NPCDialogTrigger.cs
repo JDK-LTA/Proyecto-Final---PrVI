@@ -31,6 +31,7 @@ public class NPCDialogTrigger : MonoBehaviour
     }
     public void EnableTexter()
     {
+        texter.transform.parent.gameObject.SetActive(true);
         texter.enabled = true;
     }
 }

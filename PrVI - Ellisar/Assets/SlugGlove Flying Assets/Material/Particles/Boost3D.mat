@@ -211,7 +211,7 @@ Material:
     - _BaseColor: {r: 0.990566, g: 0.9420994, b: 0.4251958, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.9839634, b: 0.5990566, a: 1}
+    - _Color: {r: 0.3726415, g: 0.956946, b: 1, a: 1}
     - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0.5283019, g: 0.17646158, b: 0.11712353, a: 1}
     - _HColor: {r: 1, g: 0.9242968, b: 0.4669811, a: 1}
@@ -223,6 +223,7 @@ Material:
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
     - _SpecularColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
+  m_BuildTextureStacks: []
 --- !u!114 &6574772331015129875
 MonoBehaviour:
   m_ObjectHideFlags: 11

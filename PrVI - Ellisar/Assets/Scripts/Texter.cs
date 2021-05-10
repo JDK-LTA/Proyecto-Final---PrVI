@@ -224,6 +224,11 @@ public class Texter : MonoBehaviour
             auxText = "";
             textComponent.text = auxText;
 
+            if (deleteAfterFullText)
+            {
+                transform.parent.gameObject.SetActive(false);
+            }
+
             print("real secs to be written: " + debugT);
         }
     }
