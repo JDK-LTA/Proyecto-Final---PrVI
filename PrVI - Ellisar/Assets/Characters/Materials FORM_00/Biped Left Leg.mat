@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Biped Left Leg
   m_Shader: {fileID: 4800000, guid: d12428961551799408aa97256fd770c3, type: 3}
-  m_ShaderKeywords: NOKEWO N_F_GLO_ON N_F_NM_ON N_F_O_ON N_F_RELGI_ON N_F_RL_ON N_F_SS_ON
+  m_ShaderKeywords: NOKEWO N_F_GLO_ON N_F_NM_ON N_F_O_ON N_F_RELGI_ON N_F_RL_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -167,7 +167,7 @@ Material:
     - _N_F_SCT: 0
     - _N_F_SL: 0
     - _N_F_SON: 0
-    - _N_F_SS: 1
+    - _N_F_SS: 0
     - _N_F_ST: 0
     - _N_F_STIAL: 0
     - _N_F_STIS: 0
