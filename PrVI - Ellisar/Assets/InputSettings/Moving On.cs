@@ -121,6 +121,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=2)""
+                },
+                {
+                    ""name"": ""InvertYCam"",
+                    ""type"": ""Button"",
+                    ""id"": ""16108e65-fad1-43e5-9c08-eecdd0151268"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -693,6 +701,28 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c5ba23f-ec34-415a-b42c-a0b4368ffbed"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""InvertYCam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76ae2d97-c1ba-468d-bc69-db7e56f84aa0"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InvertYCam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2121,6 +2151,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_PlayerBiped_ShowControls = m_PlayerBiped.FindAction("ShowControls", throwIfNotFound: true);
         m_PlayerBiped_ExitGame = m_PlayerBiped.FindAction("ExitGame", throwIfNotFound: true);
         m_PlayerBiped_Interact = m_PlayerBiped.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerBiped_InvertYCam = m_PlayerBiped.FindAction("InvertYCam", throwIfNotFound: true);
         // PlayerFlight
         m_PlayerFlight = asset.FindActionMap("PlayerFlight", throwIfNotFound: true);
         m_PlayerFlight_Move = m_PlayerFlight.FindAction("Move", throwIfNotFound: true);
@@ -2211,6 +2242,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerBiped_ShowControls;
     private readonly InputAction m_PlayerBiped_ExitGame;
     private readonly InputAction m_PlayerBiped_Interact;
+    private readonly InputAction m_PlayerBiped_InvertYCam;
     public struct PlayerBipedActions
     {
         private @InputActions m_Wrapper;
@@ -2228,6 +2260,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @ShowControls => m_Wrapper.m_PlayerBiped_ShowControls;
         public InputAction @ExitGame => m_Wrapper.m_PlayerBiped_ExitGame;
         public InputAction @Interact => m_Wrapper.m_PlayerBiped_Interact;
+        public InputAction @InvertYCam => m_Wrapper.m_PlayerBiped_InvertYCam;
         public InputActionMap Get() { return m_Wrapper.m_PlayerBiped; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2276,6 +2309,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInteract;
+                @InvertYCam.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYCam;
+                @InvertYCam.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYCam;
+                @InvertYCam.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYCam;
             }
             m_Wrapper.m_PlayerBipedActionsCallbackInterface = instance;
             if (instance != null)
@@ -2319,6 +2355,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @InvertYCam.started += instance.OnInvertYCam;
+                @InvertYCam.performed += instance.OnInvertYCam;
+                @InvertYCam.canceled += instance.OnInvertYCam;
             }
         }
     }
@@ -2634,6 +2673,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnShowControls(InputAction.CallbackContext context);
         void OnExitGame(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnInvertYCam(InputAction.CallbackContext context);
     }
     public interface IPlayerFlightActions
     {

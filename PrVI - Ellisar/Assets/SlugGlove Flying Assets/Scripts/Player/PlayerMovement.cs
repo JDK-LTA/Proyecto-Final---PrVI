@@ -157,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float ballSpeedToDestroyWalls = 30f;
     [SerializeField] private float ballBoost = 15;
     [SerializeField] private GameObject ballMesh;
+    [SerializeField] private float ballModelMaxRotPerSec = 360;
     [SerializeField] private GameObject bodyMesh, faceMesh, ponchoMesh;
     private bool isBombing = false;
     private bool ballActivated = false;
@@ -493,6 +494,8 @@ public class PlayerMovement : MonoBehaviour
 
         if ((States == WorldState.Grounded || States == WorldState.InAir) && ballActivated == true)
         {
+            //model_02.transform.Rotate(model_02.transform.right, ballModelMaxRotPerSec * ActSpeed * Time.deltaTime, Space.Self);
+
             Collider hitColl = Colli.CheckBallWall();
             if (hitColl && ActSpeed > ballSpeedToDestroyWalls)
             {
@@ -1002,6 +1005,8 @@ public class PlayerMovement : MonoBehaviour
         model_00.SetActive(false);
         model_02.SetActive(true);
         positionMarker.gameObject.SetActive(true);
+
+        model_02.transform.localEulerAngles = Vector3.zero;
 
         Rigid.useGravity = true;
 
