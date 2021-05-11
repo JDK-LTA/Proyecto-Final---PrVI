@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: TEST_FORM_00
   m_Shader: {fileID: 4800000, guid: d12428961551799408aa97256fd770c3, type: 3}
-  m_ShaderKeywords: NOKEWO N_F_NM_ON N_F_O_ON N_F_RELGI_ON N_F_SS_ON
+  m_ShaderKeywords: NOKEWO N_F_NM_ON N_F_O_ON N_F_RELGI_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c75885b5de45ec44fb9bcc132c6f0341, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskGloss:
@@ -76,7 +76,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 58a059b07b093a745b47c2191525ddce, type: 3}
+        m_Texture: {fileID: 2800000, guid: 03b94bd2fd1f42a4f9f769593172bc78, type: 3}
         m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -167,7 +167,7 @@ Material:
     - _N_F_SCT: 0
     - _N_F_SL: 0
     - _N_F_SON: 0
-    - _N_F_SS: 1
+    - _N_F_SS: 0
     - _N_F_ST: 0
     - _N_F_STIAL: 0
     - _N_F_STIS: 0
@@ -238,13 +238,13 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GlossColor: {r: 0.002669984, g: 0.030775476, b: 0.18867922, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.7571645, g: 0.76106787, b: 0.7830189, a: 1}
+    - _MainColor: {r: 0.8726415, g: 0.8885613, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
     - _OverallShadowColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
     - _RimLightColor: {r: 0.076317206, g: 0.16739683, b: 0.3301887, a: 1}
     - _SelfLitColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SelfShadowRealTimeShadowColor: {r: 0.002124689, g: 0.18447503, b: 0.3967553, a: 1}
+    - _SelfShadowRealTimeShadowColor: {r: 0.039215688, g: 0.1882353, b: 0.77254903, a: 1}
     - _ShadowTColor: {r: 1, g: 1, b: 1, a: 1}
     - _XYZPosition: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

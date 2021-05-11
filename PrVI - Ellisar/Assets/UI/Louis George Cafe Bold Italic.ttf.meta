@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: cabdcb5eb180cd3438e37550e14dc2b7
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Louis George Caf?
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d446de5b63ac89a4c85263f2c4ec1ba5, type: 3}
+  - {fileID: 12800000, guid: 60ccbdf05c8d78d4d8791eec4fe6a45a, type: 3}
+  - {fileID: 12800000, guid: 37d0b34883e6e7b4d932bba6afbe52fb, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
