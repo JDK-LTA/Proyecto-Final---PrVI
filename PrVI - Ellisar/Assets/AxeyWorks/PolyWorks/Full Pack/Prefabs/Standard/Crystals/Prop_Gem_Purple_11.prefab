@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 33550564322815366}
   - component: {fileID: 23917796520313330}
   - component: {fileID: 95019937165247424}
-  - component: {fileID: 64692864088021764}
   - component: {fileID: 448459852918362969}
   - component: {fileID: 483897867395579652}
+  - component: {fileID: 2826035791407814131}
   m_Layer: 2
   m_Name: Prop_Gem_Purple_11
   m_TagString: Untagged
@@ -105,20 +105,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &64692864088021764
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553748001134740}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 324542d991e317444b8a77a522e7d772, type: 3}
 --- !u!114 &448459852918362969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +133,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!65 &2826035791407814131
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553748001134740}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.65, y: 0.65, z: 0.65}
+  m_Center: {x: 0.000000067055225, y: 0.20239748, z: 0.00000008940697}
 --- !u!1001 &5630396687143279219
 PrefabInstance:
   m_ObjectHideFlags: 0

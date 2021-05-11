@@ -384,6 +384,9 @@ public class PlayerMovement : MonoBehaviour
 
         transform.position = Rigid.position;
 
+        if (ballActivated)
+            model_02.transform.rotation = Rigid.transform.rotation;
+
         //check for jumping
         if (States == WorldState.Grounded)
         {
@@ -494,10 +497,9 @@ public class PlayerMovement : MonoBehaviour
 
         if ((States == WorldState.Grounded || States == WorldState.InAir) && ballActivated == true)
         {
-            //model_02.transform.Rotate(model_02.transform.right, ballModelMaxRotPerSec * ActSpeed * Time.deltaTime, Space.Self);
 
             Collider hitColl = Colli.CheckBallWall();
-            if (hitColl && ActSpeed > ballSpeedToDestroyWalls)
+            if (hitColl && Rigid.velocity.magnitude > ballSpeedToDestroyWalls)
             {
                 Destroy(hitColl.gameObject);
             }
@@ -997,7 +999,8 @@ public class PlayerMovement : MonoBehaviour
     public void SetBall()
     {
         //play vfx
-        vfx_Manager.PlayParticles(2);
+        if (!ballActivated)
+            vfx_Manager.PlayParticles(2);
 
         //turn on Ball form
 
