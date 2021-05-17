@@ -129,6 +129,30 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoreSensibility"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb2a2fe9-6cbc-40f5-bffc-8115bb74c162"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LessSensibility"",
+                    ""type"": ""Button"",
+                    ""id"": ""7b81311a-2b3a-4915-b6cb-5a70b3f4bc28"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""InvertYFlight"",
+                    ""type"": ""Button"",
+                    ""id"": ""1cdae496-5eeb-452c-920b-1d968e06d809"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -723,6 +747,72 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""InvertYCam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""41d4f8dc-5335-4634-a958-ddff31f83da4"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""MoreSensibility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""630547bf-2005-49ce-89b2-77a94a2aafc6"",
+                    ""path"": ""<Keyboard>/period"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MoreSensibility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""941bdb42-ed9a-4c88-80c0-26c320a8e5e4"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LessSensibility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbb6d883-2221-4f33-be03-47baa53176c2"",
+                    ""path"": ""<Keyboard>/comma"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LessSensibility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""753e9ccc-610e-4ca1-ae59-e96ec0f4c0fc"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""InvertYFlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d720122e-4c3c-463b-94f0-b0c994e05c88"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InvertYFlight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2152,6 +2242,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_PlayerBiped_ExitGame = m_PlayerBiped.FindAction("ExitGame", throwIfNotFound: true);
         m_PlayerBiped_Interact = m_PlayerBiped.FindAction("Interact", throwIfNotFound: true);
         m_PlayerBiped_InvertYCam = m_PlayerBiped.FindAction("InvertYCam", throwIfNotFound: true);
+        m_PlayerBiped_MoreSensibility = m_PlayerBiped.FindAction("MoreSensibility", throwIfNotFound: true);
+        m_PlayerBiped_LessSensibility = m_PlayerBiped.FindAction("LessSensibility", throwIfNotFound: true);
+        m_PlayerBiped_InvertYFlight = m_PlayerBiped.FindAction("InvertYFlight", throwIfNotFound: true);
         // PlayerFlight
         m_PlayerFlight = asset.FindActionMap("PlayerFlight", throwIfNotFound: true);
         m_PlayerFlight_Move = m_PlayerFlight.FindAction("Move", throwIfNotFound: true);
@@ -2243,6 +2336,9 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerBiped_ExitGame;
     private readonly InputAction m_PlayerBiped_Interact;
     private readonly InputAction m_PlayerBiped_InvertYCam;
+    private readonly InputAction m_PlayerBiped_MoreSensibility;
+    private readonly InputAction m_PlayerBiped_LessSensibility;
+    private readonly InputAction m_PlayerBiped_InvertYFlight;
     public struct PlayerBipedActions
     {
         private @InputActions m_Wrapper;
@@ -2261,6 +2357,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @ExitGame => m_Wrapper.m_PlayerBiped_ExitGame;
         public InputAction @Interact => m_Wrapper.m_PlayerBiped_Interact;
         public InputAction @InvertYCam => m_Wrapper.m_PlayerBiped_InvertYCam;
+        public InputAction @MoreSensibility => m_Wrapper.m_PlayerBiped_MoreSensibility;
+        public InputAction @LessSensibility => m_Wrapper.m_PlayerBiped_LessSensibility;
+        public InputAction @InvertYFlight => m_Wrapper.m_PlayerBiped_InvertYFlight;
         public InputActionMap Get() { return m_Wrapper.m_PlayerBiped; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2312,6 +2411,15 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @InvertYCam.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYCam;
                 @InvertYCam.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYCam;
                 @InvertYCam.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYCam;
+                @MoreSensibility.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnMoreSensibility;
+                @MoreSensibility.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnMoreSensibility;
+                @MoreSensibility.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnMoreSensibility;
+                @LessSensibility.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnLessSensibility;
+                @LessSensibility.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnLessSensibility;
+                @LessSensibility.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnLessSensibility;
+                @InvertYFlight.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYFlight;
+                @InvertYFlight.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYFlight;
+                @InvertYFlight.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYFlight;
             }
             m_Wrapper.m_PlayerBipedActionsCallbackInterface = instance;
             if (instance != null)
@@ -2358,6 +2466,15 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @InvertYCam.started += instance.OnInvertYCam;
                 @InvertYCam.performed += instance.OnInvertYCam;
                 @InvertYCam.canceled += instance.OnInvertYCam;
+                @MoreSensibility.started += instance.OnMoreSensibility;
+                @MoreSensibility.performed += instance.OnMoreSensibility;
+                @MoreSensibility.canceled += instance.OnMoreSensibility;
+                @LessSensibility.started += instance.OnLessSensibility;
+                @LessSensibility.performed += instance.OnLessSensibility;
+                @LessSensibility.canceled += instance.OnLessSensibility;
+                @InvertYFlight.started += instance.OnInvertYFlight;
+                @InvertYFlight.performed += instance.OnInvertYFlight;
+                @InvertYFlight.canceled += instance.OnInvertYFlight;
             }
         }
     }
@@ -2674,6 +2791,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnExitGame(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnInvertYCam(InputAction.CallbackContext context);
+        void OnMoreSensibility(InputAction.CallbackContext context);
+        void OnLessSensibility(InputAction.CallbackContext context);
+        void OnInvertYFlight(InputAction.CallbackContext context);
     }
     public interface IPlayerFlightActions
     {
