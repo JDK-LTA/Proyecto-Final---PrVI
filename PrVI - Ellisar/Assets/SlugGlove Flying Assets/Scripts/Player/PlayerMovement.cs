@@ -867,8 +867,9 @@ public class PlayerMovement : MonoBehaviour
     //for when we return to the ground
     public void SetGrounded()
     {
-        Visuals.Landing();
+        InputHand.AuxYInv = false;
 
+        Visuals.Landing();
         if (model_01 != null)
         {
             //turn on ground form
@@ -998,6 +999,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void SetBall()
     {
+        InputHand.AuxYInv = false;
+       
         //play vfx
         if (!ballActivated)
             vfx_Manager.PlayParticles(2);
