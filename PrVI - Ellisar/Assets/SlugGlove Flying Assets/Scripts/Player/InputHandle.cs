@@ -20,6 +20,12 @@ public class InputHandle : MonoBehaviour
 
     public bool Fly;
 
+    private bool flightYInverted = false;
+    private bool auxYInv = false;
+
+    public bool AuxYInv { set => auxYInv = value; }
+    public bool FlightYInverted { get => flightYInverted; set => flightYInverted = value; }
+
     private void Start()
     {
         Player = GetComponent<PlayerMovement>();
@@ -44,12 +50,21 @@ public class InputHandle : MonoBehaviour
     public void MoveInput(InputAction.CallbackContext cxt)
     {
         Horizontal = cxt.ReadValue<Vector2>().x;
-        Vertical = cxt.ReadValue<Vector2>().y;
+        int i = auxYInv ? -1 : 1;
+        Vertical = cxt.ReadValue<Vector2>().y * i;
+    }
+    public void InvertYOnFlight(InputAction.CallbackContext cxt)
+    {
+        flightYInverted = !flightYInverted;
     }
     public void ChangeIntoFlight(InputAction.CallbackContext cxt)
     {
         if (cxt.performed)
+        {
             Fly = true;
+            if (flightYInverted)
+                auxYInv = true;
+        }
     }
     public void ExitGame(InputAction.CallbackContext cxt)
     {
@@ -68,5 +83,5 @@ public class InputHandle : MonoBehaviour
 #endif
             Application.Quit();
         }
-    } 
+    }
 }
