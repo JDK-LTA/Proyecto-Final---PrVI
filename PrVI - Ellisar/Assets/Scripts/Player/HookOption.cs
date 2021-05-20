@@ -11,7 +11,7 @@ public class HookOption : MonoBehaviour
         PlayerMovement biped = other.GetComponent<PlayerMovement>();
         if (biped)
         {
-        print("ddd");
+        //print("ddd");
             biped.HookOptions.Add(this);
         }
     }
