@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
         Static,
     }
 
-    [HideInInspector]
+    //[HideInInspector]
     public WorldState States;
     private Transform Cam; //reference to our camera
     private Transform CamY; //reference to our camera axis
@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float MovementAcceleration = 20f;    //how quickly we adjust to new speeds
     [SerializeField] private float SlowDownAcceleration = 2f; //how quickly we slow down
     [SerializeField] private float turnSpeed = 2f; //how quickly we turn on the ground
+    [SerializeField] private float bipedSnapMult = 1;
     private float FlownAdjustmentLerp = 1; //if we have flown this will be reset at 0, and effect turn speed on the ground
     [HideInInspector]
     public float ActSpeed; //our actual speed
@@ -153,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float bombForce = 15f;
     [SerializeField] private float massWhenBall = 3;
     [SerializeField] private float ballGravAmt = 14;
+    [SerializeField] private float ballSnapMult = 0;
     [SerializeField] private float downwardsVelLimitOnBomb = -10;
     [SerializeField] private float ballSpeedToDestroyWalls = 30f;
     [SerializeField] private float ballBoost = 15;
@@ -912,7 +914,7 @@ public class PlayerMovement : MonoBehaviour
         //CamFol.SetFlyingState(0);
 
         //turn on gravity
-        Rigid.useGravity = true;
+        Rigid.useGravity = false;
 
         isFlying = false;
         startedFlying = false;
@@ -1000,7 +1002,7 @@ public class PlayerMovement : MonoBehaviour
     public void SetBall()
     {
         InputHand.AuxYInv = false;
-       
+
         //play vfx
         if (!ballActivated)
             vfx_Manager.PlayParticles(2);
@@ -1197,6 +1199,12 @@ public class PlayerMovement : MonoBehaviour
         //lerp our movement direction
         Vector3 dir = Vector3.Lerp(curVelocity, targetVelocity, d * ActAccel);
         dir.y = Rigid.velocity.y;
+
+        RaycastHit hit;
+        Physics.Raycast(Rigid.position, Vector3.down, out hit, 3);
+
+        float snapMult = ballActivated ? ballSnapMult : bipedSnapMult;
+        dir += hit.normal * -(snapMult);
         //set our rigibody direction
         Rigid.velocity = dir;
     }
