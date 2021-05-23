@@ -226,32 +226,38 @@ public class PlayerMovement : MonoBehaviour
     {
         if (cxt.performed && ((model_01 != null && model_02 != null) && (model_02.activeInHierarchy || model_01.activeInHierarchy)))
         {
-            SetGrounded();
-            ballActivated = false;
-            Rigid.mass = originalMass;
-            isBombing = false;
-            canFlash = true;
-
-            //play vfx
-            vfx_Manager.PlayParticles(0);
-
-            //change mesh
-            model_02.SetActive(false);
-            model_01.SetActive(false);
-            model_00.SetActive(true);
-
-            //get actual animator
-            Anim = GetComponentInChildren<Animator>();
-
-            //ballMesh.SetActive(false);
-            //bodyMesh.SetActive(true);
-            //faceMesh.SetActive(true);
-            //ponchoMesh.SetActive(true);
-
-            parentOwnCollider.material = bipedPhysMat;
-            rigidCollider.material = bipedPhysMat;
+            SetBiped();
         }
     }
+
+    public void SetBiped()
+    {
+        SetGrounded();
+        ballActivated = false;
+        Rigid.mass = originalMass;
+        isBombing = false;
+        canFlash = true;
+
+        //play vfx
+        vfx_Manager.PlayParticles(0);
+
+        //change mesh
+        model_02.SetActive(false);
+        model_01.SetActive(false);
+        model_00.SetActive(true);
+
+        //get actual animator
+        Anim = GetComponentInChildren<Animator>();
+
+        //ballMesh.SetActive(false);
+        //bodyMesh.SetActive(true);
+        //faceMesh.SetActive(true);
+        //ponchoMesh.SetActive(true);
+
+        parentOwnCollider.material = bipedPhysMat;
+        rigidCollider.material = bipedPhysMat;
+    }
+
     public void ChangeToBall(InputAction.CallbackContext cxt)
     {
         if (cxt.performed && (States == WorldState.InAir || States == WorldState.Flying))
