@@ -4783,8 +4783,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851611374209868860}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.020471374, y: 0.9156432, z: -0.047013007, w: 0.3987082}
+  m_LocalPosition: {x: 341.81696, y: 142.8, z: 449.29395}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8250031267202510413}
@@ -9819,8 +9819,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066657583019857015}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0, y: 0, z: 15.02}
+  m_LocalRotation: {x: 0.047013007, y: 0.3987082, z: 0.020471374, w: -0.9156432}
+  m_LocalPosition: {x: -0, y: 141.26167, z: 439.11575}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8250031267202510413}
@@ -68884,6 +68884,7 @@ MonoBehaviour:
   MovementAcceleration: 23.24
   SlowDownAcceleration: 4.26
   turnSpeed: 6
+  bipedSnapMult: 1
   ActSpeed: 2.608579e-12
   AirAcceleration: 2
   turnSpeedInAir: 0.5
@@ -68933,6 +68934,7 @@ MonoBehaviour:
   bombForce: 140
   massWhenBall: 3
   ballGravAmt: 14
+  ballSnapMult: 0
   downwardsVelLimitOnBomb: -20
   ballSpeedToDestroyWalls: 22.5
   ballBoost: 7
@@ -69382,8 +69384,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8250031267202510412}
-  m_LocalRotation: {x: -0.03675538, y: -0.07505061, z: 0.010397483, w: 0.99644786}
-  m_LocalPosition: {x: 1.4886271, y: -0.74534035, z: -9.757686}
+  m_LocalRotation: {x: 0.0052256114, y: 0.9799017, z: -0.13665651, w: -0.14522505}
+  m_LocalPosition: {x: 2.8755307, y: 2.6479502, z: 9.258496}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1113435982666961469}
@@ -69415,7 +69417,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5000
+  far clip plane: 1500
   field of view: 45
   orthographic: 0
   orthographic size: 5
@@ -69542,8 +69544,12 @@ MonoBehaviour:
   m_ShowToolkit: 0
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
+  m_BeforeTransparentBundles:
+  - assemblyQualifiedName: Mewlist.MassiveClouds.MassiveCloudsBeforeTransparentEffectSettings,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_BeforeStackBundles:
+  - assemblyQualifiedName: Mewlist.MassiveClouds.MassiveCloudsBeforeStackEffectSettings,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   m_AfterStackBundles: []
 --- !u!1 &8250031267419343426
 GameObject:
