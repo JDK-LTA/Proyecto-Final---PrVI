@@ -37,15 +37,15 @@ MonoBehaviour:
       SkyExposure: 1.45
       GroundColor: {r: 1, g: 1, b: 1, a: 0}
       GroundScattering: 0
-      SunSize: 0
-      SunSizeConvergence: 10
+      SunSize: 0.872
+      SunSizeConvergence: 1.78
       Saturation: 1
       AtmosphereThickness: 1.433
       Gradation: 0.184
   physicsCloudPass:
     profile: {fileID: 11400000, guid: 0a75bc554252c874d8da78b37754966f, type: 2}
     transition: 1
-    densityAdjustment: 0.031
+    densityAdjustment: 0.058
     scattering:
       IsOverride: 1
       Value: 0.235
@@ -57,12 +57,12 @@ MonoBehaviour:
       Value: 0.78
     resolution: 0.25
     Animation:
-      ScrollVelocity: {x: 100, y: 0, z: 100}
+      ScrollVelocity: {x: 50, y: 0, z: 50}
       Phase: 0.238
   layeredCloudPass:
     profile: {fileID: 11400000, guid: 46cde27715387424c8eba906aa54f3e9, type: 2}
     transition: 1
-    densityAdjustment: -0.051
+    densityAdjustment: -0.073
     scattering:
       IsOverride: 1
       Value: 0.51
@@ -94,11 +94,11 @@ MonoBehaviour:
     godRayQuality: 0.5
     resolution: 0.2
     fog:
-      groundHeight: -10
+      groundHeight: -80
       range: 318
-      density: 0.163
+      density: 0.171
       coloring: 1
-      color: {r: 1, g: 1, b: 1, a: 0}
+      color: {r: 0.7122642, g: 1, b: 0.93540627, a: 0}
       scattering: 0.1
   bufferFormat: 0
   progressive: 1

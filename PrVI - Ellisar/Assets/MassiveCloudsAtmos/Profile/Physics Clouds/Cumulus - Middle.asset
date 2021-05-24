@@ -23,11 +23,11 @@ MonoBehaviour:
     Warp: -0.001
     Softness: 0.566
     NearSoftnessScale: 1.049
-    Density: 0.344
+    Density: 0.341
     Scale: 1.36
   HorizontalShape:
-    FromHeight: -410.1587
-    ToHeight: 421.82935
+    FromHeight: -684.8839
+    ToHeight: 180
     SoftnessTop: 1
     SoftnessBottom: 1
     Figure: 0.609
