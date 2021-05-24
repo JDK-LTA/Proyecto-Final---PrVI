@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
   intensity:
     overrideState: 1
-    value: 1.22
+    value: 1
   threshold:
     overrideState: 1
-    value: 0.89
+    value: 1.3
   softKnee:
     overrideState: 0
     value: 0.5
@@ -100,7 +100,7 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: 26.6
+    value: 27.5
   tint:
     overrideState: 1
     value: 0
@@ -112,16 +112,16 @@ MonoBehaviour:
     value: 0
   saturation:
     overrideState: 1
-    value: 44.1
+    value: 55.2
   brightness:
     overrideState: 0
     value: 0
   postExposure:
-    overrideState: 0
+    overrideState: 1
     value: 0
   contrast:
     overrideState: 1
-    value: 10.7
+    value: -15.3
   mixerRedOutRedIn:
     overrideState: 0
     value: 100
@@ -151,13 +151,13 @@ MonoBehaviour:
     value: 100
   lift:
     overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    value: {x: 1, y: 0.9348364, z: 0.90730864, w: 0.53456897}
   gamma:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 1, z: 1, w: 0.65573776}
   gain:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 0.665457, y: 0.7618659, z: 1, w: 0.11404133}
   masterCurve:
     overrideState: 0
     value:
@@ -1218,7 +1218,7 @@ MonoBehaviour:
       - 0.5
       - 0.5
   lumVsSatCurve:
-    overrideState: 0
+    overrideState: 1
     value:
       curve:
         serializedVersion: 2
@@ -1405,6 +1405,8 @@ MonoBehaviour:
   - {fileID: -5391680991397346770}
   - {fileID: 4127284710382362819}
   - {fileID: -295030166130571431}
+  - {fileID: 6426231787574682738}
+  - {fileID: 6249798478535999534}
 --- !u!114 &1228054468522204158
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1526,3 +1528,59 @@ MonoBehaviour:
   kernelSize:
     overrideState: 0
     value: 1
+--- !u!114 &6249798478535999534
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f6f3f7c722b4544b97e3c75840aa33, type: 3}
+  m_Name: AutoExposure
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  filtering:
+    overrideState: 1
+    value: {x: 59.8582, y: 93.18721}
+  minLuminance:
+    overrideState: 1
+    value: -0.38
+  maxLuminance:
+    overrideState: 1
+    value: 0.86
+  keyValue:
+    overrideState: 1
+    value: 1
+  eyeAdaptation:
+    overrideState: 1
+    value: 0
+  speedUp:
+    overrideState: 1
+    value: 2
+  speedDown:
+    overrideState: 1
+    value: 1
+--- !u!114 &6426231787574682738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97268ac2f5902f2498c7eeb72074544e, type: 3}
+  m_Name: MassiveCloudsBeforeTransparentEffectSettings
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  rendererParameter:
+    overrideState: 1
+    value: {fileID: 11400000, guid: 1b8073a5c709d814996c0dc75d4abff8, type: 2}
