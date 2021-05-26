@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: TEST_FORM_00 3
   m_Shader: {fileID: 4800000, guid: d12428961551799408aa97256fd770c3, type: 3}
-  m_ShaderKeywords: NOKEWO N_F_NM_ON N_F_O_ON N_F_RELGI_ON
+  m_ShaderKeywords: NOKEWO N_F_GLO_ON N_F_NM_ON N_F_O_ON N_F_RELGI_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -139,7 +139,7 @@ Material:
     - _HighlightColorPower: 1
     - _LightAffectOutlineColor: 1
     - _LightAffectRimLightColor: 1
-    - _LightAffectShadow: 0
+    - _LightAffectShadow: 1
     - _LightFalloffAffectShadowT: 0
     - _LightFalloffSoftness: 1
     - _LightIntensity: -1
@@ -153,7 +153,7 @@ Material:
     - _N_F_CLD: 0
     - _N_F_CO: 0
     - _N_F_FR: 0
-    - _N_F_GLO: 0
+    - _N_F_GLO: 1
     - _N_F_GLOT: 0
     - _N_F_HDLS: 0
     - _N_F_HPSS: 0
@@ -179,7 +179,7 @@ Material:
     - _OutlineWidth: 0.9
     - _OutlineWidthAffectedByViewDistance: 0
     - _OutlineZPostionInCamera: 0
-    - _OverallShadowColorPower: 0.45
+    - _OverallShadowColorPower: 0.03
     - _PSGLOTEX: 0
     - _PTexturePower: 1
     - _Parallax: 0.02
@@ -206,7 +206,7 @@ Material:
     - _SelfShadowAffectedByLightShadowStrength: 0
     - _SelfShadowHardness: 1
     - _SelfShadowRealTimeShadowColorPower: 5.4
-    - _SelfShadowRealtimeShadowIntensity: 0.399
+    - _SelfShadowRealtimeShadowIntensity: 1
     - _SelfShadowShadowTAtViewDirection: 0
     - _SelfShadowThreshold: 0.135
     - _ShadowColorTexturePower: 0
@@ -238,10 +238,10 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GlossColor: {r: 1.6156863, g: 1.8901961, b: 2, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.8726415, g: 0.8916098, b: 1, a: 1}
+    - _MainColor: {r: 1.1180506, g: 1.1180506, b: 1.2812254, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
-    - _OverallShadowColor: {r: 1.4583257, g: 1.4056604, b: 2, a: 1}
+    - _OverallShadowColor: {r: 1.4161067, g: 1.5418237, b: 1.715512, a: 1}
     - _RimLightColor: {r: 0.6179246, g: 0.7834057, b: 1, a: 1}
     - _SelfLitColor: {r: 1, g: 1, b: 1, a: 1}
     - _SelfShadowRealTimeShadowColor: {r: 0.040138844, g: 0.18992831, b: 0.7735849, a: 1}

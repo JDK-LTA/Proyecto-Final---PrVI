@@ -9,9 +9,9 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: TEST_FORM_00
   m_Shader: {fileID: 4800000, guid: d12428961551799408aa97256fd770c3, type: 3}
-  m_ShaderKeywords: NOKEWO N_F_NM_ON N_F_O_ON N_F_RELGI_ON
+  m_ShaderKeywords: NOKEWO N_F_CA_ON N_F_GLO_ON N_F_NM_ON N_F_O_ON N_F_RELGI_ON N_F_RL_ON
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -127,19 +127,19 @@ Material:
     - _GIFlatShade: 0
     - _GIShadeThreshold: 0
     - _GlossColorPower: 2.59
-    - _GlossIntensity: 1
+    - _GlossIntensity: 0.393
     - _GlossMapScale: 1
-    - _GlossSoftness: 1
+    - _GlossSoftness: 0
     - _GlossTextureFollowLight: 0
     - _GlossTextureFollowObjectRotation: 0
     - _GlossTextureRotate: 0
     - _GlossTextureSoftness: 0
-    - _Glossiness: 0.435
+    - _Glossiness: 0.497
     - _GlossyReflections: 1
     - _HighlightColorPower: 1
     - _LightAffectOutlineColor: 1
     - _LightAffectRimLightColor: 1
-    - _LightAffectShadow: 0
+    - _LightAffectShadow: 1
     - _LightFalloffAffectShadowT: 0
     - _LightFalloffSoftness: 1
     - _LightIntensity: -1
@@ -149,11 +149,11 @@ Material:
     - _Metallic: 0
     - _MixMainTexToOutline: 0
     - _Mode: 0
-    - _N_F_CA: 0
+    - _N_F_CA: 1
     - _N_F_CLD: 0
     - _N_F_CO: 0
     - _N_F_FR: 0
-    - _N_F_GLO: 0
+    - _N_F_GLO: 1
     - _N_F_GLOT: 0
     - _N_F_HDLS: 0
     - _N_F_HPSS: 0
@@ -163,7 +163,7 @@ Material:
     - _N_F_O: 1
     - _N_F_PT: 0
     - _N_F_R: 0
-    - _N_F_RL: 0
+    - _N_F_RL: 1
     - _N_F_SCT: 0
     - _N_F_SL: 0
     - _N_F_SON: 0
@@ -179,7 +179,7 @@ Material:
     - _OutlineWidth: 0.73
     - _OutlineWidthAffectedByViewDistance: 0
     - _OutlineZPostionInCamera: 3.37
-    - _OverallShadowColorPower: 0.45
+    - _OverallShadowColorPower: 0.4
     - _PSGLOTEX: 0
     - _PTexturePower: 1
     - _Parallax: 0.02
@@ -194,19 +194,19 @@ Material:
     - _ReflectionRoughtness: 0
     - _RimLightColorPower: 10
     - _RimLightInLight: 1
-    - _RimLightSoftness: 1
-    - _RimLightUnfill: 4.49
+    - _RimLightSoftness: 0.113
+    - _RimLightUnfill: 5.83
     - _SPECIN: 1
     - _SPECMODE: 0
     - _STIL: 0
-    - _Saturation: 1
+    - _Saturation: 2
     - _SelfLitHighContrast: 1
     - _SelfLitIntensity: 0
     - _SelfLitPower: 2
     - _SelfShadowAffectedByLightShadowStrength: 0
     - _SelfShadowHardness: 1
     - _SelfShadowRealTimeShadowColorPower: 13.61
-    - _SelfShadowRealtimeShadowIntensity: 0.399
+    - _SelfShadowRealtimeShadowIntensity: 1
     - _SelfShadowShadowTAtViewDirection: 0
     - _SelfShadowThreshold: 0
     - _ShadowColorTexturePower: 0
@@ -236,13 +236,13 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CustomLightDirection: {r: 0, g: 0, b: 10, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GlossColor: {r: 0.002669984, g: 0.030775476, b: 0.18867922, a: 1}
+    - _GlossColor: {r: 20.95821, g: 20.95821, b: 20.95821, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.8726415, g: 0.8885613, b: 1, a: 1}
+    - _MainColor: {r: 1.0352862, g: 1.1075255, b: 1.2686745, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
-    - _OverallShadowColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
-    - _RimLightColor: {r: 0.076317206, g: 0.16739683, b: 0.3301887, a: 1}
+    - _OverallShadowColor: {r: 0.031728376, g: 0.14671345, b: 0.2924528, a: 1}
+    - _RimLightColor: {r: 0.26287213, g: 0.22190507, b: 0.22190507, a: 1}
     - _SelfLitColor: {r: 1, g: 1, b: 1, a: 1}
     - _SelfShadowRealTimeShadowColor: {r: 0.039215688, g: 0.1882353, b: 0.77254903, a: 1}
     - _ShadowTColor: {r: 1, g: 1, b: 1, a: 1}

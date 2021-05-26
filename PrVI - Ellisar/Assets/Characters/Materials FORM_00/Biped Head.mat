@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Biped Head
   m_Shader: {fileID: 4800000, guid: d12428961551799408aa97256fd770c3, type: 3}
-  m_ShaderKeywords: NOKEWO N_F_NM_ON N_F_O_ON N_F_RELGI_ON
+  m_ShaderKeywords: N_F_NM_ON N_F_O_ON N_F_RELGI_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -120,7 +120,7 @@ Material:
     - _DoubleSided: 2
     - _DoubleSidedOutline: 1
     - _DstBlend: 0
-    - _DynamicNoisyOutline: 0
+    - _DynamicNoisyOutline: 1
     - _EnableTextureTransparent: 0
     - _EnvironmentalLightingIntensity: 1
     - _FarDistanceMaxWidth: 10
@@ -137,9 +137,9 @@ Material:
     - _Glossiness: 0.572
     - _GlossyReflections: 1
     - _HighlightColorPower: 1
-    - _LightAffectOutlineColor: 0
+    - _LightAffectOutlineColor: 1
     - _LightAffectRimLightColor: 1
-    - _LightAffectShadow: 0
+    - _LightAffectShadow: 1
     - _LightFalloffAffectShadowT: 0
     - _LightFalloffSoftness: 1
     - _LightIntensity: -1
@@ -171,15 +171,15 @@ Material:
     - _N_F_ST: 0
     - _N_F_STIAL: 0
     - _N_F_STIS: 0
-    - _NoisyOutlineIntensity: 0
+    - _NoisyOutlineIntensity: 0.155
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
     - _Oper: 0
     - _OutlineExtrudeMethod: 0
     - _OutlineWidth: 1.09
     - _OutlineWidthAffectedByViewDistance: 0
-    - _OutlineZPostionInCamera: 0
-    - _OverallShadowColorPower: 0.45
+    - _OutlineZPostionInCamera: 3
+    - _OverallShadowColorPower: 0.12
     - _PSGLOTEX: 0
     - _PTexturePower: 1
     - _Parallax: 0.02
@@ -187,7 +187,7 @@ Material:
     - _PointSpotlightIntensity: 0.45
     - _RELG: 1
     - _ReduceShadowPointLight: 0
-    - _ReduceShadowSpotDirectionalLight: 10
+    - _ReduceShadowSpotDirectionalLight: 9.9
     - _RefMetallic: 0
     - _RefVal: 0
     - _ReflectionIntensity: 0
@@ -206,16 +206,16 @@ Material:
     - _SelfShadowAffectedByLightShadowStrength: 0
     - _SelfShadowHardness: 1
     - _SelfShadowRealTimeShadowColorPower: 5.4
-    - _SelfShadowRealtimeShadowIntensity: 0.399
+    - _SelfShadowRealtimeShadowIntensity: 1
     - _SelfShadowShadowTAtViewDirection: 0
     - _SelfShadowThreshold: 0.135
     - _ShadowColorTexturePower: 0
-    - _ShadowHardness: 0
+    - _ShadowHardness: 1
     - _ShadowTColorPower: 1
     - _ShadowTHardness: 1
-    - _ShadowTIntensity: 1
-    - _ShadowTLightThreshold: 50
-    - _ShadowTShadowThreshold: 0
+    - _ShadowTIntensity: 0.654
+    - _ShadowTLightThreshold: 1.1
+    - _ShadowTShadowThreshold: -57.97
     - _ShowInAmbientLightShadowIntensity: 1
     - _ShowInAmbientLightShadowThreshold: 0.4
     - _ShowNormal: 0
@@ -238,13 +238,13 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GlossColor: {r: 0.504717, g: 0.6567158, b: 1, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.7216981, g: 0.8171412, b: 1, a: 1}
+    - _MainColor: {r: 1.1632164, g: 1.2162311, b: 1.3187265, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
-    - _OverallShadowColor: {r: 0.6053552, g: 0.6053552, b: 0.6053552, a: 1}
+    - _OverallShadowColor: {r: 0, g: 1.1839374, b: 0.8411977, a: 1}
     - _RimLightColor: {r: 0.61960787, g: 0.78431374, b: 1, a: 1}
     - _SelfLitColor: {r: 1, g: 1, b: 1, a: 1}
     - _SelfShadowRealTimeShadowColor: {r: 0.039215688, g: 0.1882353, b: 0.77254903, a: 1}
-    - _ShadowTColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowTColor: {r: 0.15566039, g: 0.8896286, b: 1, a: 1}
     - _XYZPosition: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
