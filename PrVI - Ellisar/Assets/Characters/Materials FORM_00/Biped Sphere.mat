@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Biped Sphere
   m_Shader: {fileID: 4800000, guid: d12428961551799408aa97256fd770c3, type: 3}
-  m_ShaderKeywords: NOKEWO N_F_GLO_ON N_F_NM_ON N_F_O_ON N_F_RELGI_ON N_F_RL_ON
+  m_ShaderKeywords: NOKEWO N_F_CA_ON N_F_GLO_ON N_F_NM_ON N_F_O_ON N_F_RELGI_ON N_F_RL_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -127,7 +127,7 @@ Material:
     - _GIFlatShade: 0
     - _GIShadeThreshold: 0
     - _GlossColorPower: 10
-    - _GlossIntensity: 0.252
+    - _GlossIntensity: 0.366
     - _GlossMapScale: 1
     - _GlossSoftness: 0.345
     - _GlossTextureFollowLight: 0
@@ -138,7 +138,7 @@ Material:
     - _GlossyReflections: 1
     - _HighlightColorPower: 1
     - _LightAffectOutlineColor: 1
-    - _LightAffectRimLightColor: 0
+    - _LightAffectRimLightColor: 1
     - _LightAffectShadow: 0
     - _LightFalloffAffectShadowT: 0
     - _LightFalloffSoftness: 1
@@ -149,7 +149,7 @@ Material:
     - _Metallic: 0
     - _MixMainTexToOutline: 0
     - _Mode: 0
-    - _N_F_CA: 0
+    - _N_F_CA: 1
     - _N_F_CLD: 0
     - _N_F_CO: 0
     - _N_F_FR: 0
@@ -172,7 +172,7 @@ Material:
     - _N_F_STIAL: 0
     - _N_F_STIS: 0
     - _NoisyOutlineIntensity: 0.429
-    - _NormalMapIntensity: 1
+    - _NormalMapIntensity: 0.26
     - _OcclusionStrength: 1
     - _Oper: 0
     - _OutlineExtrudeMethod: 0
@@ -193,13 +193,13 @@ Material:
     - _ReflectionIntensity: 0
     - _ReflectionRoughtness: 0
     - _RimLightColorPower: 7.93
-    - _RimLightInLight: 1
-    - _RimLightSoftness: 0
-    - _RimLightUnfill: 2.19
+    - _RimLightInLight: 0
+    - _RimLightSoftness: 0.292
+    - _RimLightUnfill: 3.1
     - _SPECIN: 1
     - _SPECMODE: 0
     - _STIL: 0
-    - _Saturation: 1
+    - _Saturation: 2
     - _SelfLitHighContrast: 1
     - _SelfLitIntensity: 0
     - _SelfLitPower: 2
@@ -237,8 +237,8 @@ Material:
     - _CustomLightDirection: {r: 0, g: 0, b: 10, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
+    - _HighlightColor: {r: 0, g: 0.4796934, b: 1, a: 1}
+    - _MainColor: {r: 0.015686275, g: 0.8392157, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
     - _OverallShadowColor: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}

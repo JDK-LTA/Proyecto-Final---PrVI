@@ -1,0 +1,7 @@
+newmtl Cobertura_MAT
+map_Kd Cobertura_V6_Baja_UVs_Cobertura_V5_BaseColor.png
+bump Cobertura_V6_Baja_UVs_Cobertura_V5_Normal.png
+map_Pm Cobertura_V6_Baja_UVs_Cobertura_V5_Metallic.png
+Kd 1 0.654902 0.654902
+d 1
+
