@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Circle02 2
+  m_Name: VFX_trailsBall_MAT
   m_Shader: {fileID: 4800000, guid: c73d0a68c32425f44990e420368ddda6, type: 3}
   m_ShaderKeywords: N_F_CO_ON N_F_GLO_ON N_F_RELGI_ON N_F_RL_ON N_F_SS_ON
   m_LightmapFlags: 4
@@ -249,7 +249,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 1.7786776, g: 3.3369882, b: 3.0737438, a: 1}
+    - _MainColor: {r: 6.6674438, g: 2.704501, b: 1.9184624, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
     - _OverallShadowColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}

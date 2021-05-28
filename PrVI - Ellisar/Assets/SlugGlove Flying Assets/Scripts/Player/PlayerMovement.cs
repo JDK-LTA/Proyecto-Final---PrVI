@@ -178,6 +178,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject model_00;
     [SerializeField] private GameObject model_01;
     [SerializeField] private GameObject model_02;
+    [SerializeField] private GameObject vfxModel00Trail1;
+    [SerializeField] private GameObject vfxModel00Trail2;
+    [SerializeField] private GameObject vfxModel01Trail1;
+    [SerializeField] private GameObject vfxModel01Trail2;
+    [SerializeField] private GameObject vfxModel02Trail1;
     private bool isInAir_VFX;
 
     private NPCDialogTrigger interactableDialog;
@@ -241,6 +246,9 @@ public class PlayerMovement : MonoBehaviour
         //play vfx
         vfx_Manager.PlayParticles(0);
 
+        //change trails vfx
+        SetTrailsTo(0);
+
         //change mesh
         model_02.SetActive(false);
         model_01.SetActive(false);
@@ -256,6 +264,37 @@ public class PlayerMovement : MonoBehaviour
 
         parentOwnCollider.material = bipedPhysMat;
         rigidCollider.material = bipedPhysMat;
+    }
+
+    private void SetTrailsTo(int trail)
+    {
+        switch (trail)
+        {
+            case 0:
+                vfxModel00Trail1.SetActive(true);
+                vfxModel00Trail2.SetActive(true);
+                vfxModel01Trail1.SetActive(false);
+                vfxModel01Trail2.SetActive(false);
+                vfxModel02Trail1.SetActive(false);
+                break;
+            case 1:
+                vfxModel00Trail1.SetActive(false);
+                vfxModel00Trail2.SetActive(false);
+                vfxModel01Trail1.SetActive(true);
+                vfxModel01Trail2.SetActive(true);
+                vfxModel02Trail1.SetActive(false);
+                break;
+            case 2:
+                vfxModel00Trail1.SetActive(false);
+                vfxModel00Trail2.SetActive(false);
+                vfxModel01Trail1.SetActive(false);
+                vfxModel01Trail2.SetActive(false);
+                vfxModel02Trail1.SetActive(true);
+                break;
+            default:
+                break;
+        }
+        
     }
 
     public void ChangeToBall(InputAction.CallbackContext cxt)
@@ -885,6 +924,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 //play vfx
                 vfx_Manager.PlayParticles(0);
+                //change trail
+                SetTrailsTo(0);
                 //change mesh
                 model_01.SetActive(false);
                 model_02.SetActive(false);
@@ -963,6 +1004,9 @@ public class PlayerMovement : MonoBehaviour
         //play vfx
         vfx_Manager.PlayParticles(1);
 
+        //change trails vfx
+        SetTrailsTo(1);
+
         //turn on Air form
         model_00.SetActive(false);
         model_02.SetActive(false);
@@ -1012,6 +1056,8 @@ public class PlayerMovement : MonoBehaviour
         //play vfx
         if (!ballActivated)
             vfx_Manager.PlayParticles(2);
+        //change trails vfx
+        SetTrailsTo(2);
 
         //turn on Ball form
 
