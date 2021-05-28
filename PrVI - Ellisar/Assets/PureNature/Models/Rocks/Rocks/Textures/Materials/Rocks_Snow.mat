@@ -147,7 +147,7 @@ Material:
     - _GlossyReflections: 1
     - _LayerContrast: 0
     - _LayerPosition: 0
-    - _LayerPower: 0.813
+    - _LayerPower: 0.3
     - _LayerThreshold: 50
     - _MaskPower: 0
     - _MeshBumpScale: 1
@@ -180,3 +180,4 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DirtColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
