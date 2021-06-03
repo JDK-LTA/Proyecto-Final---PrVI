@@ -21,7 +21,13 @@ public class LODToggler : MonoBehaviour
     {
         if (other.GetComponent<PlayerMovement>())
         {
-            LODSManager.Instance.SetLODActive(zoneToToggle, active);
+            StartCoroutine(LateMethod(zoneToToggle, active));
+            //LODSManager.Instance.SetLODActive(zoneToToggle, active);
         }
+    }
+    IEnumerator LateMethod(LODSZones zone, bool active)
+    {
+        yield return new WaitForEndOfFrame();
+        LODSManager.Instance.SetLODActive(zone, active);
     }
 }
