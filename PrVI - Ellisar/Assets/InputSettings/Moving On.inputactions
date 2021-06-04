@@ -140,6 +140,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Flash",
+                    "type": "Button",
+                    "id": "d8ba59c1-b627-4546-92a5-028ca18c9499",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -800,6 +808,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "InvertYFlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e443806-ca7b-48c7-b6e6-d4f39d0575b1",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Flash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4dc6399b-7fbd-4fff-afe9-3de6057efb16",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Flash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -153,6 +153,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Flash"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8ba59c1-b627-4546-92a5-028ca18c9499"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -813,6 +821,28 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""InvertYFlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e443806-ca7b-48c7-b6e6-d4f39d0575b1"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Flash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4dc6399b-7fbd-4fff-afe9-3de6057efb16"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Flash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2245,6 +2275,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_PlayerBiped_MoreSensibility = m_PlayerBiped.FindAction("MoreSensibility", throwIfNotFound: true);
         m_PlayerBiped_LessSensibility = m_PlayerBiped.FindAction("LessSensibility", throwIfNotFound: true);
         m_PlayerBiped_InvertYFlight = m_PlayerBiped.FindAction("InvertYFlight", throwIfNotFound: true);
+        m_PlayerBiped_Flash = m_PlayerBiped.FindAction("Flash", throwIfNotFound: true);
         // PlayerFlight
         m_PlayerFlight = asset.FindActionMap("PlayerFlight", throwIfNotFound: true);
         m_PlayerFlight_Move = m_PlayerFlight.FindAction("Move", throwIfNotFound: true);
@@ -2339,6 +2370,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerBiped_MoreSensibility;
     private readonly InputAction m_PlayerBiped_LessSensibility;
     private readonly InputAction m_PlayerBiped_InvertYFlight;
+    private readonly InputAction m_PlayerBiped_Flash;
     public struct PlayerBipedActions
     {
         private @InputActions m_Wrapper;
@@ -2360,6 +2392,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @MoreSensibility => m_Wrapper.m_PlayerBiped_MoreSensibility;
         public InputAction @LessSensibility => m_Wrapper.m_PlayerBiped_LessSensibility;
         public InputAction @InvertYFlight => m_Wrapper.m_PlayerBiped_InvertYFlight;
+        public InputAction @Flash => m_Wrapper.m_PlayerBiped_Flash;
         public InputActionMap Get() { return m_Wrapper.m_PlayerBiped; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2420,6 +2453,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @InvertYFlight.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYFlight;
                 @InvertYFlight.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYFlight;
                 @InvertYFlight.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnInvertYFlight;
+                @Flash.started -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnFlash;
+                @Flash.performed -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnFlash;
+                @Flash.canceled -= m_Wrapper.m_PlayerBipedActionsCallbackInterface.OnFlash;
             }
             m_Wrapper.m_PlayerBipedActionsCallbackInterface = instance;
             if (instance != null)
@@ -2475,6 +2511,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @InvertYFlight.started += instance.OnInvertYFlight;
                 @InvertYFlight.performed += instance.OnInvertYFlight;
                 @InvertYFlight.canceled += instance.OnInvertYFlight;
+                @Flash.started += instance.OnFlash;
+                @Flash.performed += instance.OnFlash;
+                @Flash.canceled += instance.OnFlash;
             }
         }
     }
@@ -2794,6 +2833,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnMoreSensibility(InputAction.CallbackContext context);
         void OnLessSensibility(InputAction.CallbackContext context);
         void OnInvertYFlight(InputAction.CallbackContext context);
+        void OnFlash(InputAction.CallbackContext context);
     }
     public interface IPlayerFlightActions
     {

@@ -8,11 +8,12 @@ public class FlashableWall : MonoBehaviour
     private float t = 0;
     private bool flashed = false;
 
-    private GameObject meshChild, particlesChild;
+    private MeshRenderer [] meshChild;
+    private GameObject particlesChild;
 
     private void Start()
     {
-        meshChild = GetComponentInChildren<MeshRenderer>().gameObject;
+        meshChild = GetComponentsInChildren<MeshRenderer>();
         //particlesChild = GetComponentInChildren<ParticleSystem>().gameObject;
     }
 
@@ -22,14 +23,23 @@ public class FlashableWall : MonoBehaviour
         {
             flashed = true;
             //flash
-            meshChild.SetActive(false);
+            foreach (MeshRenderer mesh in meshChild)
+            {
+                mesh.enabled = false;
+                mesh.GetComponent<MeshCollider>().enabled = false;
+
+            }
             //particlesChild.SetActive(true);
         }
     }
     private void Unflash()
     {
         //unflash
-        meshChild.SetActive(true);
+        foreach (MeshRenderer mesh in meshChild)
+        {
+            mesh.enabled = true;
+            mesh.GetComponent<MeshCollider>().enabled = true;
+        }
         //particlesChild.SetActive(false);
     }
 
