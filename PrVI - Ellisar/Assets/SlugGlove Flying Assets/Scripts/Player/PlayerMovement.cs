@@ -202,7 +202,8 @@ public class PlayerMovement : MonoBehaviour
                 flapCd = true;
                 hasFlapped = true;
                 actualFlaps--;
-                UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
+                if (UI_FlapsEnergy.Instance)
+                    UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
 
                 SpeedBoost(flapForce);
             }
@@ -222,7 +223,8 @@ public class PlayerMovement : MonoBehaviour
                 {
                     SpeedBoost(ballBoost);
                     actualFlaps--;
-                    UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
+                    if (UI_FlapsEnergy.Instance)
+                        UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
                 }
             }
         }
@@ -257,6 +259,8 @@ public class PlayerMovement : MonoBehaviour
         //get actual animator
         Anim = GetComponentInChildren<Animator>();
 
+        if (UI_FlapsEnergy.Instance)
+            UI_FlapsEnergy.Instance.FeatherRotsToBlue();
         //ballMesh.SetActive(false);
         //bodyMesh.SetActive(true);
         //faceMesh.SetActive(true);
@@ -294,7 +298,7 @@ public class PlayerMovement : MonoBehaviour
             default:
                 break;
         }
-        
+
     }
 
     public void ChangeToBall(InputAction.CallbackContext cxt)
@@ -810,13 +814,15 @@ public class PlayerMovement : MonoBehaviour
             float mult = States == WorldState.Grounded ? (ballActivated ? flapRegenFactorWhenBallGrounded : flapRegenFactorWhenBipedGrounded) : 1;
             tCdInterFlap += Time.deltaTime * mult;
 
-            UI_FlapsEnergy.Instance.UpdateFeatherImage(tCdInterFlap / cooldownToRegenFlap);
+            if (UI_FlapsEnergy.Instance)
+                UI_FlapsEnergy.Instance.UpdateFeatherImage(tCdInterFlap / cooldownToRegenFlap);
 
             if (tCdInterFlap >= cooldownToRegenFlap)
             {
                 tCdInterFlap = 0;
                 actualFlaps++;
-                UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
+                if (UI_FlapsEnergy.Instance)
+                    UI_FlapsEnergy.Instance.UpdateFeatherText(actualFlaps);
             }
         }
     }
@@ -968,6 +974,11 @@ public class PlayerMovement : MonoBehaviour
         tStartFlight = 0;
         InputHand.Fly = false;
 
+        if (!ballActivated)
+        {
+            if (UI_FlapsEnergy.Instance)
+                UI_FlapsEnergy.Instance.FeatherRotsToBlue();
+        }
         //ballActivated = false;
         //Rigid.mass = originalMass;
         //isBombing = false;
@@ -1041,6 +1052,8 @@ public class PlayerMovement : MonoBehaviour
 
         canFlash = false;
 
+        if (UI_FlapsEnergy.Instance)
+            UI_FlapsEnergy.Instance.FeatherRotsToGreen();
         //ballMesh.SetActive(false);
         //bodyMesh.SetActive(true);
         //faceMesh.SetActive(true);
@@ -1080,6 +1093,8 @@ public class PlayerMovement : MonoBehaviour
         Rigid.mass = massWhenBall;
         ballActivated = true;
 
+        if (UI_FlapsEnergy.Instance)
+            UI_FlapsEnergy.Instance.FeatherRotsToRed();
         //ballMesh.SetActive(true);
         //bodyMesh.SetActive(false);
         //faceMesh.SetActive(false);
