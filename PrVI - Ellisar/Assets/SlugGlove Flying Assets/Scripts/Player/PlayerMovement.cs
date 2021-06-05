@@ -317,9 +317,9 @@ public class PlayerMovement : MonoBehaviour
             Physics.SyncTransforms();
         }
     }
-    public void FlashAction(InputAction.CallbackContext cxt)
+    public void FlashAction(InputAction.CallbackContext cxt )
     {
-        if (cxt.performed)
+        if (cxt.performed && !ballActivated && !isFlying)
         {
             //ANIMACIÓN DE DESTELLO
             if (flashParticles.Count > 0)

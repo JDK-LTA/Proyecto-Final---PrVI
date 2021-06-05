@@ -10,6 +10,7 @@ public class FlashableWall : MonoBehaviour
 
     private MeshRenderer [] meshChild;
     private GameObject particlesChild;
+    [SerializeField]private GameObject wallFake;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class FlashableWall : MonoBehaviour
                 mesh.GetComponent<MeshCollider>().enabled = false;
 
             }
+            wallFake.SetActive(true);
             //particlesChild.SetActive(true);
         }
     }
@@ -40,6 +42,7 @@ public class FlashableWall : MonoBehaviour
             mesh.enabled = true;
             mesh.GetComponent<MeshCollider>().enabled = true;
         }
+        wallFake.SetActive(false);
         //particlesChild.SetActive(false);
     }
 
