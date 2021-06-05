@@ -183,6 +183,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject vfxModel01Trail1;
     [SerializeField] private GameObject vfxModel01Trail2;
     [SerializeField] private GameObject vfxModel02Trail1;
+    [SerializeField] private List<ParticleSystem> flashParticles;
     private bool isInAir_VFX;
 
     private NPCDialogTrigger interactableDialog;
@@ -321,6 +322,13 @@ public class PlayerMovement : MonoBehaviour
         if (cxt.performed)
         {
             //ANIMACIÓN DE DESTELLO
+            if (flashParticles.Count > 0)
+            {
+                foreach (ParticleSystem ps in flashParticles)
+                {
+                    ps.Play();
+                }
+            }
             flashPosition = Rigid.position;
             flashing = true;
             hasFlashed = true;

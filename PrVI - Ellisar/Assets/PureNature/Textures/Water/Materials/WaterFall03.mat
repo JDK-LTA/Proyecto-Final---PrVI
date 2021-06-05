@@ -130,10 +130,10 @@ Material:
     - _FoamDepth: 0
     - _FoamDistance: 0.57
     - _FoamFalloff: 0
-    - _FoamPower: 1
-    - _FoamScale: 0.2
+    - _FoamPower: 0.029
+    - _FoamScale: 1.13
     - _FoamSmoothness: 0
-    - _FoamSpeed: 0.25
+    - _FoamSpeed: 0.66
     - _GlobalNoiseScale: 5
     - _GlobalNoiseScale1: 1
     - _GlobalNoiseSpeed: 5
@@ -142,16 +142,16 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _MetallicPower: 0
+    - _MetallicPower: 0.408
     - _Mode: 0
     - _NormalPower: 1
     - _NormalPower1: 1
     - _NormalScale: 0.5
-    - _NormalSpeed: 1
+    - _NormalSpeed: 0.92
     - _NormalTiling: 0.05
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RefractionPower: 0.88
+    - _RefractionPower: 1.04
     - _SmoothnessPower: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -181,8 +181,8 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color0: {r: 0, g: 0.5987654, b: 1, a: 0}
     - _Color1: {r: 1, g: 0.76618373, b: 0, a: 1}
-    - _DepthColor: {r: 0, g: 0.3329634, b: 0.5660378, a: 0.5803922}
-    - _DepthColor1: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 0}
+    - _DepthColor: {r: 0.16620684, g: 0.38292453, b: 0.7830188, a: 1}
+    - _DepthColor1: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainColor: {r: 0, g: 0.6810271, b: 0.6886792, a: 1}
     - _NormalDirection: {r: 0, g: 1, b: 0, a: 1}
