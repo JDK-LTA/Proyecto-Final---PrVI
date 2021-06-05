@@ -796,6 +796,7 @@ public class PlayerMovement : MonoBehaviour
             foreach (Collider coll in flashColls)
             {
                 FlashableWall fl = coll.GetComponent<FlashableWall>();
+                if (!fl) fl = coll.GetComponentInParent<FlashableWall>();
                 fl?.GetFlashed();
             }
 
