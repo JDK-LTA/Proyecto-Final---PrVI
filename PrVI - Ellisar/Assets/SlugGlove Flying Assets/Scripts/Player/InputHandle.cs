@@ -57,6 +57,10 @@ public class InputHandle : MonoBehaviour
     {
         flightYInverted = !flightYInverted;
     }
+    public void InvertYOnFlight_UI(bool active)
+    {
+        flightYInverted = active;
+    }
     public void ChangeIntoFlight(InputAction.CallbackContext cxt)
     {
         if (cxt.performed)

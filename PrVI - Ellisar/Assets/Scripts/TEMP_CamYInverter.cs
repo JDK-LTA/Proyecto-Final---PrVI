@@ -14,6 +14,11 @@ public class TEMP_CamYInverter : MonoBehaviour
             cm.m_YAxis.m_InvertInput = !cm.m_YAxis.m_InvertInput;
         }
     }
+
+    public void InvertY_UI(bool action)
+    {
+         cm.m_YAxis.m_InvertInput = action;
+    }
     public void MoreSensibility(InputAction.CallbackContext cxt)
     {
         if (cxt.performed)

@@ -112,7 +112,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""id"": ""d8484227-ed51-451b-a8c1-66cffab69a29"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold(duration=2)""
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Interact"",

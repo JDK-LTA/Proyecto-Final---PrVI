@@ -184,6 +184,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject vfxModel01Trail2;
     [SerializeField] private GameObject vfxModel02Trail1;
     [SerializeField] private List<ParticleSystem> flashParticles;
+    [SerializeField] private GameObject ui_Pause, ui_Pause_Button;
+
     private bool isInAir_VFX;
 
     private NPCDialogTrigger interactableDialog;
@@ -193,6 +195,24 @@ public class PlayerMovement : MonoBehaviour
     public List<HookOption> HookOptions { get => hookOptions; set => hookOptions = value; }
     public NPCDialogTrigger InteractableDialog { get => interactableDialog; set => interactableDialog = value; }
     public bool CanInteract { get => canInteract; set => canInteract = value; }
+
+    public void PlayAction()
+    {
+        GetComponent<PlayerInput>().SwitchCurrentActionMap("PlayerBiped");
+        Time.timeScale = 1;
+    }
+
+
+    public void UI_Pause(InputAction.CallbackContext cxt)
+    {
+        if (cxt.performed)
+        {
+            Time.timeScale = 0;
+            GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+            ui_Pause.SetActive(true);
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(ui_Pause_Button);
+        }
+    }
 
     public void RTriggerAction(InputAction.CallbackContext cxt)
     {
