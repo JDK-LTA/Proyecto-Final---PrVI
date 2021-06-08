@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Vestido10mayo.unity
     guid: b9b7765a33429c4468c74073646c156d
   - enabled: 0
@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/CorrecionCueva.unity
     guid: cac869339e07bc0478b44583841f2fd3
+  - enabled: 1
+    path: Assets/EscenaReal/EscenaReal.unity
+    guid: b0acee48178971641a2b471e0b7e7389
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4894e8ba2ede5a143acabf9f82718464, type: 2}
