@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class UIFeathers
@@ -20,9 +21,13 @@ public class UI_FlapsEnergy : Singleton<UI_FlapsEnergy>
     [SerializeField] private float rotatorsSpeed = 25;
     [SerializeField] private Text featherText, energyText;
     [SerializeField] private GameObject controlsPanel;
+    [SerializeField] private GameObject playButton, resumeButton;
+
     private Text controlsText;
     private int energyTotal = 0;
     private int feathersTotal = 3;
+    private bool isOnMainMenu=true;
+    
 
     private static string gamepadText = "Controls:\nLeft Joystick - Movement\nRight Joystick - Camera\nX - Jump(if biped)\nR2 - Hook(biped) / Flap wings / Bomb forward\nL2 - Bomb down(ball)\nL1 + X - Biped mode\nL1 + ▲ - Flight mode\nL1 + ◯ - Ball mode\nR3 (hold) - Respawn\nUp Arrow - Invert Camera Y Axis\nDown Arrow - Invert Y Flight Movement\n<- + -> Arrows - More/Less Cam Sensibility";
     private static string keyboardText = "Controls:\nWASD - Movement\nMouse - Camera\nSpace - Jump (biped)\nQ - Hook(biped) / Flap wings / Bomb forward\nE - Bomb down(ball)\n1 - Biped mode\n2 - Flight mode\n3 - Ball mode\nR (hold) - Respawn\nY - Invert Camera Y Axis\nU - Invert Y Flight Movement\n, and . - More/Less Cam Sensibility";
@@ -176,5 +181,24 @@ public class UI_FlapsEnergy : Singleton<UI_FlapsEnergy>
         {
             item.featherRotator.color = green;
         }
+    }
+
+    public void ResetSelected(InputAction.CallbackContext cxt)
+    {
+        if (cxt.performed)
+        {
+            if (EventSystem.current.currentSelectedGameObject == null)
+            {
+                if (isOnMainMenu)
+                    EventSystem.current.SetSelectedGameObject(playButton);
+                else
+                    EventSystem.current.SetSelectedGameObject(resumeButton);
+            }
+        }
+    }
+
+    public void SetIsOnMainMenu(bool active)
+    {
+        isOnMainMenu = active;
     }
 }

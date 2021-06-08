@@ -417,6 +417,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 0;
         //static until finished setup
         States = WorldState.Static;
 

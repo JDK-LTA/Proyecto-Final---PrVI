@@ -88,4 +88,21 @@ public class InputHandle : MonoBehaviour
             Application.Quit();
         }
     }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+#endif
+
+#if UNITY_EDITOR
+        Debug.Break();
+        return;
+#endif
+        Application.Quit();
+
+    }
 }
